@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/profile boot.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10" id='updateusername'><h1 id='uname'>Username</h1></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+
+      <div class="text-center">
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6>Upload a new photo</h6>
+          <form method="post" enctype="multipart/form-data">
+              <input type="file" class="text-center center-block file-upload" value="upload">
+          </form>
+      </div><hr><br>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+                <li><a data-toggle="tab" href="#pass">Password</a></li>
+              </ul>
+
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="profile">
+                <hr>
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="username"><h4>Username:</h4></label>
+                              <input type="text" class="form-control" name="username" id="username" placeholder="username" title="enter username">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="town"><h4>Town:</h4></label>
+                              <input type="text" class="form-control" name="town" id="town" placeholder="town" title="enter your town">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="height"><h4>Height (m):</h4></label>
+                              <input type="number" class="form-control" name="height" id="height" value='0' title="enter height">
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="weight"><h4>Weight (kg):</h4></label>
+                              <input type="number" class="form-control" name="weight" id="weight" value='0' title="enter weight">
+                          </div>
+                      </div>
+
+                          <div class="col-xs-6">
+                              <label for="bmi"><h4>Bmi:</h4></label>
+                              <input type="number" class="form-control" name="bmi" id="bmi" placeholder={{bmi}} title="bmi" disabled>
+                          </div>
+                      </div>
+
+
+
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            </div>
+                      </div>
+              	</form>
+
+              <hr>
+
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="pass">
+
+               <h2></h2>
+
+               <hr>
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="password"><h4>New Password: </h4></label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="enter new password" title="enter new password">
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                            <label for="password"><h4>Re-enter Password:</h4></label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="re-enter password" title="re-enter password">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            </div>
+                      </div>
+              	</form>
+
+             </div><!--/tab-pane-->
+              	</form>
+              </div>
+
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
