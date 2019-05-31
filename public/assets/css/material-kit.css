@@ -3702,6 +3702,7 @@ tbody.collapse.show {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%;
+  padding:7px;
 }
 
 .input-group>.form-control,
