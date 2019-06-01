@@ -15,7 +15,13 @@ router.get('/Login', (req, res) => {
 router.get('/Register', (req, res) => {
   const title = 'Register';
   res.render('user/register', { title: title })
-})
+});
+
+/* Shop */
+router.get('/shop', function (req, res) {
+  const title = "Shop";
+  res.render('shop/shop', { title: title });
+});
 
 /* GET quiz */
 router.get('/quiz', function (req, res) {
