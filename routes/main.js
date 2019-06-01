@@ -17,7 +17,7 @@ router.get('/Register', (req, res) => {
   res.render('user/register', { title: title })
 });
 
-/* Shop */
+/* NewOrganics Shop */
 router.get('/shop', function (req, res) {
   const title = "Shop";
   res.render('shop/shop', { title: title });
