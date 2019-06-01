@@ -16,11 +16,16 @@ router.get('/Register', (req, res) => {
   const title = 'Register';
   res.render('user/register', { title: title })
 })
+
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
   res.render('quiz/quiz', { title: title });
 });
 
+router.get('/faq', (req, res) => {
+	const title = 'FAQ';
+	res.render('faq/faq', {title: title})
+})
 
 module.exports = router;
