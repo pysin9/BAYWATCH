@@ -1,68 +1,101 @@
-<div class="container py-3">
-    <div class="row">
-        <div class="col-10 mx-auto">
-            <div class="accordion" id="faqExample">
-                <div class="card">
-                    <div class="card-header p-2" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Q: How does this work?
-                            </button>
-                          </h5>
-                    </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
-                        <div class="card-body">
-                            <b>Answer:</b> It works using the Bootstrap 4 collapse component with cards to make a vertical accordion that expands and collapses as questions are toggled.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header p-2" id="headingTwo">
-                        <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Q: What is Bootstrap 4?
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
-                        <div class="card-body">
-                            Bootstrap is the most popular CSS framework in the world. The latest version released in 2018 is Bootstrap 4. Bootstrap can be used to quickly build responsive websites.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header p-2" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Q. What is another question?
-                            </button>
-                          </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
-                        <div class="card-body">
-                            The answer to the question can go here.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header p-2" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Q. What is the next question?
-                            </button>
-                          </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
-                        <div class="card-body">
-                            The answer to this question can go here. This FAQ example can contain all the Q/A that is needed.
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        
+      
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
 
+        .active, .accordion:hover {
+        background-color: #ccc; 
+        }
+
+        .accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        }
+
+        .active:after {
+        content: "\2212";
+        }
+
+
+        .panel {
+        padding: 0 18px;
+            display: none;
+        background-color: white;
+        overflow: hidden;
+
+        }
+        .accordion.solid {outline-style: solid;}
+    </style>
+</head>
+    <body>
+
+        <h2>Accordion</h2>
+
+        <button class="accordion">Q1</button>
+        <div class="panel">
+        <p>aaa</p>
         </div>
-    </div>
-    <!--/row-->
-</div>
-<!--container-->
+
+        <button class="accordion">Q2</button>
+        <div class="panel">
+        <p>bbb</p>
+        </div>
+
+        <button class="accordion">Q3</button>
+        <div class="panel">
+        <p>ccc</p>
+        </div>
+
+        <button class="accordion">Q4</button>
+        <div class="panel">
+        <p>ddd</p>
+        </div>
+
+        <button class="accordion">Q5</button>
+        <div class="panel">
+        <p>eee</p>
+        </div>
+
+        <button class="accordion">Q6</button>
+        <div class="panel">
+        <p>fff</p>
+        </div>
+
+            <script>
+                var acc = document.getElementsByClassName("accordion");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    } else {
+                    panel.style.display = "block";
+                    }
+                });
+                }
+            </script>
+
+    </body>
+</html>
