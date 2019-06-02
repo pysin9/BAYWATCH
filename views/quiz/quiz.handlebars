@@ -1,58 +1,23 @@
 <link rel="stylesheet" type="text/css" href="/css/quiz css.css">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-</head>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container">
-    <div class="row"><br>
-        </span>
+<!-- Main page -->
+<div class="main">
+  <!-- Number of Question  -->
+  <div class="wrapper" id="pages">
+  </div>
+  <!--display score-->
+  <p id="score">Score: </p>
+
+  <!-- Quiz Question -->
+  <div class="quiz-questions" id="display-area">
+    <p id="question">Insert Question</p>
+    <p id="option">option1</p>
+    <p id="option">option2</p>
+    <p id="option">option3</p>
+    <p id="option">option4</p>
+
+    <div id="quiz-results">
+      <button type="button" name="button" class="submit" id="submit">Submit</button>
     </div>
-    <div class="row"><br><br>
-        <div class="col-sm-8 col-sm-offset-2">
-            <div class="loader">
-                <div class="col-xs-3 col-xs-offset-5">
-                    <div id="loadbar" style="display: none;">
-                        <img alt="Loading" class="center-block loanParamsLoader" style="">
-                    </div>
-                </div>
+  </div>
 
-                <div id="quiz">
-
-                    <div class="question">
-                        <h3><span class="label label-warning" id="qid">1</span>
-                            <span id="question">question</span>
-                        </h3>
-                    </div>
-                    <ul>
-                        <li>
-                            <input type="radio" id="f-option" name="selector" value="1">
-                            <label id='option1' for="f-option" class="element-animation">option1</label>
-                            <div class="check"></div>
-                        </li>
-
-                        <li>
-                            <input type="radio" id="s-option" name="selector" value="2">
-                            <label id='option2' for="s-option" class="element-animation">option2</label>
-                            <div class="check">
-                                <div class="inside"></div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <input type="radio" id="t-option" name="selector" value="3">
-                            <label id='option3' for="t-option" class="element-animation">option3</label>
-                            <div class="check">
-                                <div class="inside"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-muted">
-                <span id="answer"></span>
-            </div>
-
-        </div>
-    </div>
 </div>
