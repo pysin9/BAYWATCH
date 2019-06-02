@@ -7,10 +7,20 @@ router.get('/', function (req, res) {
   const title = "NewOrganics";
   res.render('index', { title: title });
 });
+
+
+router.get('/logout', (req, res) => {
+	req.logout();
+	res.redirect('/');
+});
+
+
 router.get('/Login', (req, res) => {
   const title = 'Login';
   res.render('user/login', { title: title })
 });
+
+
 /*User Register*/
 router.get('/Register', (req, res) => {
   const title = 'Register';
