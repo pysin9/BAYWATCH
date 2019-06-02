@@ -1,19 +1,103 @@
 <link rel="stylesheet" type="text/css" href="/css/shop.css">
 
-<div class="topnav">
+<div class="topnav top"">
     <a class="active" href="#home">Search</a>
     <a href="#cart"><i class="material-icons">&#xe8cc;</i> Cart</a>
 </div>
 
 <!-- Sidebar -->
 <div class="sidenav">
-    <a href="#">Organic Fresh Produce</a>
-    <a href="#">Diary</a>
-    <a href="#">Beverages</a>
-    <a href="#">Frozen Meat</a>
-    <a href="#">Health & Beauty</a>
+    <button class="dropdown-btn">Organic Fresh Produce
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Fruits</a>
+        <a href="#">Herbs & Spices</a>
+        <a href="#">Vegetables</a>
+    </div>
+    <button class="dropdown-btn">Dairy
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Milk</a>
+        <a href="#">Yogurt</a>
+        <a href="#">Butter</a>
+        <a href="#">Cheese</a>
+    </div>
+    <button class="dropdown-btn">Beverages
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Juice</a>
+        <a href="#">Grain, Nut & Soy Milk</a>
+        <a href="#">Coffee & Tea</a>
+    </div>
+    <button class="dropdown-btn">Frozen Food
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Chicken</a>
+        <a href="#">Pork</a>
+        <a href="#">Beef</a>
+        <a href="#">Fish</a>
+    </div>
+    <button class="dropdown-btn">Health & Beauty
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Personal Care</a>
+        <a href="#">Healing</a>
+        <a href="#">Supplements</a>
+    </div>
+    <button class="dropdown-btn">Snacks
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="#">Crackers & Biscuits</a>
+        <a href="#">Seeds & Nuts</a>
+        <a href="#">Candy</a>
+        <a href="#">Energy Bar</a>
+    </div>
 </div>
 
 <div class="main">
-    <h2>Hey</h2>
+    <div class="topimg"><img src="/img/mainshop.jpg" style="width:100%;height:600px;"></div>
+    <div class="row">
+        <div class="column">
+            <img src="/img/mainshoporganicfreshproduce.jpg" alt="organicfreshproduce" style="width:100%;height:372.61px;">
+        </div>
+        <div class="column">
+            <img src="/img/mainshopdairy.jpg" alt="dairy" style="width:100%;height:372.61px;">
+        </div>
+        <div class="column">
+            <img src="/img/mainshopbeverages.jpg" alt="beverages" style="width:100%;height:372.61px;">
+        </div>
+    </div>
+        <div class="row">
+        <div class="column">
+            <img src="/img/mainshopfrozenfood.jpg" alt="frozenfood" style="width:100%;height:372.61px;">
+        </div>
+        <div class="column">
+            <img src="/img/mainshophealth&beauty.png" alt="health&beauty" style="width:100%;height:372.61px;">
+        </div>
+        <div class="column">
+            <img src="/img/mainshopsnacks.jpg" alt="snacks" style="width:100%;height:372.61px;">
+        </div>
+    </div>
 </div>
+
+<script>var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>
