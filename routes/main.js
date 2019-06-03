@@ -40,6 +40,12 @@ router.get('/fruits', function (req, res) {
   res.render('shop/shopfruits', { title: title });
 });
 
+/* Cart */
+router.get('/cart', function (req, res) {
+  const title = "Cart";
+  res.render('shop/cart', { title: title });
+});
+
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
