@@ -15,6 +15,12 @@ const User = db.define('user', {
     },
     phone:{
         type: Sequelize.INTEGER(8)
+    },
+    bankName:{
+        type: Sequelize.STRING
+    },
+    bankNo: {
+        type: Sequelize.INTEGER
     }
 });
 module.exports = User;

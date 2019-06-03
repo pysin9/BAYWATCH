@@ -8,7 +8,7 @@ const Shop = db.define('Quiz', {
         type: Sequelize.STRING
     },
     option2: {
-        type: Sequelize.FLOAT
+        type: Sequelize.STRING
     },
     option3:{
         type: Sequelize.STRING
