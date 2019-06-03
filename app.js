@@ -21,6 +21,7 @@ const passport = require('passport');
 */
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/users');
+const adminRoute = require('./routes/admin');
 const organicDB = require('./config/DBConnection')
 
 
@@ -113,7 +114,8 @@ app.use(function (req, res, next) {
 * mainRoute which was defined earlier to point to routes/main.js
 * */
 app.use('/', mainRoute);
-app.use('/user', userRoute) // mainRoute is declared to point to routes/main.js
+app.use('/user', userRoute);
+app.use('/admin', adminRoute); // mainRoute is declared to point to routes/main.js
 // This route maps the root URL to any path defined in main.js
 
 /*
