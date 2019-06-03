@@ -7,4 +7,5 @@ router.get('/admin-quiz', (req, res) => {
     res.render('admin/admin-quiz', {title:title});
   });
 
+
   module.exports = router;
