@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
-const Shop = db.define('Quiz', {
+const Quiz = db.define('Quiz', {
     question: {
         type: Sequelize.STRING
     },
@@ -20,4 +20,4 @@ const Shop = db.define('Quiz', {
         type: Sequelize.STRING
     },
 });
-module.exports = Shop;
+module.exports = Quiz;
