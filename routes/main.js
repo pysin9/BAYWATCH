@@ -34,6 +34,12 @@ router.get('/shop', function (req, res) {
   res.render('shop/shop', { title: title });
 });
 
+/* Shop Fruits */
+router.get('/fruits', function (req, res) {
+  const title = "Fruits";
+  res.render('shop/shopfruits', { title: title });
+});
+
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
