@@ -1,11 +1,11 @@
 <body class="login-page sidebar-collapse">
     <div class="page-header header-filter"
-        style="background-image: url('../assets/img/passenger.jpg'); background-size: cover; background-position: top center;">
+        style="background-image: url('/img/signup.jpeg'); background-size: cover; background-position: top center;">
         <div class="container">
-            <div class="row">
+            <div class="row2">
                 <div class="col-lg-5 col-md-10 ml-auto mr-auto">
                     <div class="card card-login">
-                        <form id="signup-form-passenger" class="form" method="POST" action="signup_passenger">
+                        <form class="form" method="post" action="/user/register">
                             <h2 class="card-title text-center">Register</h2>
                             <div class="card-body">
                                 <div class="input-group">
@@ -14,8 +14,8 @@
                                             <i class="material-icons">face</i>
                                         </span>
                                     </div>
-                                    <input type="text" id="username" name="username" class="form-control"
-                                        placeholder="Username...">
+                                    <input type="text" id="name" name="name" class="form-control"
+                                        placeholder="Username..." value="{{name}}">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -24,7 +24,7 @@
                                         </span>
                                     </div>
                                     <input type="email" id="email" name="email" class="form-control"
-                                        placeholder="Email...">
+                                        placeholder="Email..." value="{{email}}">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -33,7 +33,7 @@
                                         </span>
                                     </div>
                                     <input type="tel" id="phone" name="phone" minlength="8" maxlength="8"
-                                        class="form-control" placeholder="Phone Number...">
+                                        class="form-control" placeholder="Phone Number..." value="{{phone}}">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -42,7 +42,7 @@
                                         </span>
                                     </div>
                                     <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Password...">
+                                        placeholder="Password..."value="{{password}}">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -50,8 +50,8 @@
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                     </div>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        placeholder=" Confirm Password...">
+                                    <input type="password" id="cfmpassword" name="cfmpassword" class="form-control"
+                                        placeholder=" Confirm Password..." value="{{cfmpassword}}">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -60,7 +60,7 @@
                                         </span>
                                     </div>
                                     <input type="address" id="address" name="address" class="form-control"
-                                        placeholder="Address...">
+                                        placeholder="Address..." value="{{address}}">
                                 </div>
                             </div>
                             <div class="text-center">

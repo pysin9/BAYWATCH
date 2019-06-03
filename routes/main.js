@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const alertMessage = require('../helpers/messenger');
 
 
 /* GET index */
@@ -10,8 +11,8 @@ router.get('/', function (req, res) {
 
 
 router.get('/logout', (req, res) => {
-	req.logout();
-	res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
 
@@ -40,8 +41,12 @@ router.get('/quiz', function (req, res) {
 });
 
 router.get('/faq', (req, res) => {
-	const title = 'FAQ';
-	res.render('faq/faq', {title: title})
+  const title = 'FAQ';
+  res.render('faq/faq', { title: title })
 })
 
+router.get('/about', (req, res) => {
+  const title = "About"
+  res.render('about', { title: title });
+});
 module.exports = router;

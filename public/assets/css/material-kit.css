@@ -1022,6 +1022,13 @@ pre code {
   margin-left: -15px;
 }
 
+.row2{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 97px;
+}
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -5043,6 +5050,8 @@ tbody.collapse.show {
   color: #7f231c;
   background-color: #fdd9d7;
   border-color: #fccac7;
+  position: relative;
+  top: 114px;
 }
 
 .alert-danger hr {
@@ -14206,6 +14215,7 @@ textarea {
 .alert.alert-success {
   background-color: #55b559;
   color: #ffffff;
+  z-index: 5;
 }
 
 .alert.alert-success a,
@@ -14216,6 +14226,7 @@ textarea {
 .alert.alert-info {
   background-color: #00cae3;
   color: #ffffff;
+  z-index: 5;
 }
 
 .alert.alert-info a,
@@ -14226,6 +14237,7 @@ textarea {
 .alert.alert-warning {
   background-color: #ff9e0f;
   color: #ffffff;
+  z-index: 5;
 }
 
 .alert.alert-warning a,
@@ -14236,6 +14248,7 @@ textarea {
 .alert.alert-danger {
   background-color: #f55145;
   color: #ffffff;
+  z-index: 5;
 }
 
 .alert.alert-danger a,
@@ -14246,6 +14259,7 @@ textarea {
 .alert.alert-rose {
   background-color: #ea2c6d;
   color: #ffffff;
+  z-index: 5;
 }
 
 .alert.alert-rose a,

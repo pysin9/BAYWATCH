@@ -27,10 +27,15 @@
 
 
 </head>
-
+{{>_navbar}}
 <body class="landing-page sidebar-collapse">
-    {{>_navbar}}
+    
 
+    {{> _flashmsg}}
+    {{!-- views/partials/_flashmsg.handlebars --}}
+    {{> _successmsg}}
+
+    {{> _errors}}
     {{{body}}}
 
     <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>

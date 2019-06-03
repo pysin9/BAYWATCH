@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white fixed-top" color-on-scroll="100"
-    id="sectionsNav">
+<nav class="navbar navbar-expand-lg bg-white fixed-top" color-on-scroll="100" id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
             <img class="navbar-brand logo" href="/" src="/img/logo2.png">
@@ -12,6 +11,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="/">
                         Home
@@ -35,6 +35,41 @@
                 <li class="nav-item">
                     <a class="nav-link">
                         About
+                    </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> {{name}}
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/profile" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Profile
+                        </a>
+                        <a href="/logout"
+                            class="dropdown-item">
+                            <i class="material-icons">&#xe879;</i> Logout
+                        </a>
+                    </div>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop">
+                        Shop
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/faq">
+                        FAQ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">
+                        About
 
                     </a>
                 </li>
@@ -43,6 +78,7 @@
                         Login
                     </a>
                 </li>
+                {{/if}}
             </ul>
         </div>
     </div>
