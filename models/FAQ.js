@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
 const faq = db.define('faq', {
-    questions: {
+    qns: {
         type: Sequelize.STRING
     },
     answers: {
