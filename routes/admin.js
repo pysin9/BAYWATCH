@@ -8,6 +8,11 @@ router.get('/admin-quiz', (req, res) => {
   res.render('admin/admin-quiz', { title: title });
 });
 
+router.get('/faqform', (req, res) => {
+  let title = 'faqform  '
+  res.render('admin/faqform', { title: title });
+});
+
 router.post('/addquiz', (req, res) => {
   let question = req.body.question;
   let option1 = req.body.option1;
