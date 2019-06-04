@@ -1,0 +1,66 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/css/profile.css">
+
+<div class="container" id='main'>
+    <p id='profile'>Add a quiz question</p>
+    <hr>
+    <form action="/admin/addquiz" method='POST' id="form">
+        <div class="row">
+            <div class="col-25">
+                <label>Add question:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="question" name="question">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Option 1:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="option1" name="option1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="country">Option 2:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="option2" name="option2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="subject">Option 3:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="option3" name="option3">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="subject">Option 4:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="option4" name="option4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="subject">Correct option:</label>
+            </div>
+            <div class="col-75">
+                <select name="correct">
+                    <option value="option1">option 1</option>
+                    <option value="option2">option 2</option>
+                    <option value="option3">option 3</option>
+                    <option value="option4">option 4</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" id="submit">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+</div>
