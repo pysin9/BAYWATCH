@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz');
+const FAQ = require('../models/FAQ')
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'adminquiz'
@@ -11,6 +12,19 @@ router.get('/admin-quiz', (req, res) => {
 router.get('/faqform', (req, res) => {
   let title = 'faqform  '
   res.render('admin/faqform', { title: title });
+});
+
+router.post('/addqns', (req, res) => {
+  let qns = req.body.qns;
+  let ans = req.body.ans;
+
+  FAQ.create({
+    qns,
+    ans
+  }).then((form) => {
+    res.redirect('/faq');
+  })
+    .catch(err => console.log(err))
 });
 
 router.post('/addquiz', (req, res) => {
