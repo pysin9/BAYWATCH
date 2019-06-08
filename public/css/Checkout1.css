@@ -1,0 +1,250 @@
+/* reset the margin and padding */
+/* {
+	margin:0px;
+	padding:0px;
+}*/
+body {
+	background-image: url("formbackground.jpg");
+	background-color: #ccc ;
+}
+
+form {
+	margin:0 auto; 
+	width:40%;	
+	
+}
+
+fieldset {
+	padding-top:5%;
+	padding-bottom:5%;
+	padding-left:15%;
+	padding-right:15%;
+	margin:20px;
+	background-color: #ccc ;
+	background-image: url("formbackground.jpg");
+	border:none;
+}
+
+legend {
+	background-color:green;
+	color:white;
+	font-weight:900;
+	border-style: rounded 3px;
+	padding:5px;
+	margin:20px;
+	box-shadow:2px 2px 2px 3px green;
+	text-align: center;
+	position: absolute;
+    margin: 57px;
+    margin-left: -558px;
+}
+/*input:not([type=radio]){
+	height:2em;
+	font-size:1.2em;
+	font-family:Verdana;
+	text-indent:10px;
+	display:block;
+	padding:2px;
+	margin:10px
+}
+
+label[for*="male"] {	
+    line-height:2em;
+	font-family:Verdana;
+}
+
+input[type="radio"] {
+	margin:5px;
+}
+*/
+
+
+input::placeholder {
+  color: gray;
+  font-style:italic;
+  font-size:0.8em;
+}
+
+input[type="submit"] {
+	clear: both;
+    text-align: center;
+    width: 7%;
+    height: 2em;
+    margin-top: 166px;
+    border-radius: 20px;
+    position: absolute;
+	margin-left: 467px;
+}
+
+
+
+/*input[type=text]:focus:valid {
+   background: rgba(255, 255,255,0.6) no-repeat;
+   background-position:right 40%; 
+   background-size:1.5em 1.5em;
+}
+
+input:focus:invalid {
+   background: rgba(121, 210, 121) url(images/stop.png) no-repeat;
+   background-position:right 40%; 
+   background-size:1.5em 1.5em;
+ }
+ */
+ 
+ #Fstname {
+  width: 17%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc ;
+  border-radius: 4px;
+  resize: none;
+  margin: -480px;
+  margin-top: 153px;
+  position:absolute;
+ }
+ 
+ #Ftext {
+	
+	margin-left: -479px;
+    margin-top: 152px;
+	position:absolute;
+ }
+ 
+ #Ltext {
+	margin-left: -169px;
+    margin-top: 132px;
+	position: absolute;
+ }
+ 
+ #Lstname {
+width: 17%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -182px;
+  margin-top: 135px;
+  position:absolute;
+ }
+ 
+  #PNum {
+    margin-left: 105px;
+    margin-top: 77px;
+	position:absolute;
+
+ }
+ 
+ #phonenumber {
+  width: 17%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: 96px;
+  margin-top: 79px;
+  position:absolute;
+ }
+ 
+ #Atext {
+	margin-left: -470px;
+    margin-top: 167px;
+	position:absolute;
+ }
+ #address{
+  width: 25%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -479px;
+  margin-top: 168px;
+  position:absolute; 
+ }
+ 
+ #Etext{
+  margin-left: -71px;
+  margin-top: 186px;
+  position:absolute; 
+ }
+ 
+ #email {
+  width: 25%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -81px;
+  margin-top: 186px;
+  position:absolute; 
+		 
+ }
+ 
+ #Ctext{
+  margin-left: -474px;
+  margin-top: 194px;
+  position:absolute; 
+	 
+ }
+ 
+ #city{
+  width: 17%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -480px;
+  margin-top: 194px;
+  position:absolute; 
+ }
+ 
+ #Stext{
+  margin-left: -205px;
+  margin-top: 175px;
+  position:absolute; 
+ }
+ 
+ #state {
+    width: 12%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -210px;
+  margin-top: 175px;
+  position:absolute; 
+ }
+ 
+ #Ztext {
+  margin-left: -15px;
+  margin-top: 157px;
+  position:absolute; 	 
+ }
+ #zip {
+  width: 12%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin: -15px;
+  margin-top: 157px;
+  position:absolute;
+ }
+ #Step1 {
+  margin: 8px;
+  margin-top: 162px;
+  position: absolute;
+  font-size: 24px;
+}
+#hr {
+	top: 204px;
+    position: sticky;
+}
+ 
+ 
