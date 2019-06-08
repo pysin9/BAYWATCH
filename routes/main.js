@@ -40,6 +40,12 @@ router.get('/fruits', function (req, res) {
   res.render('shop/shopfruits', { title: title });
 });
 
+/* Shop Herbs and Spices */
+router.get('/herbsandspices', function (req, res) {
+  const title = "Fruits";
+  res.render('shop/shopherbsandspices', { title: title });
+});
+
 /* Cart */
 router.get('/cart', function (req, res) {
   const title = "Cart";
