@@ -5008,6 +5008,8 @@ tbody.collapse.show {
   color: #285b2a;
   background-color: #dbefdc;
   border-color: #cde9ce;
+  position: relative;
+  top: 114px;
 }
 
 .alert-success hr {
@@ -5022,6 +5024,8 @@ tbody.collapse.show {
   color: #00626e;
   background-color: #ccf2f6;
   border-color: #b8ecf3;
+  position: relative;
+  top: 114px;
 }
 
 .alert-info hr {
@@ -5036,6 +5040,8 @@ tbody.collapse.show {
   color: #857a1f;
   background-color: #fffbd8;
   border-color: #fff9c8;
+  position: relative;
+  top: 114px;
 }
 
 .alert-warning hr {
@@ -14216,6 +14222,7 @@ textarea {
   background-color: #55b559;
   color: #ffffff;
   z-index: 5;
+  padding: 11px;
 }
 
 .alert.alert-success a,
@@ -14249,6 +14256,9 @@ textarea {
   background-color: #f55145;
   color: #ffffff;
   z-index: 5;
+  position: relative;
+  top: 114px;
+  padding: 11px;
 }
 
 .alert.alert-danger a,
@@ -14553,7 +14563,9 @@ h6,
   font-weight: 300;
   line-height: 1.5em;
 }
-
+h6{
+  display: contents;
+}
 h1,
 h2,
 h3,
