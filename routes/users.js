@@ -110,6 +110,7 @@ router.put('/saveProfile/:id', function (req, res) {
                 id
             }
         }).then(() => {
+            alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
             res.redirect('/user/profile');
         }).catch(err => console.log(err));
 });
@@ -124,6 +125,9 @@ router.put('/savePassword/:id', function (req, res) {
     }
     if (password.length < 4) {
         errors.push({ text: 'Password must be at least 4 characters' });
+    }
+    if (password == '' || cpassword == ''){
+        errors.push({text: 'One field is empty. Please fill up both.'});
     }
     if (errors.length > 0) {
         res.render('user/password', {
@@ -142,7 +146,8 @@ router.put('/savePassword/:id', function (req, res) {
                             id
                         }
                     }).then(() => {
-                        res.redirect('/');
+                        alertMessage(res, 'success', 'Password Updated!', 'fas fa - sign -in -alt', true);
+                        res.redirect('/user/password');
                     }).catch(err => console.log(err));
             })
         })

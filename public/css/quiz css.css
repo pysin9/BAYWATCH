@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: black;
 }
 
 body {
@@ -48,8 +49,8 @@ p {
   text-align: left;
   background-color: transparent;
   margin: 10px 5px;
-  padding: 5px 10px;
-  border: 1px solid lightgray;
+  padding: 5px 150px;
+  border: 1px solid darkgray;
   font-weight: normal;
   text-align: center;
 }

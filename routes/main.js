@@ -57,24 +57,28 @@ router.get('/quiz', function (req, res) {
   const title = "Quiz";
   Quiz.findAll({
     where: {
-      id:1 
+      id:2
     },
     raw: true
   })
-    .then((quiz) => {
+    .then((quizzes) => {
       res.render('quiz/quiz', {
-        quiz:quiz,
+        quizzes:quizzes,
         title: title,
-        question: quiz[0].question,
-        option1: quiz[0].option1,
-        option2: quiz[0].option2,
-        option3: quiz[0].option3,
-        option4: quiz[0].option4,
+        question: quizzes[0].question,
+        option1: quizzes[0].option1,
+        option2: quizzes[0].option2,
+        option3: quizzes[0].option3,
+        option4: quizzes[0].option4,
       });
-      
     })
     .catch(err => console.log(err));
 });
+
+router.get('/checkquiz', (req, res) => {
+  const title = 'Check';
+  res.render('quiz/quiz', { title: title })
+})
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
