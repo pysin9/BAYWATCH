@@ -17,7 +17,7 @@ router.get('/faqform', (req, res) => {
 
 router.get('/addproducts', (req,res) => {
   let title = 'Add Products'
-  res.render('admin/addproducts', { title: title });
+  res.render('admin/addproduct', { title: title });
 });
 
 router.post('/addqns', (req, res) => {
