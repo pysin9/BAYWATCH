@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
-
+const Quiz = require('../models/Quiz')
 
 /* GET index */
 router.get('/', function (req, res) {
@@ -55,7 +55,25 @@ router.get('/cart', function (req, res) {
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
-  res.render('quiz/quiz', { title: title });
+  Quiz.findAll({
+    where: {
+      id:1 
+    },
+    raw: true
+  })
+    .then((quiz) => {
+      res.render('quiz/quiz', {
+        quiz:quiz,
+        title: title,
+        question: quiz[0].question,
+        option1: quiz[0].option1,
+        option2: quiz[0].option2,
+        option3: quiz[0].option3,
+        option4: quiz[0].option4,
+      });
+      
+    })
+    .catch(err => console.log(err));
 });
 
 router.get('/faq', (req, res) => {

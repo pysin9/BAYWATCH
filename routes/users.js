@@ -85,4 +85,8 @@ router.get('/profile', function(req, res) {
   res.render('user/profile', { title: title });
 });
 
+router.get('/password', function(req, res) {
+    const title = "Password";
+    res.render('user/password', { title: title });
+  });
 module.exports = router;

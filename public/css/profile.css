@@ -14,7 +14,7 @@ input[type=text], select, textarea {
     resize: vertical;
   }
 #main{
-    padding:220px;
+    padding:210px;
     background-color: lightgray;
 }
   label {
