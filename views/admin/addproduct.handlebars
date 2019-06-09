@@ -1,0 +1,54 @@
+<!--.col-	.col-sm-	.col-md-	.col-lg-	.col-xl- -->
+<div class="container">
+    <form action="/admin/addproducts" method="post" id="addVideo">
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>Add Products</h3>
+                <input type="file" id="posterUpload" name="posterUpload" accept="image/png,
+				image/jpeg,image/jpg,image/gif">
+                <img id="poster" src="/img/no-image.jpg" alt="" class="border img-thumbnail img-fluid"
+                    style="height:95%;width:100%">
+                <input id="posterURL" type="hidden" name="posterURL">
+                <div class="font-weight-bold text-danger small" id="posterErr" style="display:none"></div>
+            </div>
+            <div class="col-lg-9">
+                <div class="form-group">
+                    <label class="font-italic" for="title">Name</label>
+                    <input class="form-control" id="name" name="name" rows="7" />
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <button id="butAddVideo" type="submit" class="btn btn-primary">Save
+        </button>
+    </form>
+</div>
+
+
+<script>
+    $('#posterUpload').on('change', function () {
+        let image = $("#posterUpload")[0].files[0];
+        let formdata = new FormData();
+        formdata.append('posterUpload', image);
+        $.ajax({
+            url: '/video/upload',
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            'success': (data) => {
+                $('#poster').attr('src', data.file);
+                $('#posterURL').attr('value', data.file);// sets posterURL hidden field
+                if (data.err) {
+                    $('#posterErr').show();
+                    $('#posterErr').text(data.err.message);
+                } else {
+                    $('#posterErr').hide();
+                }
+            }
+        });
+    });
+
+</script>

@@ -3,6 +3,7 @@ const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz');
 const FAQ = require('../models/FAQ')
+const Shop = require('../models/Shop')
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'adminquiz'
@@ -12,6 +13,11 @@ router.get('/admin-quiz', (req, res) => {
 router.get('/faqform', (req, res) => {
   let title = 'faqform  '
   res.render('admin/faqform', { title: title });
+});
+
+router.get('/addproducts', (req,res) => {
+  let title = 'Add Products'
+  res.render('admin/addproducts', { title: title });
 });
 
 router.post('/addqns', (req, res) => {
@@ -45,6 +51,23 @@ router.post('/addquiz', (req, res) => {
 
   }).then((quizzes) => {
     res.redirect('/quiz');
+  })
+    .catch(err => console.log(err))
+})
+
+router.post('/addproducts', (req, res) => {
+  let name = req.body.name;
+  let description = req.body.description.slice(0, 1999);
+  let image = req.body.posterURL;
+  let price = req.body.price;
+
+  Shop.create({
+    image,
+    name,
+    description,
+    price
+  }).then((products) => {
+    res.redirect('/shop');
   })
     .catch(err => console.log(err))
 })
