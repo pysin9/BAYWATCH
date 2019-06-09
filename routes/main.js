@@ -31,7 +31,7 @@ router.get('/Register', (req, res) => {
 /* NewOrganics Shop */
 router.get('/shop', function (req, res) {
   const title = "Shop";
-  res.render('partials/_shop', { title: title });
+  res.render('shop/shop', { title: title });
 });
 
 /* Shop Fruits */
