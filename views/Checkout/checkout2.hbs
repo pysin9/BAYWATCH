@@ -1,50 +1,60 @@
 <!DOCTYPE HTML>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <title>Store ChKOut</title>
+<meta charset="utf-8"/>
+<title>Store ChKOut</title>
 
-    <link rel="stylesheet" type="text/css" href="Checkout2.css" />
+<link rel="stylesheet" type="text/css" href="Checkout2.css"/>
 </head>
-
 <body>
-    <p id="Step2"> Step 2: Shipping Method </p>
-    <hr id="hr">
-    <form action="Checkout3.html" method="post">
-        <fieldset id="particular">
-            <legend>Checkout</legend>
+<p id="Step2"> Step 2: Shipping Method </p>
+<hr id = "hr">
+<form action="Checkout3.html" method="post"> 
+<fieldset id="particular">
+<legend>Checkout</legend>
+
+<p id="SS"> standard shipping </p>
+<br>
+<p id= "PS"> Priority shipping </p>
+<br>
+<p id= "ISAS"> International standard air shipping</p>
+
+<p id= "SPrice"> $17.95 </p>
+<br>
+<p id= "PPrice"> $25.00 </p>
+<br>
+<p id= "ISPrice"> $30.00 </p>
+<br>
+<p id= "FPrice"> $0.00 </p>
+<br>
+<p id= "FSP"> Free pickup in store </p>
+<label class="container">
+  <input type="checkbox"name="Shipping1" value="Standard Shipping"> <br>
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">
+  <input type="checkbox" name="Shipping2" value="Priorty Shipping"><br>
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">
+  <input type="checkbox" name="Shipping3" value="International Standard Air Shipping"><br> 
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">
+  <input type="checkbox" name="Shipping4" value="Free Pickup">
+  <span class="checkmark"></span>
+</label>
+</form>
+<br>
 
 
-            <label class="container">
-                <input type="checkbox" name="Shipping1" value="Standard Shipping"> Standard Shipping<br>
-                <span class="checkmark"></span>
-            </label>
 
-            <label class="container">
-                <input type="checkbox" name="Shipping2" value="Priorty Shipping"> Priority Shipping<br>
-                <span class="checkmark"></span>
-            </label>
+</fieldset>
 
-            <label class="container">Three
-                <input type="checkbox" name="Shipping3" value="International Standard Air Shipping"> International Air
-                Shipping <br>
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="container">
-                <input type="checkbox" name="Shipping4" value="Free Pickup">Free Pickup in store
-                <span class="checkmark"></span>
-            </label>
-    </form>
-    <br>
-
-
-
-    </fieldset>
-
-    <input type="submit" value="Continue"></input>
-    </form>
+<input type="submit" value="Continue"></input>
+</form>
 </body>
-
 </html>
