@@ -44,7 +44,7 @@ p {
 }
 
 /*formatting answers*/
-#option {
+.option {
   list-style-type: none;
   text-align: left;
   background-color: transparent;
@@ -55,7 +55,7 @@ p {
   text-align: center;
 }
 
-#option:hover {
+.option:hover {
   background: #ECEEF0;
 }
 

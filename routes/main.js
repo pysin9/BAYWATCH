@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
+const math = require('math');
 
 /* GET index */
 router.get('/', function (req, res) {
@@ -55,21 +56,33 @@ router.get('/cart', function (req, res) {
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
+
   Quiz.findAll({
     where: {
-      id:2
+      
+    },
+    raw: true
+  })
+    .then((quizzes) => {
+    })
+    .catch(err => console.log(err));
+
+  Quiz.findAll({
+    where: {
+      id: 2
     },
     raw: true
   })
     .then((quizzes) => {
       res.render('quiz/quiz', {
-        quizzes:quizzes,
+        quizzes: quizzes,
         title: title,
         question: quizzes[0].question,
         option1: quizzes[0].option1,
         option2: quizzes[0].option2,
         option3: quizzes[0].option3,
         option4: quizzes[0].option4,
+        correct: quizzes[0].correct,
       });
     })
     .catch(err => console.log(err));

@@ -82,12 +82,12 @@ router.post('/Register', (req, res) => {
 /* GET user profile */
 router.get('/profile', function (req, res) {
     const title = "Profile";
-    res.render('user/profile', { title: title });
+    res.render('user/profile1', { title: title });
 });
 
 router.get('/password', function (req, res) {
     const title = "Password";
-    res.render('user/password', { title: title });
+    res.render('user/password1', { title: title });
 });
 
 router.put('/saveProfile/:id', function (req, res) {

@@ -1,0 +1,76 @@
+<body class="login-page sidebar-collapse">
+    <div class="page-header header-filter"
+        style="background-color: lightgrey">
+        <div class="container">
+            <div class="row" ></div>
+                <div class="card card-login">
+                    <form class="form" action="/user/saveProfile/{{user.id}}?_method=PUT" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                        <h2 class="card-title text-center">Edit Profile</h2>
+                        <div class="card-body">
+                            <div class="row" style='margin-left: 250px'>
+                                <div class="col-lg-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons" style="font-size:24px">supervisor_account</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="name" name="name" class="form-control"
+                                            value={{user.name}}>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">email</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="email" name="email" class="form-control"
+                                            value={{user.email}}>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">home</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="address" name="address" class="form-control"
+                                            value={{user.address}}>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">perm_phone_msg</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="phone" name="phone" class="form-control"
+                                           value={{user.phone}}>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">credit_card</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="bankName" name="bankName" class="form-control"
+                                            value={{user.bankName}}>
+                                    </div>
+                                     <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">credit_card</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="bankNo" name="bankNo" class="form-control"
+                                            value={{user.bankNo}}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-round">Submit</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
