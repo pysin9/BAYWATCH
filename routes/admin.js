@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz');
-const FAQ = require('../models/FAQ')
+const FAQ = require('../models/QnA')
 const Shop = require('../models/Shop')
 
 router.get('/admin-quiz', (req, res) => {
