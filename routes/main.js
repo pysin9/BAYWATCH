@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
-const math = require('math');
 
 /* GET index */
 router.get('/', function (req, res) {
