@@ -1,340 +1,244 @@
 body {
-    margin: 0;
-    padding-top: 97px;
-  }
-  
-  .topnav {
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    position: relative;
-    left: 1410px;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .sidenav {
-    height: 100%;
-    width: 300px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #333;
-    overflow-x: hidden;
-    padding-top: 20px;
-    margin-top: 150px;
-  }
-  
-  .sidenav a {
-    padding: 16px 16px 16px 16px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #ffffff;
-    display: block;
-  }
-  
-  .sidenav a:hover {
-    color: #000000;
-  }
-  
-  .main {
-    margin-left: 300px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 50px;
-    margin-top: 55px;
-  }
+  margin: 0;
+  font-family: Arial;
+  position: relative;
+  top: 97px;
+}
 
-  .top{
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
+.product-image {
+  float: left;
+  width: 20%;
+}
 
-  .sidenav a, .dropdown-btn {
-    padding: 16px 16px 16px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #ffffff;
-    display: block;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
-  }
+.product-details {
+  float: left;
+  width: 37%;
+}
 
-  .sidenav a:hover, .dropdown-btn:hover {
-    color: #000000;
-  }
+.product-price {
+  float: left;
+  width: 12%;
+}
 
-  .dropdown-container {
-    display: none;
-    background-color: rgba(144, 238, 144, 0.500);
-    padding-left: 8px;
-  }
+.product-quantity {
+  float: left;
+  width: 10%;
+}
 
-  .fa-caret-down {
-    float: right;
-    padding-right: 8px;
-  }
+.product-removal {
+  float: left;
+  width: 9%;
+}
 
-  .topnav input[type=text] {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-  }
+.product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+}
 
-  .product-image {
-    float: left;
-    width: 20%;
-  }
-  
-  .product-details {
-    float: left;
-    width: 37%;
-  }
-  
-  .product-price {
-    float: left;
-    width: 12%;
-  }
-  
-  .product-quantity {
-    float: left;
-    width: 10%;
-  }
-  
-  .product-removal {
-    float: left;
-    width: 9%;
-  }
-  
-  .product-line-price {
-    float: left;
-    width: 12%;
-    text-align: right;
-  }
-  
-  /* This is used as the traditional .clearfix class */
-  .group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
-  .group:after,
-  .shopping-cart:after,
-  .column-labels:after,
-  .product:after,
-  .totals-item:after {
-    content: '';
-    display: table;
-  }
-  
-  .group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
-    clear: both;
-  }
-  
-  .group, .shopping-cart, .column-labels, .product, .totals-item {
-    zoom: 1;
-  }
-  
-  /* Apply clearfix in a few places */
-  /* Apply dollar signs */
-  .product .product-price:before, .product .product-line-price:before, .totals-value:before {
-    content: '$';
-  }
-  
-  /* Body/Header stuff */
-  h2 {
-    font-weight: 100;
-  }
-  
-  label {
-    color: #aaa;
-  }
-  
+/* This is used as the traditional .clearfix class */
+
+.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before, .group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
+  content: '';
+  display: table;
+}
+
+.group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
+  clear: both;
+}
+
+.group, .shopping-cart, .column-labels, .product, .totals-item {
+  zoom: 1;
+}
+
+/* Apply clearfix in a few places */
+
+/* Apply dollar signs */
+
+.product .product-price:before, .product .product-line-price:before, .totals-value:before {
+  content: '$';
+}
+
+/* Body/Header stuff */
+
+h2 {
+  font-weight: 100;
+}
+
+label {
+  color: #aaa;
+}
+
+.shopping-cart {
+  margin-top: -45px;
+}
+
+/* Column headers */
+
+.column-labels label {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
+  text-indent: -9999px;
+}
+
+/* Product entries */
+
+.product {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.product .product-image {
+  text-align: center;
+}
+
+.product .product-image img {
+  width: 100px;
+}
+
+.product .product-details .product-title {
+  margin-right: 20px;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.product .product-details .product-description {
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+}
+
+.product .product-quantity input {
+  width: 40px;
+}
+
+.product .remove-product {
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.product .remove-product:hover {
+  background-color: #a44;
+}
+
+/* Totals section */
+
+.totals .totals-item {
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.totals .totals-item label {
+  float: left;
+  clear: both;
+  width: 79%;
+  text-align: right;
+}
+
+.totals .totals-item .totals-value {
+  float: right;
+  width: 21%;
+  text-align: right;
+}
+
+.totals .totals-item-total {
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.checkout {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  padding: 6px 25px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 3px;
+}
+
+.checkout:hover {
+  background-color: #494;
+}
+
+/* Make adjustments for tablet */
+
+@media screen and (max-width: 650px) {
   .shopping-cart {
-    margin-top: -45px;
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
   }
-  
-  /* Column headers */
-  .column-labels label {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
+  .column-labels {
+    display: none;
   }
-  .column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
-    text-indent: -9999px;
+  .product-image {
+    float: right;
+    width: auto;
   }
-  
-  /* Product entries */
-  .product {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+  .product-image img {
+    margin: 0 0 10px 10px;
   }
-  .product .product-image {
-    text-align: center;
+  .product-details {
+    float: none;
+    margin-bottom: 10px;
+    width: auto;
   }
-  .product .product-image img {
+  .product-price {
+    clear: both;
+    width: 70px;
+  }
+  .product-quantity {
     width: 100px;
   }
-  .product .product-details .product-title {
-    margin-right: 20px;
-    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  .product-quantity input {
+    margin-left: 20px;
   }
-  .product .product-details .product-description {
-    margin: 5px 20px 5px 0;
-    line-height: 1.4em;
+  .product-quantity:before {
+    content: 'x';
   }
-  .product .product-quantity input {
-    width: 40px;
+  .product-removal {
+    width: auto;
   }
-  .product .remove-product {
-    border: 0;
-    padding: 4px 8px;
-    background-color: #c66;
-    color: #fff;
-    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-    font-size: 12px;
-    border-radius: 3px;
-  }
-  .product .remove-product:hover {
-    background-color: #a44;
-  }
-  
-  /* Totals section */
-  .totals .totals-item {
+  .product-line-price {
     float: right;
-    clear: both;
-    width: 100%;
-    margin-bottom: 10px;
+    width: 70px;
+  }
+}
+
+/* Make more adjustments for phone */
+
+@media screen and (max-width: 350px) {
+  .product-removal {
+    float: right;
+  }
+  .product-line-price {
+    float: right;
+    clear: left;
+    width: auto;
+    margin-top: 10px;
+  }
+  .product .product-line-price:before {
+    content: 'Item Total: $';
   }
   .totals .totals-item label {
-    float: left;
-    clear: both;
-    width: 79%;
-    text-align: right;
+    width: 60%;
   }
   .totals .totals-item .totals-value {
-    float: right;
-    width: 21%;
-    text-align: right;
+    width: 40%;
   }
-  .totals .totals-item-total {
-    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-  }
-  
-  .checkout {
-    float: right;
-    border: 0;
-    margin-top: 20px;
-    padding: 6px 25px;
-    background-color: #6b6;
-    color: #fff;
-    font-size: 25px;
-    border-radius: 3px;
-  }
-  
-  .checkout:hover {
-    background-color: #494;
-  }
-  
-  /* Make adjustments for tablet */
-  @media screen and (max-width: 650px) {
-    .shopping-cart {
-      margin: 0;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
-    }
-  
-    .column-labels {
-      display: none;
-    }
-  
-    .product-image {
-      float: right;
-      width: auto;
-    }
-    .product-image img {
-      margin: 0 0 10px 10px;
-    }
-  
-    .product-details {
-      float: none;
-      margin-bottom: 10px;
-      width: auto;
-    }
-  
-    .product-price {
-      clear: both;
-      width: 70px;
-    }
-  
-    .product-quantity {
-      width: 100px;
-    }
-    .product-quantity input {
-      margin-left: 20px;
-    }
-  
-    .product-quantity:before {
-      content: 'x';
-    }
-  
-    .product-removal {
-      width: auto;
-    }
-  
-    .product-line-price {
-      float: right;
-      width: 70px;
-    }
-  }
-  /* Make more adjustments for phone */
-  @media screen and (max-width: 350px) {
-    .product-removal {
-      float: right;
-    }
-  
-    .product-line-price {
-      float: right;
-      clear: left;
-      width: auto;
-      margin-top: 10px;
-    }
-  
-    .product .product-line-price:before {
-      content: 'Item Total: $';
-    }
-  
-    .totals .totals-item label {
-      width: 60%;
-    }
-    .totals .totals-item .totals-value {
-      width: 40%;
-    }
-  }
+}
+
+.shopping-cart {
+  max-width: 1500px;
+  margin: auto;
+}

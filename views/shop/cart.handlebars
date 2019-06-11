@@ -1,149 +1,106 @@
 <link rel="stylesheet" type="text/css" href="/css/cart.css">
+{{>_shopnavbar}}
 
-<div class="topnav top"">
-    <!-- <a class=" active" href="#home">Search</a> -->
-    <input type="text" placeholder="Search..">
-    <a href="/cart"><i class="material-icons">&#xe8cc;</i> Cart</a>
+<div class="shopping-cart">
+
+    <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-price">Price</label>
+        <label class="product-quantity">Quantity</label>
+        <label class="product-removal">Remove</label>
+        <label class="product-line-price">Total</label>
+    </div>
+
+    <div class="product">
+        <div class="product-image">
+            <img src="/img/fruitsavocado.jpg">
+        </div>
+        <div class="product-details">
+            <div class="product-title">Organic Avocado 2pcs Large</div>
+            <p class="product-description">Australian Avocados. Get your mouth watery for these tasty and creamy
+                delicious goodness.</p>
+        </div>
+        <div class="product-price">7.20</div>
+        <div class="product-quantity">
+            <input type="number" value="1" min="1">
+        </div>
+        <div class="product-removal">
+            <button class="remove-product">
+                Remove
+            </button>
+        </div>
+        <div class="product-line-price">7.20</div>
+    </div>
+
+    <div class="product">
+        <div class="product-image">
+            <img src="/img/fruitsapple.jpg">
+        </div>
+        <div class="product-details">
+            <div class="product-title">Organic Apple Gala 4pcs</div>
+            <p class="product-description">Juicy, pinkish, heavenly bite of USA GRAND Apples.</p>
+        </div>
+        <div class="product-price">5.50</div>
+        <div class="product-quantity">
+            <input type="number" value="1" min="1">
+        </div>
+        <div class="product-removal">
+            <button class="remove-product">
+                Remove
+            </button>
+        </div>
+        <div class="product-line-price">5.50</div>
+    </div>
+
+    <div class="product">
+        <div class="product-image">
+            <img src="/img/fruitsbanana.jpg">
+        </div>
+        <div class="product-details">
+            <div class="product-title">Organic Banana (Malaysia)</div>
+            <p class="product-description">Delicious, yellow on the go fruit.</p>
+        </div>
+        <div class="product-price">3.60</div>
+        <div class="product-quantity">
+            <input type="number" value="1" min="1">
+        </div>
+        <div class="product-removal">
+            <button class="remove-product">
+                Remove
+            </button>
+        </div>
+        <div class="product-line-price">3.60</div>
+    </div>    
+
+    <div class="totals">
+        <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">16.30</div>
+        </div>
+        <div class="totals-item">
+            <label>Tax (5%)</label>
+            <div class="totals-value" id="cart-tax">0.80</div>
+        </div>
+        <div class="totals-item">
+            <label>Shipping</label>
+            <div class="totals-value" id="cart-shipping">10.00</div>
+        </div>
+        <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">27.10</div>
+        </div>
+    </div>
+
+    <button class="checkout">Checkout</button>
+
 </div>
 
-<!-- Sidebar -->
-<div class="sidenav">
-    <button class="dropdown-btn">Organic Fresh Produce
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="/fruits">Fruits</a>
-        <a href="#">Herbs & Spices</a>
-        <a href="#">Vegetables</a>
-    </div>
-    <button class="dropdown-btn">Dairy
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Milk</a>
-        <a href="#">Yogurt</a>
-        <a href="#">Butter</a>
-        <a href="#">Cheese</a>
-    </div>
-    <button class="dropdown-btn">Beverages
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Juice</a>
-        <a href="#">Grain, Nut & Soy Milk</a>
-        <a href="#">Coffee & Tea</a>
-    </div>
-    <button class="dropdown-btn">Frozen Food
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Chicken</a>
-        <a href="#">Pork</a>
-        <a href="#">Beef</a>
-        <a href="#">Fish</a>
-    </div>
-    <button class="dropdown-btn">Health & Beauty
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Personal Care</a>
-        <a href="#">Healing</a>
-        <a href="#">Supplements</a>
-    </div>
-    <button class="dropdown-btn">Snacks
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Crackers & Biscuits</a>
-        <a href="#">Seeds & Nuts</a>
-        <a href="#">Candy</a>
-        <a href="#">Energy Bar</a>
-    </div>
-</div>
-
-<div class="main">
-    <h2>Shopping Cart</h2>
-
-    <div class="shopping-cart">
-
-        <div class="column-labels">
-            <label class="product-image">Image</label>
-            <label class="product-details">Product</label>
-            <label class="product-price">Price</label>
-            <label class="product-quantity">Quantity</label>
-            <label class="product-removal">Remove</label>
-            <label class="product-line-price">Total</label>
-        </div>
-
-        <div class="product">
-            <div class="product-image">
-                <img src="/img/fruitsavocado.jpg">
-            </div>
-            <div class="product-details">
-                <div class="product-title">Avocado</div>
-                <p class="product-description">Australian Avocados. Get your mouth watery for these tasty and creamy
-                    delicious goodness.</p>
-            </div>
-            <div class="product-price">12.99</div>
-            <div class="product-quantity">
-                <input type="number" value="2" min="1">
-            </div>
-            <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-            </div>
-            <div class="product-line-price">25.98</div>
-        </div>
-
-        <div class="product">
-            <div class="product-image">
-                <img src="/img/fruitsapple.jpg">
-            </div>
-            <div class="product-details">
-                <div class="product-title">Apple</div>
-                <p class="product-description">Juicy, pinkish, heavenly bite of USA GRAND Apples.</p>
-            </div>
-            <div class="product-price">45.99</div>
-            <div class="product-quantity">
-                <input type="number" value="1" min="1">
-            </div>
-            <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-            </div>
-            <div class="product-line-price">45.99</div>
-        </div>
-
-        <div class="totals">
-            <div class="totals-item">
-                <label>Subtotal</label>
-                <div class="totals-value" id="cart-subtotal">71.97</div>
-            </div>
-            <div class="totals-item">
-                <label>Tax (5%)</label>
-                <div class="totals-value" id="cart-tax">3.60</div>
-            </div>
-            <div class="totals-item">
-                <label>Shipping</label>
-                <div class="totals-value" id="cart-shipping">15.00</div>
-            </div>
-            <div class="totals-item totals-item-total">
-                <label>Grand Total</label>
-                <div class="totals-value" id="cart-total">90.57</div>
-            </div>
-        </div>
-
-        <button class="checkout">Checkout</button>
-
-    </div>
-</div>
 
 <script>
     /* Set rates + misc */
     var taxRate = 0.05;
-    var shippingRate = 15.00;
+    var shippingRate = 10.00;
     var fadeTime = 300;
 
 
