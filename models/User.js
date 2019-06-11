@@ -21,6 +21,9 @@ const User = db.define('user', {
     },
     bankNo: {
         type: Sequelize.INTEGER
+    },
+    role: {
+       type: Sequelize.STRING
     }
 });
 module.exports = User;
