@@ -34,16 +34,10 @@ router.get('/shop', function (req, res) {
   res.render('shop/shop', { title: title });
 });
 
-/* Shop Fruits */
-router.get('/fruits', function (req, res) {
-  const title = "Fruits";
-  res.render('shop/shopfruits', { title: title });
-});
-
-/* Shop Herbs and Spices */
-router.get('/herbsandspices', function (req, res) {
-  const title = "Herbs & Spices";
-  res.render('shop/shopherbsandspices', { title: title });
+/* Shop Categories */
+router.get('/category', function (req, res) {
+  const title = "Category";
+  res.render('shop/shopcategory', { title: title });
 });
 
 /* Cart */
