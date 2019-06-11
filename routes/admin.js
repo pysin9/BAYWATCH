@@ -15,7 +15,7 @@ router.get('/faqform', (req, res) => {
   res.render('admin/faqform', { title: title });
 });
 
-router.get('/addproducts', (req,res) => {
+router.get('/addproducts', (req, res) => {
   let title = 'Add Products'
   res.render('admin/addproduct', { title: title });
 });
@@ -57,18 +57,35 @@ router.post('/addquiz', (req, res) => {
 
 router.post('/addproducts', (req, res) => {
   let name = req.body.name;
-  let description = req.body.description.slice(0, 1999);
-  let image = req.body.posterURL;
+  let images = req.body.images;
   let price = req.body.price;
 
   Shop.create({
-    image,
+    images,
     name,
-    description,
     price
   }).then((products) => {
     res.redirect('/shop');
   })
     .catch(err => console.log(err))
+})
+
+router.post('/upload', (req, res) => {
+  // Creates user id directory for upload if not exist
+  if (!fs.existsSync('./public/uploads/' + req.user.id)) {
+    fs.mkdirSync('./public/uploads/' + req.user.id);
+  }
+
+  upload(req, res, (err) => {
+    if (err) {
+      res.json({ file: '/img/no-image.jpg', err: err });
+    } else {
+      if (req.file === undefined) {
+        res.json({ file: '/img/no-image.jpg', err: err });
+      } else {
+        res.json({ file: `/uploads/${req.user.id}/${req.file.filename}` });
+      }
+    }
+  });
 })
 module.exports = router;

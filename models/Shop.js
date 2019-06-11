@@ -8,7 +8,7 @@ const Shop = db.define('shop', {
         type: Sequelize.STRING
     },
     price: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
     },
     description:{
         type: Sequelize.STRING

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="card card-login">
-                    <form class="form" method="post" action="/user/login">
+                    <form class="form" method="post" action="/admin/addproducts">
                         <h2 class="card-title text-center">Add Products</h2>
                         <div class="card-body">
                             <div class="row">
@@ -15,7 +15,7 @@
                                                 <i class="material-icons" style="font-size:24px">email</i>
                                             </span>
                                         </div>
-                                        <input type="email" id="email" name="email" class="form-control"
+                                        <input type="name" id="name" name="name" class="form-control"
                                             placeholder="Product Name..">
                                     </div>
                                     <div class="input-group">
@@ -24,22 +24,30 @@
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
                                         </div>
-                                        <input type="text" id="price" name="password" class="form-control"
+                                        <input type="text" id="price" name="price" class="form-control"
                                             placeholder="Price...">
+                                    </div>
+                                    <div class="input-group">
+                                        <select name="category" class="dropdown nav-item">
+                                            <option name ="fruits" id="" value="fruits">Fruits</option>
+                                            <option value="saab">Saab</option>
+                                            <option value="fiat">Fiat</option>
+                                            <option value="audi">Audi</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <input type="file" id="posterUpload" name="posterUpload"
+                                    <input type="file" id="posterUpload" name="imageUpload"
                                         accept="image/png,image/jpeg,image/jpg,image/gif">
-                                    <img id="poster" src="/img/no-image.jpg" alt=""
+                                    <img id="picture" src="/img/no-image.jpg" alt=""
                                         class="border img-thumbnail img-fluid" style="height:95%;width:100%">
-                                    <input id="posterURL" type="hidden" name="posterURL">
-                                    <div class="font-weight-bold text-danger small" id="posterErr" style="display:none">
+                                    <input id="images" type="hidden" name="images">
+                                    <div class="font-weight-bold text-danger small" id="imageErr" style="display:none">
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success btn-round">Login</button>
+                                <button type="submit" class="btn btn-success btn-round">Create</button>
                             </div>
                     </form>
                 </div>
@@ -48,24 +56,24 @@
     </div>
 </body>
 <script>
-    $('#posterUpload').on('change', function () {
-        let image = $("#posterUpload")[0].files[0];
+    $('#imageUpload').on('change', function () {
+        let image = $("#imageUpload")[0].files[0];
         let formdata = new FormData();
-        formdata.append('posterUpload', image);
+        formdata.append('imageUpload', image);
         $.ajax({
-            url: '/video/upload',
+            url: '/admin/upload',
             type: 'POST',
             data: formdata,
             contentType: false,
             processData: false,
             'success': (data) => {
-                $('#poster').attr('src', data.file);
-                $('#posterURL').attr('value', data.file);// sets posterURL hidden field
+                $('#picture').attr('src', data.file);
+                $('#images').attr('value', data.file);// sets posterURL hidden field
                 if (data.err) {
-                    $('#posterErr').show();
-                    $('#posterErr').text(data.err.message);
+                    $('#imageErr').show();
+                    $('#imageErr').text(data.err.message);
                 } else {
-                    $('#posterErr').hide();
+                    $('#imageErr').hide();
                 }
             }
         });

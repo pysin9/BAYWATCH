@@ -17,19 +17,19 @@ const Cart = db.define('cart', {
         type: Sequelize.INTEGER
     },
     total: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
     },
     subtotal: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
     },
-    tax: {
-        type: Sequelize.FLOAT
+    gst: {
+        type: Sequelize.DECIMAL
     },
     shipping: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
     },
     grandTotal: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
     },
 });
 module.exports = Cart;
