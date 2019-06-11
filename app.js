@@ -25,7 +25,7 @@ const adminRoute = require('./routes/admin');
 const organicDB = require('./config/DBConnection')
 
 
-organicDB.setUpDB(false);
+organicDB.setUpDB(true);
 const authenticate = require('./config/passport');
 authenticate.localStrategy(passport);
 /*

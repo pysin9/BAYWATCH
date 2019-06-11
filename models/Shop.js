@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
 const Shop = db.define('shop', {
-    image: {
+    images: {
         type: Sequelize.BLOB('long')
     },
     name: {
