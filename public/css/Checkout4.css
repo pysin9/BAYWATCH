@@ -1,8 +1,11 @@
 
 body {
-	background-image: url("formbackground.jpg");
+	background-image: url("foodbackground.jpg");
 	background-color: #cccc;
+	background-repeat: no-repeat;
+	background-size: 1538px;
 }
+
 
 form {
 	margin:0 auto; 

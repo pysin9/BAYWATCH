@@ -4,8 +4,10 @@
 	padding:0px;
 }*/
 body {
-	background-image: url("formbackground.jpg");
-	background-color: #ccc ;
+	background-image: url("foodbackground.jpg");
+	background-color: #cccc;
+	background-repeat: no-repeat;
+	background-size: 1538px;
 }
 
 form {
@@ -20,7 +22,7 @@ fieldset {
 	padding-left:15%;
 	padding-right:15%;
 	margin:20px;
-	background-color: #ccc ;
+	background-color:#cccc;
 	background-image: url("formbackground.jpg");
 	border:none;
 }
@@ -95,7 +97,7 @@ input:focus:invalid {
   width: 17%;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc ;
+  border: 2px solid gray ;
   border-radius: 4px;
   resize: none;
   margin: -480px;

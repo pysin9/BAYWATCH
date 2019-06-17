@@ -105,14 +105,16 @@ fieldset {
 	padding-left:15%;
 	padding-right:15%;
 	margin:20px;
-	background-color:#ccc;
+	background-color:#cccc;
 	background-image: url("formbackground.jpg");
 	border:none;
 }
 
 body {
-	background-image: url("formbackground.jpg");
-	background-color: #ccc;
+	background-image: url("foodbackground.jpg");
+	background-color: #cccc;
+	background-repeat: no-repeat;
+	background-size: 1538px;
 }
 
 form {
