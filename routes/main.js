@@ -2,10 +2,27 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('organic', 'organic', 'green', {
+  host: 'localhost',
+  dialect: 'mysql',
+
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  operatorsAliases: false
+});
 
 /* GET index */
 router.get('/', function (req, res) {
   const title = "NewOrganics";
+  /*sequelize.query("SELECT * from users").then(results => {
+    console.log(results);
+  });--- SELECT METHOD*/
   res.render('index', { title: title });
 });
 
