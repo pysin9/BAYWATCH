@@ -3,6 +3,7 @@ const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
 const Sequelize = require('sequelize');
+const math = require("math");
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -20,7 +21,7 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 /* GET index */
 router.get('/', function (req, res) {
   const title = "NewOrganics";
-  /*sequelize.query("SELECT * from users").then(results => {
+    /*sequelize.query("SELECT * from users").then(results => {
     console.log(results);
   });--- SELECT METHOD*/
   res.render('index', { title: title });
@@ -67,35 +68,24 @@ router.get('/cart', function (req, res) {
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
 
-  Quiz.findAll({
-    where: {
-      
-    },
-    raw: true
-  })
-    .then((quizzes) => {
-    })
-    .catch(err => console.log(err));
+  sequelize.query("SELECT * FROM quizzes").then(result => {
+    let length = result.length;
+    let selectedID = getRndInteger(1, length);
 
-  Quiz.findAll({
-    where: {
-      id: 2
-    },
-    raw: true
-  })
-    .then((quizzes) => {
-      res.render('quiz/quiz', {
-        quizzes: quizzes,
-        title: title,
-        question: quizzes[0].question,
-        option1: quizzes[0].option1,
-        option2: quizzes[0].option2,
-        option3: quizzes[0].option3,
-        option4: quizzes[0].option4,
-        correct: quizzes[0].correct,
-      });
+    sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
+    ).then(function (quiz) {
+      res.render('quiz/quiz',
+        {
+          title: title,
+          option1: quiz[0].option1,
+          option2: quiz[0].option2,
+          option3: quiz[0].option3,
+          option4: quiz[0].option4,
+          question: quiz[0].question,
+          correct: quiz[0].correct,
+        })
     })
-    .catch(err => console.log(err));
+  })
 });
 
 router.get('/checkquiz', (req, res) => {
@@ -112,4 +102,9 @@ router.get('/about', (req, res) => {
   const title = "About"
   res.render('about', { title: title });
 });
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 module.exports = router;
