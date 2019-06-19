@@ -21,9 +21,9 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 /* GET index */
 router.get('/', function (req, res) {
   const title = "NewOrganics";
-    /*sequelize.query("SELECT * from users").then(results => {
-    console.log(results);
-  });--- SELECT METHOD*/
+  /*sequelize.query("SELECT * from users").then(results => {
+  console.log(results);
+});--- SELECT METHOD*/
   res.render('index', { title: title });
 });
 
@@ -68,10 +68,10 @@ router.get('/cart', function (req, res) {
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
 
-  sequelize.query("SELECT * FROM quizzes").then(result => {
-    let length = result.length;
-    let selectedID = getRndInteger(1, length);
-
+  sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
+    let length = result[0].length;
+    let getIndex = getRndInteger(0, length-1);
+    let selectedID = result[0][getIndex].id
     sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
     ).then(function (quiz) {
       res.render('quiz/quiz',

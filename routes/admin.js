@@ -4,6 +4,20 @@ const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz');
 const FAQ = require('../models/QnA')
 const Shop = require('../models/Shop')
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize('organic', 'organic', 'green', {
+  host: 'localhost',
+  dialect: 'mysql',
+
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  operatorsAliases: false
+});
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'adminquiz'
@@ -41,18 +55,24 @@ router.post('/addquiz', (req, res) => {
   let option4 = req.body.option4;
   let correct = req.body.correct;
 
-  Quiz.create({
-    question,
-    option1,
-    option2,
-    option3,
-    option4,
-    correct,
+sequelize.query("INSERT INTO quizzes(question, option1, option2, option3, option4, correct) VALUES (:questions,:option1s, :option2s, :option3s, :option4s, :corrects)"
+,{replacements: {questions: question, option1s: option1, option2s: option2, option3s:option3, option4s:option4,corrects:correct}})
+.then((quizzes)=>{
+  res.redirect('/quiz');
+});
 
-  }).then((quizzes) => {
-    res.redirect('/quiz');
-  })
-    .catch(err => console.log(err))
+  // Quiz.create({
+  //   question,
+  //   option1,
+  //   option2,
+  //   option3,
+  //   option4,
+  //   correct,
+
+  // }).then((quizzes) => {
+  //   res.redirect('/quiz');
+  // })
+  //   .catch(err => console.log(err))
 })
 
 router.post('/addproducts', (req, res) => {
