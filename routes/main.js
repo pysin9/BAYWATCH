@@ -55,7 +55,17 @@ router.get('/shop', function (req, res) {
 /* Shop Categories */
 router.get('/category', function (req, res) {
   const title = "Category";
-  res.render('shop/shopcategory', { title: title });
+  Shop.findAll({
+    attributes: ['name', 'price', 'images','description']
+  },
+    raw = true
+  ).then((shop) => {
+    res.render('shop/shopcategory', { 
+      title: title,
+      shop:shop
+    })
+  })
+    .catch(err => console.log(err));
 });
 
 /* Cart */

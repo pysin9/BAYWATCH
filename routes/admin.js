@@ -79,11 +79,12 @@ router.post('/addproducts', (req, res) => {
   let name = req.body.name;
   let images = req.body.images;
   let price = req.body.price;
-
+  let description = req.body.description;
   Shop.create({
     images,
     name,
-    price
+    price,
+    description
   }).then((products) => {
     res.redirect('/shop');
   })
