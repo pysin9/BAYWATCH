@@ -34,6 +34,11 @@ router.get('/addproducts', (req, res) => {
   res.render('admin/addproduct', { title: title });
 });
 
+router.get('/editproducts', (req, res) => {
+  let title = 'Edit Products'
+  res.render('admin/editproduct', { title: title });
+});
+
 router.post('/addqns', (req, res) => {
   let qns = req.body.qns;
   let ans = req.body.ans;
