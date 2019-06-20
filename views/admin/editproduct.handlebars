@@ -18,7 +18,7 @@
                                             </span>
                                         </div>
                                         <input type="name" id="name" name="name" class="form-control"
-                                            placeholder="Product Name..">
+                                            placeholder="Product Name.." {{shop.name}}>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -27,7 +27,7 @@
                                             </span>
                                         </div>
                                         <input type="text" id="price" name="price" class="form-control"
-                                            placeholder="Price...">
+                                            placeholder="Price..." {{shop.price}}>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -36,7 +36,7 @@
                                             </span>
                                         </div>
                                         <input type="description" id="description" name="description"
-                                            class="form-control" placeholder="Description...">
+                                            class="form-control" placeholder="Description..." {{shop.description}}>
                                     </div>
                                     <div class="input-group">
                                         <div class="try-select" style="width:200px;">
@@ -69,7 +69,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success btn-round">Create</button>
+                                <button id="butAddVideo" type="submit" class="btn btn-primary">Save
+                                </button>
                             </div>
                     </form>
                 </div>
