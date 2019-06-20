@@ -4,7 +4,7 @@ const QnA = db.define('qna', {
     qns: {
         type: Sequelize.STRING
     },
-    answers: {
+    ans: {
         type: Sequelize.STRING
     }
 });

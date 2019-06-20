@@ -105,8 +105,18 @@ router.get('/checkquiz', (req, res) => {
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
-  res.render('faq/faq', { title: title })
-})
+  sequelize.query("SELECT * FROM qnas",raw=true
+    ).then(function (qna) {
+      res.render('faq/faq',
+        {
+          title: title,
+          questions: qna[0][0].qns,
+          answers: qna[0][0].ans
+        })
+      });
+      
+});
+
 
 router.get('/about', (req, res) => {
   const title = "About"
