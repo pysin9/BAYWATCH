@@ -4,6 +4,7 @@ const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
 const Sequelize = require('sequelize');
 const math = require("math");
+const Shop = require('../models/Shop');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -126,5 +127,10 @@ router.get('/about', (req, res) => {
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+router.get('/admin', (req, res) => {
+  const title = 'Admin';
+  res.render('admin', { title: title })
+})
 
 module.exports = router;
