@@ -22,8 +22,10 @@ const User = db.define('user', {
     bankNo: {
         type: Sequelize.INTEGER
     },
-    role: {
-       type: Sequelize.STRING
+    isAdmin:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
     }
 });
 module.exports = User;

@@ -4,6 +4,20 @@ const User = require('../models/User');
 const alertMessage = require('../helpers/messenger');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize('organic', 'organic', 'green', {
+    host: 'localhost',
+    dialect: 'mysql',
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    operatorsAliases: false
+});
 
 router.post('/Login', (req, res, next) => {
     passport.authenticate('local', {
@@ -98,21 +112,51 @@ router.put('/saveProfile/:id', function (req, res) {
     let phone = req.body.phone;
     let bankName = req.body.bankName;
     let bankNo = req.body.bankNo;
-    User.update({
-        name,
-        email,
-        address,
-        phone,
-        bankName,
-        bankNo,
-    }, {
-            where: {
-                id
-            }
-        }).then(() => {
-            alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
+    
+    let errors =[]
+
+    if (phone.length != 8)
+    {
+        errors.push({ text: 'Phone number must contain 8 numbers' });
+    }
+    if (bankNo != "")
+    {
+        sequelize.query("UPDATE users SET bankNo= :BankNo WHERE id= :ID",
+        {replacements:{BankNo: bankNo, ID: id }})
+        .then(() => {
+            alertMessage(res, 'success', 'Bank Number Updated!', 'fas fa - sign -in -alt', true);
             res.redirect('/user/profile');
-        }).catch(err => console.log(err));
+        })
+    }
+    if (errors.length > 0) {
+        res.render('user/profile1', {
+            errors
+        });
+    }
+    else
+    {
+    sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName WHERE id= :ID",
+        {replacements:{ Name: name, Email: email, Address: address, Phone: phone,BankName: bankName, ID: id }})
+        .then(() => {
+            alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
+            res.redirect('/user/profile1');
+        })
+    }
+    // User.update({
+    //     name,
+    //     email,
+    //     address,
+    //     phone,
+    //     bankName,
+    //     bankNo,
+    // }, {
+    //         where: {
+    //             id
+    //         }
+    //     }).then(() => {
+    //         alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
+    //         res.redirect('/user/profile');
+    //     }).catch(err => console.log(err));
 });
 
 router.put('/savePassword/:id', function (req, res) {
@@ -126,11 +170,11 @@ router.put('/savePassword/:id', function (req, res) {
     if (password.length < 4) {
         errors.push({ text: 'Password must be at least 4 characters' });
     }
-    if (password == '' || cpassword == ''){
-        errors.push({text: 'One field is empty. Please fill up both.'});
+    if (password == '' || cpassword == '') {
+        errors.push({ text: 'One field is empty. Please fill up both.' });
     }
     if (errors.length > 0) {
-        res.render('user/password', {
+        res.render('user/password1', {
             errors
         });
     }
@@ -139,15 +183,11 @@ router.put('/savePassword/:id', function (req, res) {
             bcrypt.hash(password, salt, (err, hash) => {
                 if (err) throw err;
                 password = hash;
-                User.update({
-                    password,
-                }, {
-                        where: {
-                            id
-                        }
+
+                sequelize.query("UPDATE users SET password= :Password WHERE id= :ID", {replacements:{Password:password, ID: id}
                     }).then(() => {
                         alertMessage(res, 'success', 'Password Updated!', 'fas fa - sign -in -alt', true);
-                        res.redirect('/user/password');
+                        res.redirect('/user/password1');
                     }).catch(err => console.log(err));
             })
         })
