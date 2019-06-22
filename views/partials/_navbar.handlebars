@@ -11,7 +11,83 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                {{#if user}}
+                {{#if user.isAdmin}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="/shop" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Shop
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="admin/addproducts" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Create
+                        </a>
+                        <a href="/shop/category" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Products
+                        </a>
+                        <a href="/logout" class="dropdown-item">
+                            <i class="material-icons">&#xe879;</i> Logout
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="/shop" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Quiz
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="admin/addproducts" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Create Quiz
+                        </a>
+                        <a href="/quiz" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Show Quiz
+                        </a>
+                        <a href="/logout" class="dropdown-item">
+                            <i class="material-icons">&#xe879;</i> Logout
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="/shop" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> FAQ
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="admin/addproducts" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Create FAQ
+                        </a>
+                        <a href="/shop/category" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Show FAQ
+                        </a>
+                        <a href="/logout" class="dropdown-item">
+                            <i class="material-icons">&#xe879;</i> Logout
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        About
+                    </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> {{user.name}}
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="user/profile" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Profile
+                        </a>
+                        <a href="user/password" class="dropdown-item">
+                            <i class="material-icons">&#xe416;</i> Change Password
+                        </a>
+                        <a href="/logout" class="dropdown-item">
+                            <i class="material-icons">&#xe879;</i> Logout
+                        </a>
+                    </div>
+                </li>
+                {{else}}
+                {{#if user.isNotAdmin}}
                 <li class="nav-item">
                     <a class="nav-link" href="/">
                         Home
@@ -80,6 +156,7 @@
                         Login
                     </a>
                 </li>
+                {{/if}}
                 {{/if}}
             </ul>
         </div>

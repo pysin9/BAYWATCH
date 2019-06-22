@@ -32,7 +32,7 @@ router.post('/Login', (req, res, next) => {
 
 router.post('/Register', (req, res) => {
     let errors = [];
-    let { name, email, password, cfmpassword, phone, address } = req.body;
+    let { name, email, password, cfmpassword, phone } = req.body;
 
     if (req.body.password != cfmpassword) {
         errors.push({
@@ -53,7 +53,6 @@ router.post('/Register', (req, res) => {
             password,
             cfmpassword,
             phone,
-            address
         })
     } else {
         // If all is well, checks if user is already registered
@@ -68,15 +67,14 @@ router.post('/Register', (req, res) => {
                         email,
                         password,
                         cfmpassword,
-                        phone,
-                        address
+                        phone
                     });
                 } else {
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(password, salt, (err, hash) => {
                             if (err) throw err;
                             password = hash;
-                            User.create({ name, email, password, phone, address })
+                            User.create({ name, email, password, phone})
                                 .then(user => {
                                     alertMessage(res, 'success', user.name + ' added.Please login', 'fas fa - sign -in -alt', true);
                                     res.redirect('/Login');

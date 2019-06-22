@@ -37,6 +37,8 @@ router.get('/logout', (req, res) => {
 
 router.get('/Login', (req, res) => {
   const title = 'Login';
+  sequelize.query("UPDATE users SET isAdmin = '1' WHERE email = 'admin@gmail.com'")
+  sequelize.query("UPDATE users SET isNotAdmin = '0' WHERE email = 'admin@gmail.com'")
   res.render('user/login', { title: title })
 });
 
