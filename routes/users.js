@@ -112,9 +112,7 @@ router.put('/saveProfile/:id', function (req, res) {
     let phone = req.body.phone;
     let bankName = req.body.bankName;
     let bankNo = req.body.bankNo;
-    
     let errors =[]
-
     if (phone.length != 8)
     {
         errors.push({ text: 'Phone number must contain 8 numbers' });
@@ -129,7 +127,7 @@ router.put('/saveProfile/:id', function (req, res) {
         })
     }
     if (errors.length > 0) {
-        res.render('user/profile1', {
+        res.redirect('user/profile', {
             errors
         });
     }
@@ -139,7 +137,7 @@ router.put('/saveProfile/:id', function (req, res) {
         {replacements:{ Name: name, Email: email, Address: address, Phone: phone,BankName: bankName, ID: id }})
         .then(() => {
             alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
-            res.redirect('/user/profile1');
+            res.redirect('/user/profile');
         })
     }
     // User.update({

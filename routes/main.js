@@ -78,7 +78,7 @@ router.get('/cart', function (req, res) {
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
-
+  let user = req.user;
   sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
     let length = result[0].length;
     let getIndex = getRndInteger(0, length-1);
@@ -88,15 +88,27 @@ router.get('/quiz', function (req, res) {
       res.render('quiz/quiz',
         {
           title: title,
+          quiz:quiz,
           option1: quiz[0].option1,
           option2: quiz[0].option2,
           option3: quiz[0].option3,
           option4: quiz[0].option4,
           question: quiz[0].question,
           correct: quiz[0].correct,
+          points: user.points
         })
     })
   })
+});
+
+router.post('/submitedquiz', function(req,res){
+  const title = 'Quiz'
+  let ID  = req.user.id
+  let points = parseInt(req.body.points)
+  sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", {replacements:{Id:ID, Points:points}})
+  .then((users)=>{
+    console.log(users)
+  });
 });
 
 router.get('/checkquiz', (req, res) => {

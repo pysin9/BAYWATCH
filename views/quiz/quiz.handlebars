@@ -5,27 +5,32 @@
   <div class="wrapper" id="pages">
   </div>
   <!--display score-->
-  <p id="score">Score: {{user.score}}</p>
-
+  <p id="score">Score: {{points}}</p>
   <!-- Quiz Question -->
-  <form action=# method='GET'>
+  <form action="/submitedquiz" method='POST' id='quizform'>
     <div class="quiz-questions" id="display-area">
       <p id="question">{{question}}</p>
-      <input type='button' id='option 1' class="option" value={{option1}} onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 2' class="option" value='{{option2}}' onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 3' class="option" value={{option3}} onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 4' class="option" value={{option4}} onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 1' class="option" value={{option1}} name='option1' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 2' class="option" value={{option2}} name='option2' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 3' class="option" value={{option3}} name='option3' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 4' class="option" value={{option4}} name='option4' onclick="checkcorrect(this.id)"></input>
+      <input style= 'display: none' type='text' id='points' name="points" value={{points}}></input>
       <p id='correct' style='display: none'>{{correct}}</p>
     </div>
   </form>
 </div>
 <script>
   function checkcorrect(clickid) {
+    var score = document.getElementById("score").innerText;
+    var curscore = parseInt(score.substring(7));
     var getid = clickid;
     var correct = document.getElementById('correct').innerText;
     if (correct == getid) {
       var coption = document.getElementById(getid);
       coption.style.backgroundColor = 'green';
+      curscore += 10;
+      document.getElementById("score").innerText = "Score: " + curscore;
+      document.getElementById("points").value = curscore;
       for (i = 0; i < 4; i++) {
         if (document.getElementsByClassName('option')[i].id != getid) {
           document.getElementsByClassName('option')[i].style.backgroundColor = 'red';
@@ -43,5 +48,7 @@
         options.disabled = true;
       }
     }
+    document.forms["quizform"].submit();
   }
+ 
 </script>

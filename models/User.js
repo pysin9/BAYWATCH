@@ -22,6 +22,10 @@ const User = db.define('user', {
     bankNo: {
         type: Sequelize.INTEGER
     },
+    points:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     isAdmin:{
         type: Sequelize.BOOLEAN,
         allowNull: false,
