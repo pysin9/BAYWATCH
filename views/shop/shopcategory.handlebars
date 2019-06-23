@@ -2,6 +2,29 @@
 {{>_shopnavbar}}
 {{#if shop}}
 <div class="items">
+    {{#if user.isAdmin}}
+    {{#each shop}}
+    <div class="card">
+
+        <img src="/img/fruitsapple.jpg" alt="Denim Jeans" style="width:100%;height:100%;">
+        <h1>{{name}}</h1>
+        <p class="price">{{price}}</p>
+        <p>{{description}}</p>
+        <p><button>Add to Cart</button></p>
+
+        <p class="font-italic"></p>
+        <a href="/video/edit/{{id}}" class="card-link">
+            <i class="fas fa-pencil-alt"></i>
+            Edit
+        </a>
+        <a href="/video/delete/{{id}}" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+            <i class="far fa-trash-alt"></i>
+            Delete
+        </a>
+    </div>
+
+    {{/each}}
+    {{else}}
     {{#each shop}}
     <div class="card">
         <img src="/img/fruitsapple.jpg" alt="Denim Jeans" style="width:100%;height:100%;">
@@ -11,6 +34,7 @@
         <p><button>Add to Cart</button></p>
     </div>
     {{/each}}
+    {{/if}}
 </div>
 {{else}}
 <h3>No videos jotted</h3>
