@@ -59,13 +59,13 @@ router.get('/shop', function (req, res) {
 router.get('/category', function (req, res) {
   const title = "Category";
   Shop.findAll({
-    attributes: ['name', 'price', 'images','description']
+    attributes: ['name', 'price', 'images', 'description']
   },
     raw = true
   ).then((shop) => {
-    res.render('shop/shopcategory', { 
+    res.render('shop/shopcategory', {
       title: title,
-      shop:shop
+      shop: shop
     })
   })
     .catch(err => console.log(err));
@@ -83,14 +83,14 @@ router.get('/quiz', function (req, res) {
   let user = req.user;
   sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
     let length = result[0].length;
-    let getIndex = getRndInteger(0, length-1);
+    let getIndex = getRndInteger(0, length - 1);
     let selectedID = result[0][getIndex].id
     sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
     ).then(function (quiz) {
       res.render('quiz/quiz',
         {
           title: title,
-          quiz:quiz,
+          quiz: quiz,
           option1: quiz[0].option1,
           option2: quiz[0].option2,
           option3: quiz[0].option3,
@@ -100,17 +100,20 @@ router.get('/quiz', function (req, res) {
           points: user.points
         })
     })
+    }).catch(function (err) {
+      res.render('quiz/quiz',
+        { title: title })
   })
 });
 
-router.post('/submitedquiz', function(req,res){
+router.post('/submitedquiz', function (req, res) {
   const title = 'Quiz'
-  let ID  = req.user.id
+  let ID = req.user.id
   let points = parseInt(req.body.points)
-  sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", {replacements:{Id:ID, Points:points}})
-  .then((users)=>{
-    console.log(users)
-  });
+  sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", { replacements: { Id: ID, Points: points } })
+    .then((users) => {
+      console.log(users)
+    });
 });
 
 router.get('/checkquiz', (req, res) => {
@@ -120,16 +123,16 @@ router.get('/checkquiz', (req, res) => {
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
-  sequelize.query("SELECT * FROM qnas",raw=true
-    ).then(function (qna) {
-      res.render('faq/faq',
-        {
-          title: title,
-          questions: qna[0][0].qns,
-          answers: qna[0][0].ans
-        })
-      });
-      
+  sequelize.query("SELECT * FROM qnas", raw = true
+  ).then(function (qna) {
+    res.render('faq/faq',
+      {
+        title: title,
+        questions: qna[0][0].qns,
+        answers: qna[0][0].ans
+      })
+  });
+
 });
 
 

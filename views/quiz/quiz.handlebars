@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/quiz css.css">
 <!-- Main page -->
 <div class="main">
+  {{#if quiz}}
   <!-- Number of Question  -->
   <div class="wrapper" id="pages">
   </div>
@@ -19,6 +20,9 @@
     </div>
   </form>
 </div>
+{{else}}
+<h3>Quiz will be added soon!</h3>
+{{/if}}
 <script>
   function checkcorrect(clickid) {
     var score = document.getElementById("score").innerText;
