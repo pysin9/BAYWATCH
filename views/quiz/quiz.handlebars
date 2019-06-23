@@ -4,6 +4,7 @@
   {{#if quiz}}
   <!-- Number of Question  -->
   <div class="wrapper" id="pages">
+    <div id="overlay"></div>
   </div>
   <!--display score-->
   <p id="score">Score: {{points}}</p>
@@ -53,6 +54,9 @@
       }
     }
     document.forms["quizform"].submit();
+    document.getElementById("overlay").style.display = "block";
+    alert("Quiz limit reached!\nReturn tomorrow for a new quiz");
+    window.stop();
   }
  
 </script>
