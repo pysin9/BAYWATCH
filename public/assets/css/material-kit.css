@@ -8916,7 +8916,7 @@ button:focus {
 .btn.btn-primary:focus,
 .btn.btn-primary.focus,
 .btn.btn-primary:hover {
-  color: #fff;
+  color: #000;
   background-color: white;
   border-color: #82b440;
 }
