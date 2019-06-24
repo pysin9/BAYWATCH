@@ -39,11 +39,6 @@ router.get('/editproducts', (req, res) => {
   res.render('admin/editproduct', { title: title });
 });
 
-// router.get('/faqformdelete', (req, res) => {
-//   let title = 'faqformdelete  '
-//   res.render('admin/faqformdelete', { title: title });
-// });
-
 router.post('/addqns', (req, res) => {
   let qns = req.body.qns;
   let ans = req.body.ans;

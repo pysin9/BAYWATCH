@@ -51,7 +51,7 @@
 
         <h2>Accordion</h2>
 
-        {{!-- <button class="accordion">Do I have to sign up for an account to shop?</button>
+        <button class="accordion">Do I have to sign up for an account to shop?</button>
         <div class="panel">
         <p>Yes.An account is needed for any users to shop for products.</p>
         </div>
@@ -78,19 +78,15 @@
 
         <button class="accordion">Am i able to get a refund for a defactive product.</button>
         <div class="panel">
-        <p>You will only be able to return the product if it was damaged during the process of the delivery.</p> --}}
+        <p>You will only be able to return the product if it was damaged during the process of the delivery.</p>
         </div>
-        {{#if qna}}
-        {{#each qna}}
-        </ul>
-        <button class="accordion">{{qns}}</button>
+
+        
+        <button class="accordion">{{questions}}</button>
         <div class="panel">
-        <p>{{ans}}</p>
+        <p>{{answers}}</p>
         </div>
-        {{/each}}
-        {{else}}
-        <center><h3>FAQ will be updated soon</h3></center>
-        {{/if}}
+
             <script>
                 var acc = document.getElementsByClassName("accordion");
                 var i;
