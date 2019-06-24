@@ -1,0 +1,116 @@
+{{!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        
+      
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
+
+        .active, .accordion:hover {
+        background-color: #ccc; 
+        }
+
+        .accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        }
+
+        .active:after {
+        content: "\2212";
+        }
+
+
+        .panel {
+        padding: 0 18px;
+            display: none;
+        background-color: white;
+        overflow: hidden;
+        
+
+        }
+        .accordion.solid {outline-style: solid;}
+    </style>
+</head>
+    <body>
+
+        <h2>Accordion</h2>
+
+        {{!-- <button class="accordion">Do I have to sign up for an account to shop?</button>
+        <div class="panel">
+        <p>Yes.An account is needed for any users to shop for products.</p>
+        </div>
+
+        <button class="accordion">Will I get any benfits signing up for an account</button>
+        <div class="panel">
+        <p>No.But you will be able to shop on our website with and account and many more.</p>
+        </div>
+
+        <button class="accordion">Is the payment for everything only credit card?</button>
+        <div class="panel">
+        <p>No.There is a cash option when you checkout.</p>
+        </div>
+
+        <button class="accordion">What are the points earned from the quiz for?</button>
+        <div class="panel">
+        <p>The points can be used to redeem offers such as free delivery.</p>
+        </div>
+
+        <button class="accordion">Where or who can i talk to if i have more enquiries?</button>
+        <div class="panel">
+        <p>there is a chat that you can talk to other users who might be able to answer your questions./p>
+        </div>
+
+        <button class="accordion">Am i able to get a refund for a defactive product.</button>
+        <div class="panel">
+        <p>You will only be able to return the product if it was damaged during the process of the delivery.</p> --}}
+        </div>
+
+        {{#if qna}}
+        {{#each qna}}
+        </ul>
+        <form method = 'get' action = 'admin/faqformdelete'>
+        <button class="accordion">{{qns}}</button>
+        <div class="panel">
+        <p>{{ans}}</p>
+        </div>
+        <input type='submit' value = 'delete'>
+        </form>
+        {{/each}}
+        {{else}}
+        <center><h3>There is no FAQ</h3></center>
+        {{/if}}
+            <script>
+                var acc = document.getElementsByClassName("accordion");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    } else {
+                    panel.style.display = "block";
+                    }
+                });
+                }
+            </script>
+
+    </body>
+</html> --}}
