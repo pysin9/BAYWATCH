@@ -61,7 +61,7 @@ router.get('/shop', function (req, res) {
 router.get('/category', function (req, res) {
   const title = "Category";
   Shop.findAll({
-    attributes: ['id', 'name', 'price', 'images', 'description']
+    attributes: ['id', 'name', 'price', 'images', 'description', 'id']
   },
     raw = true
   ).then((shop) => {

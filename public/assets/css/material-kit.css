@@ -14234,6 +14234,8 @@ textarea {
   background-color: #00cae3;
   color: #ffffff;
   z-index: 5;
+  padding: 11px;
+  position: static;
 }
 
 .alert.alert-info a,

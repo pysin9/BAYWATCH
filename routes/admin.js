@@ -29,7 +29,7 @@ router.get('/faqform', (req, res) => {
   res.render('admin/faqform', { title: title });
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/remove/:id', (req, res) => {
   qnaId = req.params.id
   FAQ.findOne({
       where: {
@@ -155,16 +155,53 @@ router.post('/addproducts', (req, res) => {
   let images = req.body.images;
   let price = req.body.price;
   let description = req.body.description;
+  let userId = req.user.id;
+
   Shop.create({
     images,
     name,
     price,
-    description
+    description,
+    userId
   }).then((products) => {
     res.redirect('/shop');
   })
     .catch(err => console.log(err))
 })
+
+router.get('/delete/:id',  (req, res) => {
+  let id = req.params.id
+  let userId = req.user.id
+
+  Shop.findOne({
+    where: {
+      id,
+      userId
+    }
+  }).then((products) => {
+    if (!products) {
+      let error_msg = 'Product not found';
+      alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
+      res.redirect('/');
+      return;
+    }
+    if (products.userId != userId) {
+      let error_msg = "Access denied";
+      alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
+      res.redirect('/');
+      return;
+    }
+    products.destroy({
+      where: {
+        id
+      }
+    }).then(() => {
+      let success_msg = products.name + " deleted successfully";
+      alertMessage(res, 'success_msg', success_msg, true);
+      res.redirect('/category');
+    })
+  }).catch(err => console.log(err)); // To catch no video ID
+});
 
 router.post('/upload', (req, res) => {
   // Creates user id directory for upload if not exist
