@@ -56,10 +56,13 @@
         document.getElementById("displayanswer").innerHTML = "You chose " + getid + ". The correct option is " + correct
       }
     }
-    document.forms["quizform"].submit();
+    
     document.getElementById("overlay").style.display = "block";
     alert("Return tomorrow for a new quiz!");
-    window.stop();
+    setTimeout("submitForm()", 5000)
   }
-
+  function submitForm()
+  {
+    document.forms["quizform"].submit();
+  }
 </script>
