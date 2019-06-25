@@ -1,57 +1,60 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        
-      
         .accordion {
-        background-color: #eee;
-        color: #444;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        transition: 0.4s;
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
         }
 
-        .active, .accordion:hover {
-        background-color: #ccc; 
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
         }
 
         .accordion:after {
-        content: '\002B';
-        color: #777;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
         }
 
         .active:after {
-        content: "\2212";
+            content: "\2212";
         }
 
 
         .panel {
-        padding: 0 18px;
+            padding: 0 18px;
             display: none;
-        background-color: white;
-        overflow: hidden;
-        
+            background-color: white;
+            overflow: hidden;
+
 
         }
-        .accordion.solid {outline-style: solid;}
+
+        .accordion.solid {
+            outline-style: solid;
+        }
     </style>
 </head>
-    <body>
 
-        <h2>Accordion</h2>
+<body>
 
-        <button class="accordion">Do I have to sign up for an account to shop?</button>
+    <h2>Accordion</h2>
+
+    {{!-- <button class="accordion">Do I have to sign up for an account to shop?</button>
         <div class="panel">
         <p>Yes.An account is needed for any users to shop for products.</p>
         </div>
@@ -78,31 +81,51 @@
 
         <button class="accordion">Am i able to get a refund for a defactive product.</button>
         <div class="panel">
-        <p>You will only be able to return the product if it was damaged during the process of the delivery.</p>
-        </div>
+        <p>You will only be able to return the product if it was damaged during the process of the delivery.</p> --}}
+    {{#if qna}}
+    {{#if user.isAdmin}}
+    {{#each qna}}
+    </ul>
+    <button class="accordion">{{qns}}</button>
+    <div class="panel">
+        <p>{{ans}}</p>
+        <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
+            data-title="Confirm delete?">Delete</a>
+    </div>
+    {{/each}}
+    {{else}}
+    {{#if user.isNotAdmin}}
+    {{#each}}
+    </ul>
+    <button class="accordion">{{qns}}</button>
+    <div class="panel">
+        <p>{{ans}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <center>
+        <h3>FAQ will be updated soon</h3>
+    </center>
+    {{/if}}
+    {{/if}}
+    {{/if}}
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
-        
-        <button class="accordion">{{questions}}</button>
-        <div class="panel">
-        <p>{{answers}}</p>
-        </div>
-
-            <script>
-                var acc = document.getElementsByClassName("accordion");
-                var i;
-
-                for (i = 0; i < acc.length; i++) {
-                acc[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var panel = this.nextElementSibling;
-                    if (panel.style.display === "block") {
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
                     panel.style.display = "none";
-                    } else {
+                } else {
                     panel.style.display = "block";
-                    }
-                });
                 }
-            </script>
+            });
+        }
+    </script>
 
-    </body>
+</body>
+
 </html>

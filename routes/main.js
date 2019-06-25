@@ -5,6 +5,7 @@ const Quiz = require('../models/Quiz')
 const Sequelize = require('sequelize');
 const math = require("math");
 const Shop = require('../models/Shop');
+const qna = require("../models/QnA")
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -128,18 +129,21 @@ router.get('/checkquiz', (req, res) => {
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
-  sequelize.query("SELECT * FROM qnas", raw = true
-  ).then(function (qna) {
-    res.render('faq/faq',
-      {
-        title: title,
-        questions: qna[0][0].qns,
-        answers: qna[0][0].ans
-      })
-  });
-
+  qna.findAll({
+    attributes: ['qns', 'ans', 'id']
+  },
+    raw = true
+  ).then((qna) => {
+    res.render('faq/faq', {
+      title: title,
+      qna: qna
+    })
+  })
+    .catch(function(err) {
+      res.render('faq/faq',
+      {title: title})
+    })
 });
-
 router.get('/about', (req, res) => {
   const title = "About"
   res.render('about', { title: title });

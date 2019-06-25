@@ -29,6 +29,33 @@ router.get('/faqform', (req, res) => {
   res.render('admin/faqform', { title: title });
 });
 
+router.get('/delete/:id', (req, res) => {
+  qnaId = req.params.id
+  FAQ.findOne({
+      where: {
+          id: qnaId,
+      }
+  }).then((qna) => {
+    console.log(qna)
+      if (qna != null) {
+
+          FAQ.destroy({
+              where: {
+                  id: qnaId
+              }
+          }).then(() => {
+              res.redirect('/faq')
+          })
+      } 
+      else {
+          alertMessage(res, 'danger', 'Access Denied', 'fas fa-exclamation-circle', true);
+          res.redirect('/logout');
+
+
+      }
+  })
+});
+
 router.get('/addproducts', (req, res) => {
   let title = 'Add Products'
   res.render('admin/addproduct', { title: title });
