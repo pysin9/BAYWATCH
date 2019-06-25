@@ -105,9 +105,9 @@ router.get('/quiz', function (req, res) {
           points: user.points
         })
     })
-    }).catch(function (err) {
-      res.render('quiz/quiz',
-        { title: title })
+  }).catch(function (err) {
+    res.render('quiz/quiz',
+      { title: title })
   })
 });
 
@@ -139,7 +139,6 @@ router.get('/faq', (req, res) => {
   });
 
 });
-
 
 router.get('/about', (req, res) => {
   const title = "About"

@@ -34,9 +34,52 @@ router.get('/addproducts', (req, res) => {
   res.render('admin/addproduct', { title: title });
 });
 
+// Shows edit video page
 router.get('/editproducts', (req, res) => {
-  let title = 'Edit Products'
-  res.render('admin/editproduct', { title: title });
+  Shop.findOne({
+    where: {
+      id: 1
+    },
+  }).then((shop) => {
+    if (!shop) {
+      alertMessage(res, 'info', 'No such video', 'fas fa-exclamation-circle', true);
+      res.redirect('/');
+    // } else {
+    //   if (req.user.id === shop.userId) {
+    //     checkOptions(shop);
+    //     res.render('admin/editproduct', { shop:shop });
+    //   } else {
+    //     alertMessage(res, 'danger', 'Unauthorised access to video', 'fas fa-exclamation-circle', true);
+    //     res.redirect('/logout');
+    //   }
+    }
+    res.render('admin/editproduct', {shop:shop})
+    console.log(shop[0])
+  }).catch(err => console.log(err)); // To catch no video ID
+});
+
+// Save edited video
+router.post('/saveEditedVideo/:id', (req, res) => {
+  // Retrieves edited values from req.body
+  let name = req.body.name;
+  let price = req.body.price;
+  let description = req.body.description.slice(0, 1999);
+  let userId = req.user.id;
+  Shop.update({
+      // Set variables here to save to the videos table
+      name,
+      price,
+      description,
+      userId
+  }, {
+          where: {
+              id: req.params.id
+          }
+      }).then(() => {
+          // After saving, redirect to router.get(/listVideos...) to retrieve all updated
+          // videos
+          res.redirect('/category');
+      }).catch(err => console.log(err));
 });
 
 router.post('/addqns', (req, res) => {
