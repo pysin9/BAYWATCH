@@ -112,11 +112,11 @@ router.put('/saveProfile/:id', function (req, res) {
         {replacements:{BankNo: bankNo, ID: id }})
         .then(() => {
             alertMessage(res, 'success', 'Bank Number Updated!', 'fas fa - sign -in -alt', true);
-            res.redirect('/user/profile');
+            res.redirect('/profile');
         })
     }
     if (errors.length > 0) {
-        res.redirect('user/profile', {
+        res.redirect('/profile', {
             errors
         });
     }
@@ -126,7 +126,7 @@ router.put('/saveProfile/:id', function (req, res) {
         {replacements:{ Name: name, Email: email, Address: address, Phone: phone,BankName: bankName, ID: id }})
         .then(() => {
             alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
-            res.redirect('/user/profile');
+            res.redirect('/profile');
         })
     }
     // User.update({
@@ -161,7 +161,7 @@ router.put('/savePassword/:id', function (req, res) {
         errors.push({ text: 'One field is empty. Please fill up both.' });
     }
     if (errors.length > 0) {
-        res.render('user/password1', {
+        res.redirect('/password', {
             errors
         });
     }
@@ -174,7 +174,7 @@ router.put('/savePassword/:id', function (req, res) {
                 sequelize.query("UPDATE users SET password= :Password WHERE id= :ID", {replacements:{Password:password, ID: id}
                     }).then(() => {
                         alertMessage(res, 'success', 'Password Updated!', 'fas fa - sign -in -alt', true);
-                        res.redirect('/user/password1');
+                        res.redirect('/password');
                     }).catch(err => console.log(err));
             })
         })
