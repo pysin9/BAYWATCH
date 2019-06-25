@@ -76,7 +76,7 @@
     position: sticky;
 }
  
- input[type="submit"] {
+ input[type="button"] {
 	clear: both;
     text-align: center;
     width: 7%;
