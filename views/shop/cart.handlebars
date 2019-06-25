@@ -14,81 +14,36 @@
 
     <div class="product">
         <div class="product-image">
-            <img src="/img/fruitsavocado.jpg">
+            <img src="{{image}}">
         </div>
         <div class="product-details">
-            <div class="product-title">Organic Avocado 2pcs Large</div>
-            <p class="product-description">Australian Avocados. Get your mouth watery for these tasty and creamy
-                delicious goodness.</p>
+            <div class="product-title">{{name}}</div>
+            <p class="product-description">{{description}}</p>
         </div>
-        <div class="product-price">7.20</div>
+        <div class="product-price">{{price}}</div>
         <div class="product-quantity">
-            <input type="number" value="1" min="1">
+            <input type="number" value="{{quantity}}" min="1">
         </div>
         <div class="product-removal">
             <button class="remove-product">
                 Remove
             </button>
         </div>
-        <div class="product-line-price">7.20</div>
+        <div class="product-line-price">{{total}}</div>
     </div>
-
-    <div class="product">
-        <div class="product-image">
-            <img src="/img/fruitsapple.jpg">
-        </div>
-        <div class="product-details">
-            <div class="product-title">Organic Apple Gala 4pcs</div>
-            <p class="product-description">Juicy, pinkish, heavenly bite of USA GRAND Apples.</p>
-        </div>
-        <div class="product-price">5.50</div>
-        <div class="product-quantity">
-            <input type="number" value="1" min="1">
-        </div>
-        <div class="product-removal">
-            <button class="remove-product">
-                Remove
-            </button>
-        </div>
-        <div class="product-line-price">5.50</div>
-    </div>
-
-    <div class="product">
-        <div class="product-image">
-            <img src="/img/fruitsbanana.jpg">
-        </div>
-        <div class="product-details">
-            <div class="product-title">Organic Banana (Malaysia)</div>
-            <p class="product-description">Delicious, yellow on the go fruit.</p>
-        </div>
-        <div class="product-price">3.60</div>
-        <div class="product-quantity">
-            <input type="number" value="1" min="1">
-        </div>
-        <div class="product-removal">
-            <button class="remove-product">
-                Remove
-            </button>
-        </div>
-        <div class="product-line-price">3.60</div>
-    </div>    
-
+ 
     <div class="totals">
         <div class="totals-item">
             <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal">16.30</div>
-        </div>
-        <div class="totals-item">
-            <label>Tax (5%)</label>
-            <div class="totals-value" id="cart-tax">0.80</div>
+            <div class="totals-value" id="cart-subtotal">{{subtotal}}</div>
         </div>
         <div class="totals-item">
             <label>Shipping</label>
-            <div class="totals-value" id="cart-shipping">10.00</div>
+            <div class="totals-value" id="cart-shipping">5.00</div>
         </div>
         <div class="totals-item totals-item-total">
             <label>Grand Total</label>
-            <div class="totals-value" id="cart-total">27.10</div>
+            <div class="totals-value" id="cart-total">{{grandTotal}}</div>
         </div>
     </div>
 

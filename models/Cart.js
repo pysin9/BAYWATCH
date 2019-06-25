@@ -22,9 +22,6 @@ const Cart = db.define('cart', {
     subtotal: {
         type: Sequelize.DECIMAL
     },
-    gst: {
-        type: Sequelize.DECIMAL
-    },
     shipping: {
         type: Sequelize.DECIMAL
     },

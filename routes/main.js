@@ -71,6 +71,11 @@ router.get('/category', function (req, res) {
     .catch(err => console.log(err));
 });
 
+/* Add To Cart */
+router.get('/addToCart/:id', (req, res) => {
+  let id = req.params.id;
+});
+
 /* Cart */
 router.get('/cart', function (req, res) {
   const title = "Cart";
