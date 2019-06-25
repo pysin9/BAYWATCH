@@ -163,7 +163,7 @@ router.post('/submitedquiz', function (req, res) {
   let points = parseInt(req.body.points)
   sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", { replacements: { Id: ID, Points: points } })
     .then((users) => {
-      console.log(users)
+      res.render('quiz/quiz', {title:title})
     });
 });
 

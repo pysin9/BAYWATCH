@@ -12,17 +12,18 @@
   <form action="/submitedquiz" method='POST' id='quizform'>
     <div class="quiz-questions" id="display-area">
       <p id="question">{{question}}</p>
-      <input type='button' id='option 1' class="option" value={{option1}} name='option1' onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 2' class="option" value={{option2}} name='option2' onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 3' class="option" value={{option3}} name='option3' onclick="checkcorrect(this.id)"></input>
-      <input type='button' id='option 4' class="option" value={{option4}} name='option4' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 1' class="option" value="{{option1}}" name='option1' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 2' class="option" value="{{option2}}" name='option2' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 3' class="option" value="{{option3}}" name='option3' onclick="checkcorrect(this.id)"></input>
+      <input type='button' id='option 4' class="option" value="{{option4}}" name='option4' onclick="checkcorrect(this.id)"></input>
       <input style= 'display: none' type='text' id='points' name="points" value={{points}}></input>
       <p id='correct' style='display: none'>{{correct}}</p>
     </div>
   </form>
+  <p id='displayanswer'>  </p>
 </div>
 {{else}}
-<h3>Quiz will be added soon!</h3>
+<h3>Come back again for Quizzes!</h3><br><h3>You can view your total points under profile</h3> 
 {{/if}}
 <script>
   function checkcorrect(clickid) {
@@ -36,6 +37,7 @@
       curscore += 10;
       document.getElementById("score").innerText = "Score: " + curscore;
       document.getElementById("points").value = curscore;
+      document.getElementById("displayanswer").innerHTML = "You chose " + getid + ". You are correct!"
       for (i = 0; i < 4; i++) {
         if (document.getElementsByClassName('option')[i].id != getid) {
           document.getElementsByClassName('option')[i].style.backgroundColor = 'red';
@@ -51,12 +53,13 @@
         var options = document.getElementsByClassName('option')[i]
         options.style.backgroundColor = 'red';
         options.disabled = true;
+        document.getElementById("displayanswer").innerHTML = "You chose " + getid + ". The correct option is " + correct
       }
     }
     document.forms["quizform"].submit();
     document.getElementById("overlay").style.display = "block";
-    alert("Limit up! Return tomorrow for a new quiz!");
+    alert("Return tomorrow for a new quiz!");
     window.stop();
   }
- 
+
 </script>
