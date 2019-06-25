@@ -12,7 +12,7 @@
             <h4 class="card-title">{{name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
             <p class="card-text">{{description}}</p>
-            <p><button>Add to Cart</button></p>
+            <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
             <a href="/admin/editproducts/" class="card-link">Edit</a>
             <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
                 data-title="Confirm delete?">Delete</a>

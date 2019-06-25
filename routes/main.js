@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 const math = require("math");
 const Shop = require('../models/Shop');
 const qna = require("../models/QnA")
+const Cart = require('../models/Cart');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -60,7 +61,7 @@ router.get('/shop', function (req, res) {
 router.get('/category', function (req, res) {
   const title = "Category";
   Shop.findAll({
-    attributes: ['name', 'price', 'images', 'description']
+    attributes: ['id', 'name', 'price', 'images', 'description']
   },
     raw = true
   ).then((shop) => {
@@ -75,12 +76,56 @@ router.get('/category', function (req, res) {
 /* Add To Cart */
 router.get('/addToCart/:id', (req, res) => {
   let id = req.params.id;
+  let userId = req.user.id;
+  console.log(userId)
+
+  Cart.findOne({ where: { id: id } })
+    .then(product => {
+      if (product) {
+        let quantity = product.quantity + 1;
+        Cart.update({
+          // Set variables here to save to the videos table
+          quantity
+        }, {
+            where: {
+              id: id
+            }
+          });
+      } else {
+        let quantity = 1
+        Cart.create({ id, quantity, userId })
+      }
+    });
+  return res.redirect('/category');
 });
 
 /* Cart */
 router.get('/cart', function (req, res) {
   const title = "Cart";
-  res.render('shop/cart', { title: title });
+  let userId = req.user.id;
+
+  let items = [];
+
+  Cart.findAll({
+    attributes: ['id'],
+    where: {
+      userId: userId
+    }
+  }).then(products => {
+    for (let i = 0; i < products.length; i++) {
+      Shop.findOne({
+        attributes: ['name', 'price'],
+        where: {
+          id: products[i].id
+        }
+      }).then(item => {
+        console.log(item);
+        items.push(item.dataValues);
+      }).then(console.log(items));
+    }
+    
+  })
+res.render('shop/cart', { title: title });
 });
 
 /* GET quiz */
