@@ -44,6 +44,8 @@ router.get('/remove/:id', (req, res) => {
                   id: qnaId
               }
           }).then(() => {
+            let success_msg = qna.qns + "Deleted successfully";
+            alertMessage(res, 'success_msg',success_msg, true);
               res.redirect('/faq')
           })
       } 
