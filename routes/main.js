@@ -158,12 +158,13 @@ router.get('/quiz', function (req, res) {
 });
 
 router.post('/submitedquiz', function (req, res) {
-  const title = 'Quiz'
-  let ID = req.user.id
-  let points = parseInt(req.body.points)
+  const title = 'Quiz';
+  let ID = req.user.id;
+  let user = req.user;
+  let points = parseInt(req.body.points);
   sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", { replacements: { Id: ID, Points: points } })
     .then((users) => {
-      res.render('quiz/quiz', {title:title})
+      res.render('quiz/quiz', {title:title, points: user.points})
     });
 });
 
