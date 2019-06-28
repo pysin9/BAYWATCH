@@ -13,12 +13,13 @@ body {
   margin: 0 auto;
   font-family: 'Lato', sans-serif;
   color: #b3b3b3;
-  background-color: #31a2ac;
   text-align: center;
   margin-top: 0;
 padding: 153px;
 }
-
+.alert.alert-danger {
+  top: 0px !important
+}
 /*========================================================
           Quiz Section
 ========================================================*/

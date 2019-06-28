@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/editproduct.css">
 
-<body class="login-page sidebar-collapse">
+<body class="login-page sidebar-collapse" onload='loadselect()'>
     <div class="page-header header-filter"
         style="background-image: url('/img/login.jpeg'); background-size: cover; background-position: top center;">
         <div class="container">
@@ -36,8 +36,8 @@
                                                 <i class="material-icons" style="font-size:24px">filter_2</i>
                                             </span>
                                         </div>
-                                        <input type="description" id="option2" name="option2"
-                                            class="form-control" value="{{quiz.option2}}">
+                                        <input type="description" id="option2" name="option2" class="form-control"
+                                            value="{{quiz.option2}}">
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -45,8 +45,8 @@
                                                 <i class="material-icons" style="font-size:24px">filter_3</i>
                                             </span>
                                         </div>
-                                        <input type="description" id="option3" name="option3"
-                                            class="form-control" value="{{quiz.option3}}">
+                                        <input type="description" id="option3" name="option3" class="form-control"
+                                            value="{{quiz.option3}}">
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -54,25 +54,25 @@
                                                 <i class="material-icons" style="font-size:24px">filter_4</i>
                                             </span>
                                         </div>
-                                        <input type="description" id="option4" name="option4"
-                                            class="form-control" value="{{quiz.option4}}">
+                                        <input type="description" id="option4" name="option4" class="form-control"
+                                            value="{{quiz.option4}}">
                                     </div>
                                     <div class="input-group">
                                         <i class="material-icons" style="font-size:24px">thumb_up_alt</i>
                                         <div class="try-select" style="width:200px;">
                                             <select name="correct" class="form-control" id="exampleFormControlSelect1">
-                                                <option value="option 1">option 1</option>
-                                                <option value="option 2">option 2</option>
-                                                <option value="option 3">option 3</option>
-                                                <option value="option 4">option 4</option>
+                                                <option id='option 1' value="option 1">option 1</option>
+                                                <option id='option 2' value="option 2">option 2</option>
+                                                <option id='option 3' value="option 3">option 3</option>
+                                                <option id='option 4' value="option 4">option 4</option>
                                             </select>
                                         </div>
                                     </div>
+                                    <p id='correct' style='display:none'>{{quiz.correct}}</p>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button id="butAddVideo" type="submit" class="btn btn-primary">Save
-                                </button>
+                                <button id="butAddVideo" type="submit" class="btn btn-primary">Save</button>
                             </div>
                     </form>
                 </div>
@@ -80,3 +80,9 @@
         </div>
     </div>
 </body>
+<script>
+    function loadselect() {
+        var correct = document.getElementById('correct').innerText;
+        document.getElementById(correct).selected = "true";
+    }
+</script>

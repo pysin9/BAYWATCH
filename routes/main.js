@@ -123,38 +123,45 @@ router.get('/cart', function (req, res) {
         items.push(item.dataValues);
       }).then(console.log(items));
     }
-    
+
   })
-res.render('shop/cart', { title: title });
+  res.render('shop/cart', { title: title });
 });
 
 /* GET quiz */
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
   let user = req.user;
-  sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
-    let length = result[0].length;
-    let getIndex = getRndInteger(0, length - 1);
-    let selectedID = result[0][getIndex].id
-    sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
-    ).then(function (quiz) {
+  console.log(user);
+  if (user == undefined) {
+    alertMessage(res, 'danger', 'Please log in to access daily quizzes!', 'fas fa-exclamation-circle', true);
+    res.redirect('/');
+  }
+  else {
+    sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
+      let length = result[0].length;
+      let getIndex = getRndInteger(0, length - 1);
+      let selectedID = result[0][getIndex].id
+      sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
+      ).then(function (quiz) {
+        res.render('quiz/quiz',
+          {
+            title: title,
+            quiz: quiz,
+            option1: quiz[0].option1,
+            option2: quiz[0].option2,
+            option3: quiz[0].option3,
+            option4: quiz[0].option4,
+            question: quiz[0].question,
+            correct: quiz[0].correct,
+            points: user.points
+          });
+      });
+    }).catch(function (err) {
       res.render('quiz/quiz',
-        {
-          title: title,
-          quiz: quiz,
-          option1: quiz[0].option1,
-          option2: quiz[0].option2,
-          option3: quiz[0].option3,
-          option4: quiz[0].option4,
-          question: quiz[0].question,
-          correct: quiz[0].correct,
-          points: user.points
-        })
-    })
-  }).catch(function (err) {
-    res.render('quiz/quiz',
-      { title: title })
-  })
+        { title: title })
+    });
+  };
 });
 
 router.post('/submitedquiz', function (req, res) {
@@ -164,7 +171,7 @@ router.post('/submitedquiz', function (req, res) {
   let points = parseInt(req.body.points);
   sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", { replacements: { Id: ID, Points: points } })
     .then((users) => {
-      res.render('quiz/quiz', {title:title, points: user.points})
+      res.render('quiz/quiz', { title: title, points: user.points })
     });
 });
 
@@ -185,9 +192,9 @@ router.get('/faq', (req, res) => {
       qna: qna
     })
   })
-    .catch(function(err) {
+    .catch(function (err) {
       res.render('faq/faq',
-      {title: title})
+        { title: title })
     })
 });
 router.get('/about', (req, res) => {
@@ -206,10 +213,24 @@ router.get('/admin', (req, res) => {
 
 router.get('/profile', function (req, res) {
   const title = "Profile";
-  res.render('user/profile1', { title: title });
+  let user = req.user;
+  if (user == undefined) {
+    alertMessage(res, 'danger', 'User not found! Log in to access profile', 'fas fa-check', true);
+    res.redirect('/');
+  }
+  else {
+    res.render('user/profile1', { title: title });
+  }
 });
 router.get('/password', function (req, res) {
   const title = "Password";
-  res.render('user/password1', { title: title });
+  let user = req.user;
+  if (user == undefined) {
+    alertMessage(res, 'danger', 'User not found! Log in to access password', 'fas fa-check', true);
+    res.redirect('/');
+  }
+  else {
+    res.render('user/password1', { title: title });
+  }
 });
 module.exports = router;

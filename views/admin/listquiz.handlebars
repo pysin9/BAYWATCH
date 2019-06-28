@@ -1,4 +1,10 @@
 <link rel="stylesheet" type="text/css" href="/css/quiz css.css">
+<style>
+      body{
+    background-color:grey;
+  }
+</style>
+
 <!-- Main page -->
 {{#if quiz}}
 {{#each quiz}}
@@ -18,7 +24,8 @@
                 <i class="fas fa-pencil-alt"></i>
                 Edit
             </a>
-            <a href="/admin/deleteQuiz/{{id}}" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+            <a href="/admin/deleteQuiz/{{id}}" class="card-link" data-toggle="confirmation"
+                data-title="Confirm delete?">
                 <i class="far fa-trash-alt"></i>
                 Delete
             </a>

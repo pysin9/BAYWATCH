@@ -32,29 +32,29 @@ router.get('/faqform', (req, res) => {
 router.get('/remove/:id', (req, res) => {
   qnaId = req.params.id
   FAQ.findOne({
-      where: {
-          id: qnaId,
-      }
+    where: {
+      id: qnaId,
+    }
   }).then((qna) => {
     console.log(qna)
-      if (qna != null) {
+    if (qna != null) {
 
-          FAQ.destroy({
-              where: {
-                  id: qnaId
-              }
-          }).then(() => {
-            let success_msg = qna.qns + "Deleted successfully";
-            alertMessage(res, 'success_msg',success_msg, true);
-              res.redirect('/faq')
-          })
-      } 
-      else {
-          alertMessage(res, 'danger', 'Access Denied', 'fas fa-exclamation-circle', true);
-          res.redirect('/logout');
+      FAQ.destroy({
+        where: {
+          id: qnaId
+        }
+      }).then(() => {
+        let success_msg = qna.qns + "Deleted successfully";
+        alertMessage(res, 'success_msg', success_msg, true);
+        res.redirect('/faq')
+      })
+    }
+    else {
+      alertMessage(res, 'danger', 'Access Denied', 'fas fa-exclamation-circle', true);
+      res.redirect('/logout');
 
 
-      }
+    }
   })
 });
 
@@ -73,16 +73,16 @@ router.get('/editproducts', (req, res) => {
     if (!shop) {
       alertMessage(res, 'info', 'No such video', 'fas fa-exclamation-circle', true);
       res.redirect('/');
-    // } else {
-    //   if (req.user.id === shop.userId) {
-    //     checkOptions(shop);
-    //     res.render('admin/editproduct', { shop:shop });
-    //   } else {
-    //     alertMessage(res, 'danger', 'Unauthorised access to video', 'fas fa-exclamation-circle', true);
-    //     res.redirect('/logout');
-    //   }
+      // } else {
+      //   if (req.user.id === shop.userId) {
+      //     checkOptions(shop);
+      //     res.render('admin/editproduct', { shop:shop });
+      //   } else {
+      //     alertMessage(res, 'danger', 'Unauthorised access to video', 'fas fa-exclamation-circle', true);
+      //     res.redirect('/logout');
+      //   }
     }
-    res.render('admin/editproduct', {shop:shop})
+    res.render('admin/editproduct', { shop: shop })
     console.log(shop[0])
   }).catch(err => console.log(err)); // To catch no video ID
 });
@@ -95,20 +95,20 @@ router.post('/saveEditedVideo/:id', (req, res) => {
   let description = req.body.description.slice(0, 1999);
   let userId = req.user.id;
   Shop.update({
-      // Set variables here to save to the videos table
-      name,
-      price,
-      description,
-      userId
+    // Set variables here to save to the videos table
+    name,
+    price,
+    description,
+    userId
   }, {
-          where: {
-              id: req.params.id
-          }
-      }).then(() => {
-          // After saving, redirect to router.get(/listVideos...) to retrieve all updated
-          // videos
-          res.redirect('/category');
-      }).catch(err => console.log(err));
+      where: {
+        id: req.params.id
+      }
+    }).then(() => {
+      // After saving, redirect to router.get(/listVideos...) to retrieve all updated
+      // videos
+      res.redirect('/category');
+    }).catch(err => console.log(err));
 });
 
 router.post('/addqns', (req, res) => {
@@ -132,11 +132,11 @@ router.post('/addquiz', (req, res) => {
   let option4 = req.body.option4;
   let correct = req.body.correct;
 
-sequelize.query("INSERT INTO quizzes(question, option1, option2, option3, option4, correct) VALUES (:questions,:option1s, :option2s, :option3s, :option4s, :corrects)"
-,{replacements: {questions: question, option1s: option1, option2s: option2, option3s:option3, option4s:option4,corrects:correct}})
-.then((quizzes)=>{
-  res.redirect('/quiz');
-});
+  sequelize.query("INSERT INTO quizzes(question, option1, option2, option3, option4, correct) VALUES (:questions,:option1s, :option2s, :option3s, :option4s, :corrects)"
+    , { replacements: { questions: question, option1s: option1, option2s: option2, option3s: option3, option4s: option4, corrects: correct } })
+    .then((quizzes) => {
+      res.redirect('/quiz');
+    });
 
   // Quiz.create({
   //   question,
@@ -165,11 +165,17 @@ router.get('/listquiz', (req, res) => {
 router.get('/quizedit/:id', (req, res) => {
   let title = 'Edit Quiz'
   let id = req.params.id;
-
   sequelize.query('SELECT * FROM quizzes WHERE id= :ID ', { replacements: { ID: id } }, raw = true)
-    .then(function (quiz) {
+    .then( function(quiz){
       console.log(quiz[0][0])
-      res.render('admin/editquiz', { title: title, quiz: quiz[0][0] })
+      if (quiz[0][0] == undefined) 
+      {
+        alertMessage(res, 'danger', 'Quiz not found!', 'fas fa-exclamation-circle', true);
+        res.redirect('/admin/listquiz');
+      }
+      else {
+        res.render('admin/editquiz', { title: title, quiz: quiz[0][0] })
+      }
     });
 });
 
@@ -185,22 +191,28 @@ router.post('/saveEditedQuiz/:id', (req, res) => {
     { replacements: { Question: question, Option1: option1, Option2: option2, Option3: option3, Option4: option4, Correct: correct, ID: id } })
     .then((quiz) => {
       res.redirect('/admin/listquiz')
-      })
-    });
+    })
+});
 
-router.get('/deleteQuiz/:id', (req, res)=>{
+router.get('/deleteQuiz/:id', (req, res) => {
   let id = req.params.id;
   Quiz.destroy({
     where: {
-        id
+      id
     }
-}).then(() => {
-    let success_msg = 'A quiz has been deleted successfully!';
-    alertMessage(res, 'success', success_msg, 'fas fa-check', true);
-    res.redirect('/admin/listQuiz');
+  }).then((quiz) => {
+    console.log(quiz)
+    if (quiz == 0) {
+      alertMessage(res, 'danger', 'No such quiz to delete!', 'fas fa-check', true);
+      res.redirect('/admin/listquiz')
+    }
+    else {
+      alertMessage(res, 'success', 'Quiz deleted successfully!', 'fas fa-check', true);
+      res.redirect('/admin/listQuiz');
+    }
+  });
 });
-});
-  //end quiz//
+//end quiz//
 router.post('/addproducts', (req, res) => {
   let name = req.body.name;
   let images = req.body.images;
@@ -220,7 +232,7 @@ router.post('/addproducts', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/delete/:id',  (req, res) => {
+router.get('/delete/:id', (req, res) => {
   let id = req.params.id
   let userId = req.user.id
 
