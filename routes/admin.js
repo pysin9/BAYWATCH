@@ -123,7 +123,7 @@ router.post('/addqns', (req, res) => {
   })
     .catch(err => console.log(err))
 });
-
+//quiz//
 router.post('/addquiz', (req, res) => {
   let question = req.body.question;
   let option1 = req.body.option1;
@@ -151,7 +151,56 @@ sequelize.query("INSERT INTO quizzes(question, option1, option2, option3, option
   // })
   //   .catch(err => console.log(err))
 })
+router.get('/listquiz', (req, res) => {
+  let title = 'Edit Quiz'
+  sequelize.query("SELECT * FROM quizzes", raw = true).then(function (quiz) {
+    res.render('admin/listquiz',
+      {
+        title: title,
+        quiz: quiz[0],
+      });
+  })
+});
 
+router.get('/quizedit/:id', (req, res) => {
+  let title = 'Edit Quiz'
+  let id = req.params.id;
+
+  sequelize.query('SELECT * FROM quizzes WHERE id= :ID ', { replacements: { ID: id } }, raw = true)
+    .then(function (quiz) {
+      console.log(quiz[0][0])
+      res.render('admin/editquiz', { title: title, quiz: quiz[0][0] })
+    });
+});
+
+router.post('/saveEditedQuiz/:id', (req, res) => {
+  let id = req.params.id;
+  let question = req.body.question;
+  let option1 = req.body.option1;
+  let option2 = req.body.option2;
+  let option3 = req.body.option3;
+  let option4 = req.body.option4;
+  let correct = req.body.correct;
+  sequelize.query('UPDATE quizzes SET question= :Question, option1= :Option1, option2= :Option2, option3= :Option3, option4= :Option4, correct= :Correct WHERE id= :ID',
+    { replacements: { Question: question, Option1: option1, Option2: option2, Option3: option3, Option4: option4, Correct: correct, ID: id } })
+    .then((quiz) => {
+      res.redirect('/admin/listquiz')
+      })
+    });
+
+router.get('/deleteQuiz/:id', (req, res)=>{
+  let id = req.params.id;
+  Quiz.destroy({
+    where: {
+        id
+    }
+}).then(() => {
+    let success_msg = 'A quiz has been deleted successfully!';
+    alertMessage(res, 'success', success_msg, 'fas fa-check', true);
+    res.redirect('/admin/listQuiz');
+});
+});
+  //end quiz//
 router.post('/addproducts', (req, res) => {
   let name = req.body.name;
   let images = req.body.images;

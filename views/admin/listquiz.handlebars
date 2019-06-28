@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="/css/quiz css.css">
+<!-- Main page -->
+{{#if quiz}}
+{{#each quiz}}
+<div class="main">
+
+    <!-- Number of Question  -->
+    <div class="wrapper" id="pages">
+        <p>Question: {{question}}</p>
+        <p>Option1: {{option1}}</p>
+        <p>Option2: {{option2}}</p>
+        <p>Option3: {{option3}}</p>
+        <p>Option4: {{option4}}</p>
+        <p>Correct option: {{correct}}</p>
+        <div class="col-sm-12 col-md-6 col-lg-2">
+            <p class="font-italic"></p>
+            <a href="/admin/quizedit/{{id}}" class="card-link">
+                <i class="fas fa-pencil-alt"></i>
+                Edit
+            </a>
+            <a href="/admin/deleteQuiz/{{id}}" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+                <i class="far fa-trash-alt"></i>
+                Delete
+            </a>
+        </div>
+    </div>
+
+</div>
+{{/each}}
+{{else}}
+<h3>No Quiz Added</h3>
+{{/if}}
