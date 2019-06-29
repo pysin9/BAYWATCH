@@ -135,7 +135,7 @@ router.post('/addquiz', (req, res) => {
   sequelize.query("INSERT INTO quizzes(question, option1, option2, option3, option4, correct) VALUES (:questions,:option1s, :option2s, :option3s, :option4s, :corrects)"
     , { replacements: { questions: question, option1s: option1, option2s: option2, option3s: option3, option4s: option4, corrects: correct } })
     .then((quizzes) => {
-      res.redirect('/quiz');
+      res.redirect('/admin/listquiz');
     });
 
   // Quiz.create({
