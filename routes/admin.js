@@ -5,6 +5,8 @@ const Quiz = require('../models/Quiz');
 const FAQ = require('../models/QnA')
 const Shop = require('../models/Shop')
 const Sequelize = require('sequelize')
+const fs = require('fs');
+const upload = require('../helpers/imageUpload');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -214,24 +216,53 @@ router.get('/deleteQuiz/:id', (req, res) => {
 });
 //end quiz//
 router.post('/addproducts', (req, res) => {
+  let errors = []
   let name = req.body.name;
   let images = req.body.images;
   let price = req.body.price;
   let description = req.body.description;
   let userId = req.user.id;
 
-  Shop.create({
-    images,
-    name,
-    price,
-    description,
-    userId
-  }).then((products) => {
-    res.redirect('/shop');
-  })
-    .catch(err => console.log(err))
-})
+  if (!name) {
+    errors.push({
+      text: 'Please add a name'
+    })
+  }
 
+  if (!images) {
+    errors.push({
+      text: 'Please add an image'
+    })
+  }
+
+  if (!price) {
+    errors.push({
+      text: 'Please add a price'
+    })
+  }
+  if (!description) {
+    errors.push({
+      text: 'Please add a name'
+    })
+  }
+
+  if (errors.length > 0) {
+    res.render('admin/addproduct', {
+      errors,
+      name,
+      images,
+      price,
+      description
+    })
+  } else {
+    sequelize.query("INSERT INTO shops(images, name, price, description, userId) VALUES (:images,:name, :price, :description, :userId)"
+      , { replacements: { images: images, name: name, price: price, description: description, userId: userId } })
+      .then((products) => {
+        res.redirect('/category');
+      })
+      .catch(err => console.log(err))
+  }
+})
 router.get('/delete/:id', (req, res) => {
   let id = req.params.id
   let userId = req.user.id
