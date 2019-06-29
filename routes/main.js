@@ -7,6 +7,7 @@ const math = require("math");
 const Shop = require('../models/Shop');
 const qna = require("../models/QnA")
 const Cart = require('../models/Cart');
+const moment = require('moment');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -29,7 +30,6 @@ router.get('/', function (req, res) {
 });--- SELECT METHOD*/
   res.render('index', { title: title });
 });
-
 
 router.get('/logout', (req, res) => {
   req.logout();
@@ -132,36 +132,58 @@ router.get('/cart', function (req, res) {
 router.get('/quiz', function (req, res) {
   const title = "Quiz";
   let user = req.user;
-  console.log(user);
-  if (user == undefined) {
-    alertMessage(res, 'danger', 'Please log in to access daily quizzes!', 'fas fa-exclamation-circle', true);
-    res.redirect('/');
-  }
-  else {
-    sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
-      let length = result[0].length;
-      let getIndex = getRndInteger(0, length - 1);
-      let selectedID = result[0][getIndex].id
-      sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
-      ).then(function (quiz) {
-        res.render('quiz/quiz',
-          {
-            title: title,
-            quiz: quiz,
-            option1: quiz[0].option1,
-            option2: quiz[0].option2,
-            option3: quiz[0].option3,
-            option4: quiz[0].option4,
-            question: quiz[0].question,
-            correct: quiz[0].correct,
-            points: user.points
-          });
-      });
-    }).catch(function (err) {
-      res.render('quiz/quiz',
-        { title: title })
+  let id = req.user.id;
+  let nowdate = new Date();
+  let nowday = nowdate.getDate();
+  let allowQuiz = Boolean;
+  //test date retrieve
+  sequelize.query('SELECT quizcompleted FROM users WHERE id= :ID', { replacements: { ID: id } }, raw = true)
+    .then(function (compdate) {
+      let currdate = compdate[0][0].quizcompleted
+      let currday = currdate.getDate();
+      let dif = parseInt(nowday) - parseInt(currday);
+      if (dif == 0) {
+        allowQuiz = false;
+      }
+      else {
+        allowQuiz = true;
+      }
     });
-  };
+  if (allowQuiz==true) {
+    if (id == undefined || user == undefined) {
+      alertMessage(res, 'danger', 'Please log in to access daily quizzes!', 'fas fa-exclamation-circle', true);
+      res.redirect('/');
+    }
+    else {
+      sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
+        let length = result[0].length;
+        let getIndex = getRndInteger(0, length - 1);
+        let selectedID = result[0][getIndex].id
+        sequelize.query("SELECT * FROM quizzes WHERE id = :id ", { replacements: { id: selectedID }, type: sequelize.QueryTypes.SELECT }
+        ).then(function (quiz) {
+          res.render('quiz/quiz',
+            {
+              title: title,
+              quiz: quiz,
+              option1: quiz[0].option1,
+              option2: quiz[0].option2,
+              option3: quiz[0].option3,
+              option4: quiz[0].option4,
+              question: quiz[0].question,
+              correct: quiz[0].correct,
+              user:user
+            });
+        });
+      })
+        .catch(function (err) {
+          res.render('quiz/quiz',
+            { title: title })
+        });
+    };
+  }
+  else{
+    res.render('quiz/quiz', {title:title})
+  }
 });
 
 router.post('/submitedquiz', function (req, res) {
@@ -169,16 +191,12 @@ router.post('/submitedquiz', function (req, res) {
   let ID = req.user.id;
   let user = req.user;
   let points = parseInt(req.body.points);
-  sequelize.query("UPDATE users SET points= :Points  WHERE id= :Id", { replacements: { Id: ID, Points: points } })
+  let date = new Date();
+  sequelize.query("UPDATE users SET points= :Points, quizcompleted= :Date WHERE id= :Id", { replacements: { Id: ID, Points: points, Date: date } })
     .then((users) => {
       res.render('quiz/quiz', { title: title, points: user.points })
     });
 });
-
-router.get('/checkquiz', (req, res) => {
-  const title = 'Check';
-  res.render('quiz/quiz', { title: title })
-})
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
