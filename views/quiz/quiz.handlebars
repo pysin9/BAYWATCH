@@ -12,7 +12,7 @@
     <div id="overlay"></div>
   </div>
   <!--display score-->
-  <p id="score">Score: {{points}}</p>
+  <p id="score">Score: {{user.points}}</p>
   <!-- Quiz Question -->
   <form action="/submitedquiz" method='POST' id='quizform'>
     <div class="quiz-questions" id="display-area">
@@ -21,7 +21,7 @@
       <input type='button' id='option 2' class="option" value="{{option2}}" name='option2' onclick="checkcorrect(this.id)"></input>
       <input type='button' id='option 3' class="option" value="{{option3}}" name='option3' onclick="checkcorrect(this.id)"></input>
       <input type='button' id='option 4' class="option" value="{{option4}}" name='option4' onclick="checkcorrect(this.id)"></input>
-      <input style= 'display: none' type='text' id='points' name="points" value={{points}}></input>
+      <input style= 'display: none' type='text' id='points' name="points" value={{user.points}}></input>
       <p id='correct' style='display: none'>{{correct}}</p>
     </div>
   </form>

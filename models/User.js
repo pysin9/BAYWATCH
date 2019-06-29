@@ -27,7 +27,8 @@ const User = db.define('user', {
         defaultValue: 0
     },
     quizcompleted:{
-        type: Sequelize.DATE
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     },
     isAdmin:{
         type: Sequelize.BOOLEAN,
