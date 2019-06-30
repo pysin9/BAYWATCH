@@ -256,4 +256,20 @@ router.get('/password', function (req, res) {
     res.render('user/password1', { title: title });
   }
 });
+router.get('/checkout1', function (req, res) {
+  const title = "Checkout";
+  res.render('Checkout/checkout1', { title: title });
+});
+router.get('/checkout2', function (req, res) {
+  const title = "Checkout";
+  res.render('Checkout/checkout2', { title: title });
+});
+router.get('/checkout3', function (req, res) {
+  const title = "Checkout";
+  res.render('Checkout/checkout3', { title: title });
+});
+router.get('/checkout4', function (req, res) {
+  const title = "Checkout";
+  res.render('Checkout/checkout4', { title: title });
+});
 module.exports = router;
