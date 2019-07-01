@@ -1,14 +1,147 @@
 <link rel="stylesheet" type="text/css" href="/css/shopcategory.css">
+<link rel="stylesheet" type="text/css" href="/css/shop.css">
 {{>_shopnavbar}}
+<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container">
+        <div class="navbar-translate">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        ORGANIC FRESH PRODUCE
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127820;</i> Fruits
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127808;</i> Herbs & Spices
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127805;</i> Vegetables
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        DAIRY
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127868;</i> Milk
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127871;</i> Yogurt
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127838;</i> Butter
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127765;</i> Cheese
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        BEVERAGES
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127865;</i> Juice
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127862;</i> Grain, Nut & Soy Milk
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127861;</i> Coffee & Tea
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        FROZEN FOOD
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128019;</i> Chicken
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128022;</i> Pork
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128004;</i> Beef
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128031;</i> Fish
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        HEALTH & BEAUTY
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128134;</i> Personal Care
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128150;</i> Healing
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#128138;</i> Supplements
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        SNACKS
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127850;</i> Crackers & Biscuits
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127792;</i> Seeds & Nuts
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127852;</i> Candy
+                        </a>
+                        <a href="/category" class="dropdown-item">
+                            <i class="material-icons">&#127851;</i> Energy Bar
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a class="nav-link" href="/cart">
+                        <i style="font-size:30px" class="fa">&#xf07a;</i>
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline ml-auto">
+                <div class="form-group has-white">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-white btn-raised btn-fab btn-round">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
 {{>_flashmsg}}
 {{#if shop}}
 <div class="items">
     {{#if user.isAdmin}}
     {{#each shop}}
     <div class="card" style="width: 20rem;">
-        <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80"
-            alt="Card image cap">
+        <img class="card-img-top" width="250" height="200" src="{{images}}" alt="Card image cap">
         <div class="card-body">
             <h4 class="card-title">{{name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
@@ -23,9 +156,7 @@
     {{else}}
     {{#each shop}}
     <div class="card" style="width: 20rem;">
-        <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80"
-            alt="Card image cap">
+        <img class="card-img-top" src="{{images}}" alt="Card image cap">
         <div class="card-body">
             <h4 class="card-title">{{name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
@@ -38,6 +169,6 @@
 </div>
 {{else}}
 <div class="main">
-<h3>Products will be added soon!!</h3>
+    <h3>Products will be added soon!!</h3>
 </div>
 {{/if}}
