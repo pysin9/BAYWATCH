@@ -193,7 +193,10 @@ router.post('/saveEditedQuiz/:id', (req, res) => {
     { replacements: { Question: question, Option1: option1, Option2: option2, Option3: option3, Option4: option4, Correct: correct, ID: id } })
     .then((quiz) => {
       res.redirect('/admin/listquiz')
-    })
+    }).catch(function(err){
+      alertMessage(res, 'danger', 'No such quiz to edit!', 'fas fa-check', true);
+      res.redirect('/admin/listQuiz'); 
+    });
 });
 
 router.get('/deleteQuiz/:id', (req, res) => {

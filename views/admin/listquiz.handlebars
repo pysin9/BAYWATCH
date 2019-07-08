@@ -1,8 +1,14 @@
 <link rel="stylesheet" type="text/css" href="/css/quiz css.css">
 <style>
-      body{
-    background-color:grey;
-  }
+    body {
+        background-color: grey;
+    }
+    h3{
+        color: white;
+    }
+    .alert.alert-success{
+        top:0 !important;
+    }
 </style>
 
 <!-- Main page -->
@@ -18,17 +24,16 @@
         <p>Option3: {{option3}}</p>
         <p>Option4: {{option4}}</p>
         <p>Correct option: {{correct}}</p>
-       <!--<div class="col-sm-12 col-md-6 col-lg-2">-->
-            <p class="font-italic"></p>
-            <a href="/admin/quizedit/{{id}}" class="card-link">
-                <i class="fas fa-pencil-alt"></i>
-                Edit
-            </a>
-            <a href="/admin/deleteQuiz/{{id}}" class="card-link" data-toggle="confirmation"
-                data-title="Confirm delete?">
-                <i class="far fa-trash-alt"></i>
-                Delete
-            </a>
+        <!--<div class="col-sm-12 col-md-6 col-lg-2">-->
+        <p class="font-italic"></p>
+        <a href="/admin/quizedit/{{id}}" class="card-link">
+            <i class="fas fa-pencil-alt"></i>
+            Edit
+        </a>
+        <a href="/admin/deleteQuiz/{{id}}" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+            <i class="far fa-trash-alt"></i>
+            Delete
+        </a>
         <!--</div>-->
     </div>
 

@@ -101,10 +101,10 @@ router.put('/saveProfile/:id', function (req, res) {
     let phone = req.body.phone;
     let bankName = req.body.bankName;
     let bankNo = req.body.bankNo;
-    let errors =[]
     if (phone.length != 8)
     {
-        errors.push({ text: 'Phone number must contain 8 numbers' });
+        alertMessage(res, 'danger', 'Phone number should contain 8 numbers!', 'fas fa - sign -in -alt', true);
+            res.redirect('/profile');
     }
     if (bankNo != "")
     {
@@ -114,11 +114,6 @@ router.put('/saveProfile/:id', function (req, res) {
             alertMessage(res, 'success', 'Bank Number Updated!', 'fas fa - sign -in -alt', true);
             res.redirect('/profile');
         })
-    }
-    if (errors.length > 0) {
-        res.redirect('/profile', {
-            errors
-        });
     }
     else
     {
@@ -148,22 +143,19 @@ router.put('/saveProfile/:id', function (req, res) {
 
 router.put('/savePassword/:id', function (req, res) {
     let id = req.params.id;
-    let errors = [];
     let password = req.body.password;
     let cpassword = req.body.cpassword;
     if (password != cpassword) {
-        errors.push({ text: 'Passwords do not match' });
+        alertMessage(res, 'danger', 'Passwords do not match!', 'fas fa - sign -in -alt', true);
+        res.redirect('/password');
     }
     if (password.length < 4) {
-        errors.push({ text: 'Password must be at least 4 characters' });
+        alertMessage(res, 'danger', 'Password length should be at least 4 characters!', 'fas fa - sign -in -alt', true);
+        res.redirect('/password');
     }
     if (password == '' || cpassword == '') {
-        errors.push({ text: 'One field is empty. Please fill up both.' });
-    }
-    if (errors.length > 0) {
-        res.redirect('/password', {
-            errors
-        });
+        alertMessage(res, 'danger', 'Please fill up both fields!', 'fas fa - sign -in -alt', true);
+        res.redirect('/password');
     }
     else {
         bcrypt.genSalt(10, (err, salt) => {
