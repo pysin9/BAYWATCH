@@ -154,7 +154,7 @@ router.post('/addquiz', (req, res) => {
   //   .catch(err => console.log(err))
 })
 router.get('/listquiz', (req, res) => {
-  let title = 'Edit Quiz'
+  let title = 'List Quiz'
   sequelize.query("SELECT * FROM quizzes", raw = true).then(function (quiz) {
     res.render('admin/listquiz',
       {
