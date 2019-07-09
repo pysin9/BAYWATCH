@@ -1,0 +1,81 @@
+<body class="login-page sidebar-collapse">
+    <div class="page-header header-filter" style="background-image: url('/img/background4.jpg');">
+        <div class="container">
+            <div class="row"></div>
+            <div class="card card-login">
+                <form action="/admin/addquiz" method='POST' id="form">
+                    <h2 class="card-title text-center">Add Quiz Question</h2>
+                    <div class="card-body">
+                        <div class="row" style='margin-left: 250px'>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">not_listed_location</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="question" name="question" class="form-control"
+                                        placeholder='Enter a question' required>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons" style="font-size:24px">filter_1</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="option1" name="option1" class="form-control"
+                                        placeholder='Enter option 1' required>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">filter_2</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="option2" name="option2" class="form-control"
+                                        placeholder='Enter option 2' required>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">filter_3</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="option3" name="option3" class="form-control"
+                                        placeholder='Enter option 3' required>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">filter_4</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="option4" name="option4" class="form-control"
+                                        placeholder='Enter option 4' required>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">thumb_up_alt</i>
+                                        </span>
+                                    </div>
+                                    <div class="try-select" style="width:200px;">
+                                        <select name="correct" class="form-control" id="exampleFormControlSelect1">
+                                            <option id='option 1' value="option 1">option 1</option>
+                                            <option id='option 2' value="option 2">option 2</option>
+                                            <option id='option 3' value="option 3">option 3</option>
+                                            <option id='option 4' value="option 4">option 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-round">Add</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -23,7 +23,7 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'adminquiz'
-  res.render('admin/admin-quiz', { title: title });
+  res.render('admin/admin-quiz1', { title: title });
 });
 
 router.get('/faqform', (req, res) => {
