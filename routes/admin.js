@@ -21,9 +21,30 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
   operatorsAliases: false
 });
 
+router.get('/admin*' , (req, res, next)=>{
+  let user = req.user;
+  if (user == undefined || user.isAdmin != true)
+  {
+    alertMessage(res, 'danger', 'Access Denied! You are not an admin!', 'fas fa-exclamation-circle', true);
+    res.redirect('/');
+  }
+  else
+  {
+    next();
+  }
+});
+
 router.get('/admin-quiz', (req, res) => {
-  let title = 'adminquiz'
-  res.render('admin/admin-quiz1', { title: title });
+  let title = 'Add Quiz'
+  // let user = req.user;
+  // if (user == undefined || user.isAdmin != true)
+  // {
+  //   alertMessage(res, 'danger', 'Access Denied! You are not an admin!', 'fas fa-exclamation-circle', true);
+  //   res.redirect('/');
+  // }
+  // else{
+    res.render('admin/admin-quiz1', { title: title });
+  // }
 });
 
 router.get('/faqform', (req, res) => {

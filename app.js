@@ -116,6 +116,8 @@ app.use(function (req, res, next) {
 app.use('/', mainRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
+app.use('/admin*', adminRoute);
+
 app.use(methodOverride('_method')); // mainRoute is declared to point to routes/main.js
 // This route maps the root URL to any path defined in main.js
 
