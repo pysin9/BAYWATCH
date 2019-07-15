@@ -36,13 +36,6 @@ router.get('/admin*' , (req, res, next)=>{
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'Add Quiz'
-  // let user = req.user;
-  // if (user == undefined || user.isAdmin != true)
-  // {
-  //   alertMessage(res, 'danger', 'Access Denied! You are not an admin!', 'fas fa-exclamation-circle', true);
-  //   res.redirect('/');
-  // }
-  // else{
     res.render('admin/admin-quiz1', { title: title });
   // }
 });
@@ -160,19 +153,6 @@ router.post('/addquiz', (req, res) => {
     .then((quizzes) => {
       res.redirect('/admin/listquiz');
     });
-
-  // Quiz.create({
-  //   question,
-  //   option1,
-  //   option2,
-  //   option3,
-  //   option4,
-  //   correct,
-
-  // }).then((quizzes) => {
-  //   res.redirect('/quiz');
-  // })
-  //   .catch(err => console.log(err))
 })
 router.get('/listquiz', (req, res) => {
   let title = 'List Quiz'

@@ -124,21 +124,6 @@ router.put('/saveProfile/:id', function (req, res) {
             res.redirect('/profile');
         })
     }
-    // User.update({
-    //     name,
-    //     email,
-    //     address,
-    //     phone,
-    //     bankName,
-    //     bankNo,
-    // }, {
-    //         where: {
-    //             id
-    //         }
-    //     }).then(() => {
-    //         alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
-    //         res.redirect('/user/profile');
-    //     }).catch(err => console.log(err));
 });
 
 router.put('/savePassword/:id', function (req, res) {
