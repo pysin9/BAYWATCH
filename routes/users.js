@@ -5,6 +5,10 @@ const alertMessage = require('../helpers/messenger');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize')
+const sgMail = require('@sendgrid/mail');
+
+// JWT
+const jwt = require('jsonwebtoken');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
     host: 'localhost',
@@ -20,15 +24,29 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 });
 
 router.post('/Login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/', // Route to /video/listVideos URL
-        failureRedirect: '/Login', // Route to /login URL
-        failureFlash: true
-        /* Setting the failureFlash option to true instructs Passport to flash an error
-        message using the message given by the strategy's verify callback, if any.
-        When a failure occur passport passes the message object as error */
-    })(req, res, next);
+    User.findOne({
+        where: { email: req.body.email }
+    }).then(user => {
+        if (user) {
+            if (user.verified !== true) {
+                alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', 'fas fa-exclamation-circle', true);
+                res.redirect('/');
+            } else {
+                passport.authenticate('local', {
+                    successRedirect: '/', // Route to /video/listVideos URL
+                    failureRedirect: '/Login', // Route to /login URL
+                    failureFlash: true
+                    /* Setting the failureFlash option to true instructs Passport to flash an error
+                    message using the message given by the strategy's verify callback, if any.
+                    When a failure occur passport passes the message object as error */
+                })(req, res, next);
+            }
+        }
+    });
+
+
 });
+
 
 router.post('/Register', (req, res) => {
     let errors = [];
@@ -70,26 +88,100 @@ router.post('/Register', (req, res) => {
                         phone
                     });
                 } else {
+                    let token;
+                    jwt.sign(email, 'gr33ngra33', (err, jwtoken) => {
+                        if (err) console.log('Error generating Token: ' + err);
+                        token = jwtoken;
+                    });
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(password, salt, (err, hash) => {
                             if (err) throw err;
                             password = hash;
-                            User.create({ name, email, password, phone})
-                                .then(user => {
-                                    alertMessage(res, 'success', user.name + ' added.Please login', 'fas fa - sign -in -alt', true);
-                                    res.redirect('/Login');
-                                })
-                                .catch(err => console.log(err));
+                            User.create({
+                                name,
+                                email,
+                                password,
+                                phone,
+                            }).then(user => {
+                                sendEmail(user.id, user.email, token)
+                                    .then((msg) => {		// Send email success
+                                        alertMessage(res, 'success', user.name + ' added. Please log in to ' + user.email + ' to verify account.'
+                                            , 'fas fa-sign-in-alt', true);
+                                        res.redirect('/Login');
+                                    })
+                                    .catch((err) => {		// Send email fail
+                                        alertMessage(res, 'warning', 'Error sending to ' + user.email + ' ' + err, 'fas fa-sign-in-alt', true);
+                                        console.log('Sending email error: ' + err);
+                                        res.redirect('/');
+                                    });
+
+                            }).catch(err => console.log(err));
                         })
-
-                    })// Create new user record
-
+                    });
                 }
             });
     }
 });
 
+router.get('/verify/:userId/:token', (req, res, next) => {
+    // retreiever from user check, then set verified to true
+    User.findOne({
+        where: { id: req.params.userId }
+    }).then(user => {
+        if (user) {
+            let email = user.email;
+            if (user.verified === true) {
+                alertMessage(res, 'info', 'User already verified', 'fas fa-exclamation-circle', true);
+                res.redirect('/Login');
+            } else {
+                jwt.verify(req.params.token, 'gr33ngra33', (err, authData) => {
+                    if (err) {
+                        alertMessage(res, 'danger', 'Unauthorised Access', 'fas fa-exclamation-circle', true);
+                        res.redirect('/');
+                    } else {
+                        User.update({
+                            verified: 1
+                        }, {
+                                where: { id: user.id }
+                            }
+                        ).then(user => {
+                            alertMessage(res, 'success', email + ' verified. Please login', 'fas fa-sign-in-alt', true);
+                            res.redirect('/Login');
+                        });
+                    }
+                });
+            }
+        } else {
+            alertMessage(res, 'danger', 'Unauthorised Access', 'fas fa-exclamation-circle', true);
+            res.redirect('/');
+        }
+    });
 
+});
+
+function sendEmail(userId, email, token) {
+    sgMail.setApiKey('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');
+
+    const message = {
+        to: email,
+        from: 'Do Not Reply <admin@New-Organic.sg>',
+        templateId: 'd-af294f56c59040908d8013cd0acc7d87',
+        dynamic_template_data: {
+          subject: 'Verify Organic Account',
+          name: 'Some One',
+          city: 'Denver',
+        },
+//         text: 'and easy to do anywhere, even with Node.js',
+//         html: `Thank you registering with New Organics.<br><br>
+// Please <a href="http://localhost:5001/user/verify/${userId}/${token}"><strong>verify</strong></a>
+// your account.`
+    };
+    return new Promise((resolve, reject) => {
+        sgMail.send(message)
+            .then(msg => resolve(msg))
+            .catch(err => reject(err));
+    });
+}
 
 /* GET user profile */
 
@@ -101,28 +193,25 @@ router.put('/saveProfile/:id', function (req, res) {
     let phone = req.body.phone;
     let bankName = req.body.bankName;
     let bankNo = req.body.bankNo;
-    if (phone.length != 8)
-    {
+    if (phone.length != 8) {
         alertMessage(res, 'danger', 'Phone number should contain 8 numbers!', 'fas fa - sign -in -alt', true);
-            res.redirect('/profile');
+        res.redirect('/profile');
     }
-    if (bankNo != "")
-    {
+    if (bankNo != "") {
         sequelize.query("UPDATE users SET bankNo= :BankNo WHERE id= :ID",
-        {replacements:{BankNo: bankNo, ID: id }})
-        .then(() => {
-            alertMessage(res, 'success', 'Bank Number Updated!', 'fas fa - sign -in -alt', true);
-            res.redirect('/profile');
-        })
+            { replacements: { BankNo: bankNo, ID: id } })
+            .then(() => {
+                alertMessage(res, 'success', 'Bank Number Updated!', 'fas fa - sign -in -alt', true);
+                res.redirect('/profile');
+            })
     }
-    else
-    {
-    sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName WHERE id= :ID",
-        {replacements:{ Name: name, Email: email, Address: address, Phone: phone,BankName: bankName, ID: id }})
-        .then(() => {
-            alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
-            res.redirect('/profile');
-        })
+    else {
+        sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName WHERE id= :ID",
+            { replacements: { Name: name, Email: email, Address: address, Phone: phone, BankName: bankName, ID: id } })
+            .then(() => {
+                alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
+                res.redirect('/profile');
+            })
     }
 });
 
@@ -148,11 +237,12 @@ router.put('/savePassword/:id', function (req, res) {
                 if (err) throw err;
                 password = hash;
 
-                sequelize.query("UPDATE users SET password= :Password WHERE id= :ID", {replacements:{Password:password, ID: id}
-                    }).then(() => {
-                        alertMessage(res, 'success', 'Password Updated!', 'fas fa - sign -in -alt', true);
-                        res.redirect('/password');
-                    }).catch(err => console.log(err));
+                sequelize.query("UPDATE users SET password= :Password WHERE id= :ID", {
+                    replacements: { Password: password, ID: id }
+                }).then(() => {
+                    alertMessage(res, 'success', 'Password Updated!', 'fas fa - sign -in -alt', true);
+                    res.redirect('/password');
+                }).catch(err => console.log(err));
             })
         })
     };
