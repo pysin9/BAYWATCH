@@ -24,11 +24,11 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 });
 
 router.post('/Login', (req, res, next) => {
-    User.findOne({
-        where: { email: req.body.email }
-    }).then(user => {
+    sequelize.query('SELECT verified FROM users WHERE email = :Email', { replacements: { Email: req.body.email } }, raw = true
+    ).then(user => {
+        console.log(user)
         if (user) {
-            if (user.verified !== true) {
+            if (user == 0) {
                 alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', 'fas fa-exclamation-circle', true);
                 res.redirect('/');
             } else {
@@ -42,7 +42,7 @@ router.post('/Login', (req, res, next) => {
                 })(req, res, next);
             }
         }
-    });
+    })
 
 
 });
@@ -85,7 +85,7 @@ router.post('/Register', (req, res) => {
                         email,
                         password,
                         cfmpassword,
-                        phone
+                        phone,
                     });
                 } else {
                     let token;
@@ -102,6 +102,7 @@ router.post('/Register', (req, res) => {
                                 email,
                                 password,
                                 phone,
+                                verified: 0
                             }).then(user => {
                                 sendEmail(user.id, user.email, token)
                                     .then((msg) => {		// Send email success
@@ -122,30 +123,31 @@ router.post('/Register', (req, res) => {
             });
     }
 });
-
 router.get('/verify/:userId/:token', (req, res, next) => {
-    // retreiever from user check, then set verified to true
+    // retrieve from user using id
     User.findOne({
-        where: { id: req.params.userId }
+        where: {
+            id: req.params.userId
+        }
     }).then(user => {
-        if (user) {
-            let email = user.email;
-            if (user.verified === true) {
-                alertMessage(res, 'info', 'User already verified', 'fas fa-exclamation-circle', true);
+        if (user) { // If user is found
+            let userEmail = user.email;
+            console.log(userEmail) // Store email in temporary variable
+            if (user.verified === true) { // Checks if user has been verified
+                alertMessage(res, 'info', 'User already verified', 'fas fa-exclamation - circle', true);
                 res.redirect('/Login');
             } else {
+                // Verify JWT token sent via URL
                 jwt.verify(req.params.token, 'gr33ngra33', (err, authData) => {
                     if (err) {
-                        alertMessage(res, 'danger', 'Unauthorised Access', 'fas fa-exclamation-circle', true);
+                        alertMessage(res, 'danger', 'Unauthorised Access', 'fas fa-exclamation - circle', true);
                         res.redirect('/');
                     } else {
-                        User.update({
-                            verified: 1
-                        }, {
-                                where: { id: user.id }
-                            }
-                        ).then(user => {
-                            alertMessage(res, 'success', email + ' verified. Please login', 'fas fa-sign-in-alt', true);
+                        sequelize.query("UPDATE users SET verified= 1 WHERE id= :ID",
+                        { replacements: { ID: req.params.userId } 
+                        }).then(user => {
+                            console.log(user)
+                            alertMessage(res, 'success', userEmail + ' verified.Please login', 'fas fa - sign -in -alt', true);
                             res.redirect('/Login');
                         });
                     }
@@ -156,31 +158,30 @@ router.get('/verify/:userId/:token', (req, res, next) => {
             res.redirect('/');
         }
     });
-
 });
+
+const data = {
+    verify_account_url: "http://localhost:5001/user/verify/${userId}/${token}"
+}
 
 function sendEmail(userId, email, token) {
     sgMail.setApiKey('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');
-
     const message = {
         to: email,
-        from: 'Do Not Reply <admin@New-Organic.sg>',
-        templateId: 'd-c0bbe395148d4dfb889d5223f5334d2e',
-        dynamic_template_data: {
-          subject: 'Verify Organic Account',
-          name: 'Some One',
-          city: 'Denver',
-        },
-//         text: 'and easy to do anywhere, even with Node.js',
-//         html: `Thank you registering with New Organics.<br><br>
-// Please <a href="http://localhost:5001/user/verify/${userId}/${token}"><strong>verify</strong></a>
-// your account.`
+        from: 'Do Not Reply <admin@video-jotter.sg>',
+        subject: 'Verify Organic Account',
+        text: 'New organics Email Verification',
+        html: `Thank you registering with Video Jotter.<br><br>
+        Please <a href="http://localhost:5001/user/verify/${userId}/${token}">
+        <strong>verify</strong></a>your account.`
     };
+    // Returns the promise from SendGrid to the calling function
     return new Promise((resolve, reject) => {
         sgMail.send(message)
             .then(msg => resolve(msg))
             .catch(err => reject(err));
     });
+
 }
 
 /* GET user profile */
