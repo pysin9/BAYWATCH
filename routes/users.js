@@ -160,11 +160,12 @@ router.get('/verify/:userId/:token', (req, res, next) => {
 });
 
 function sendEmail(userId, email, token) {
-    
+    sgMail.setApiKey('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');
+
     const message = {
         to: email,
         from: 'Do Not Reply <admin@New-Organic.sg>',
-
+        templateId: 'd-af294f56c59040908d8013cd0acc7d87',
         dynamic_template_data: {
           subject: 'Verify Organic Account',
           name: 'Some One',
