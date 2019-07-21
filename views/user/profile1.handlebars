@@ -7,9 +7,10 @@
                     <form class="form" action="/user/saveProfile/{{user.id}}?_method=PUT" method="post">
                     <input type="hidden" name="_method" value="PUT">
                         <h2 class="card-title text-center">Edit Profile</h2>
+                        <button type="button" class="btn btn-info" style='margin-left: 450px' onclick='signin()'>Click For Sign In Bonus!</button>
                         <div class="card-body">
                             <div class="row" style='margin-left: 250px'>
-                                <div class="col-lg-8">
+                                <div class="col-lg-8 col-md-5">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
@@ -83,3 +84,8 @@
             </div>
         </div>
     </div>
+<script>
+    function signin(){
+        alert('Its working')
+    }
+</script>

@@ -42,7 +42,7 @@ router.get('/admin-quiz', (req, res) => {
 
 router.get('/faqform', (req, res) => {
   let title = 'faqform  '
-  res.render('admin/faqform', { title: title });
+  res.render('admin/faqform1', { title: title });
 });
 
 router.get('/remove/:id', (req, res) => {

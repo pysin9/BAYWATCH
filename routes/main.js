@@ -238,13 +238,7 @@ router.get('/admin', (req, res) => {
 router.get('/profile', function (req, res) {
   const title = "Profile";
   let user = req.user;
-  if (user == undefined) {
-    alertMessage(res, 'danger', 'User not found! Log in to access profile', 'fas fa-check', true);
-    res.redirect('/');
-  }
-  else {
     res.render('user/profile1', { title: title });
-  }
 });
 router.get('/password', function (req, res) {
   const title = "Password";
