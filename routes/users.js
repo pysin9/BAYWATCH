@@ -6,8 +6,6 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize')
 const sgMail = require('@sendgrid/mail');
-
-// JWT
 const jwt = require('jsonwebtoken');
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
@@ -26,7 +24,6 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 router.post('/Login', (req, res, next) => {
     sequelize.query('SELECT verified FROM users WHERE email = :Email', { replacements: { Email: req.body.email } }, raw = true
     ).then(user => {
-        console.log(user)
         if (user) {
             if (user == 0) {
                 alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', 'fas fa-exclamation-circle', true);
@@ -160,9 +157,8 @@ router.get('/verify/:userId/:token', (req, res, next) => {
     });
 });
 
-const data = {
-    verify_account_url: "http://localhost:5001/user/verify/${userId}/${token}"
-}
+
+
 
 function sendEmail(userId, email, token) {
     sgMail.setApiKey('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');
@@ -175,6 +171,17 @@ function sendEmail(userId, email, token) {
         Please <a href="http://localhost:5001/user/verify/${userId}/${token}">
         <strong>verify</strong></a>your account.`
     };
+    // const message = {
+    //     to: email,
+    //     from: 'Do Not Reply <admin@New-Organic.sg>',
+    //     subject: 'Verify Organic Account',
+    //     templateId: 'd-c0bbe395148d4dfb889d5223f5334d2e',
+    //     dynamic_template_data: {     
+    //         name: 'name',
+    //         confirm_account: `<a href="http://localhost:5001/user/verify/${userId}/${token}">`
+    //     },
+    // };
+
     // Returns the promise from SendGrid to the calling function
     return new Promise((resolve, reject) => {
         sgMail.send(message)

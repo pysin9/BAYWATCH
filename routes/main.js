@@ -41,6 +41,7 @@ router.get('/Login', (req, res) => {
   const title = 'Login';
   sequelize.query("UPDATE users SET isAdmin = '1' WHERE email = 'admin@gmail.com'")
   sequelize.query("UPDATE users SET isNotAdmin = '0' WHERE email = 'admin@gmail.com'")
+  sequelize.query("UPDATE users SET verified = '1' WHERE email = 'admin@gmail.com'")
   res.render('user/login', { title: title })
 });
 
@@ -256,18 +257,22 @@ router.get('/password', function (req, res) {
     res.render('user/password1', { title: title });
   }
 });
+
 router.get('/checkout1', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout1', { title: title });
 });
+
 router.get('/checkout2', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout2', { title: title });
 });
+
 router.get('/checkout3', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout3', { title: title });
 });
+
 router.get('/checkout4', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout4', { title: title });
