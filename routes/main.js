@@ -25,9 +25,21 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 /* GET index */
 router.get('/', function (req, res) {
   const title = "NewOrganics";
-  /*sequelize.query("SELECT * from users").then(results => {
-  console.log(results);
-});--- SELECT METHOD*/
+  if (req.user == undefined) {
+    console.log('it works!');
+  }
+  else {
+    let id = req.user.id;
+    sequelize.query("SELECT * FROM users where id= :ID", { replacements: { ID: id } }, raw = true)
+      .then((users) => {
+        let nowdate = new Date().getDate;
+        let currday = users[0][0].signin;
+        let dif = parseInt(nowdate) - parseInt(currday);
+        if (dif != 0) {
+          alertMessage(res, 'info', 'Welcome back! Check your profile for a login bonus!', 'fas fa-exclamation-circle', true);
+        }
+      })
+  }
   res.render('index', { title: title });
 });
 
@@ -242,20 +254,19 @@ router.get('/profile', function (req, res) {
   let date = new Date();
   let nowdate = date.getDate();
 
-  sequelize.query("SELECT * FROM users WHERE id = :ID",{replacements:{ID: id}}, raw=true)
-  .then((user)=>{
-    let currday = user[0][0].signin
-    let dif = parseInt(nowdate)-parseInt(currday);
-    console.log(user[0])
-    if (dif == 0)
-    {
-      res.render('user/profile1', { title: title, user:user[0][0] });
-    }
-    else{
-      nosignin = true;
-      res.render('user/profile1', { title: title, user:user[0][0], nosignin: nosignin});
-    }
-  })
+  sequelize.query("SELECT * FROM users WHERE id = :ID", { replacements: { ID: id } }, raw = true)
+    .then((user) => {
+      let currday = user[0][0].signin
+      let dif = parseInt(nowdate) - parseInt(currday);
+      console.log(user[0])
+      if (dif == 0) {
+        res.render('user/profile1', { title: title, user: user[0][0] });
+      }
+      else {
+        nosignin = true;
+        res.render('user/profile1', { title: title, user: user[0][0], nosignin: nosignin });
+      }
+    })
 });
 router.get('/password', function (req, res) {
   const title = "Password";
