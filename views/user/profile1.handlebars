@@ -4,10 +4,12 @@
         <div class="container">
             <div class="row" ></div>
                 <div class="card card-login">
-                    <form class="form" action="/user/saveProfile/{{user.id}}?_method=PUT" method="post">
+                    <form class="form" action="/user/saveProfile/{{user.id}}?_method=PUT" method="post" id='profile'>
                     <input type="hidden" name="_method" value="PUT">
                         <h2 class="card-title text-center">Edit Profile</h2>
+                        {{#if nosignin}}
                         <button type="button" class="btn btn-info" style='margin-left: 450px' onclick='signin()'>Click For Sign In Bonus!</button>
+                        {{/if}}
                         <div class="card-body">
                             <div class="row" style='margin-left: 250px'>
                                 <div class="col-lg-8 col-md-5">
@@ -87,5 +89,9 @@
 <script>
     function signin(){
         alert('Its working')
+        var points  = parseInt(document.getElementById('points').value);
+        points += 30;
+        document.getElementById('points').value = Number(points);
+        document.forms["profile"].submit();
     }
 </script>

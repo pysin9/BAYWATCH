@@ -30,6 +30,10 @@ const User = db.define('user', {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
+    signin:{
+        type: Sequelize.INTEGER,
+        defaultValue : 0
+    },
     isAdmin:{
         type: Sequelize.BOOLEAN,
         allowNull: false,

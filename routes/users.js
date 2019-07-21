@@ -201,6 +201,10 @@ router.put('/saveProfile/:id', function (req, res) {
     let phone = req.body.phone;
     let bankName = req.body.bankName;
     let bankNo = req.body.bankNo;
+    let points = req.body.points;
+    let day = new Date();
+    let currday = day.getDate();
+
     if (phone.length != 8) {
         alertMessage(res, 'danger', 'Phone number should contain 8 numbers!', 'fas fa - sign -in -alt', true);
         res.redirect('/profile');
@@ -214,8 +218,8 @@ router.put('/saveProfile/:id', function (req, res) {
             })
     }
     else {
-        sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName WHERE id= :ID",
-            { replacements: { Name: name, Email: email, Address: address, Phone: phone, BankName: bankName, ID: id } })
+        sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName, points = :Points, signin = :Day WHERE id= :ID",
+            { replacements: { Name: name, Email: email, Address: address, Phone: phone, BankName: bankName, Points:points, Day:currday, ID: id } })
             .then(() => {
                 alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
                 res.redirect('/profile');

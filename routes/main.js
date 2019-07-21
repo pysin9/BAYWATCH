@@ -238,7 +238,24 @@ router.get('/admin', (req, res) => {
 router.get('/profile', function (req, res) {
   const title = "Profile";
   let user = req.user;
-    res.render('user/profile1', { title: title });
+  let id = user.id;
+  let date = new Date();
+  let nowdate = date.getDate();
+
+  sequelize.query("SELECT * FROM users WHERE id = :ID",{replacements:{ID: id}}, raw=true)
+  .then((user)=>{
+    let currday = user[0][0].signin
+    let dif = parseInt(nowdate)-parseInt(currday);
+    console.log(user[0])
+    if (dif == 0)
+    {
+      res.render('user/profile1', { title: title, user:user[0][0] });
+    }
+    else{
+      nosignin = true;
+      res.render('user/profile1', { title: title, user:user[0][0], nosignin: nosignin});
+    }
+  })
 });
 router.get('/password', function (req, res) {
   const title = "Password";
