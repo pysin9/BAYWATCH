@@ -21,7 +21,7 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
   operatorsAliases: false
 });
 
-router.get('/asdfghj*' , (req, res, next)=>{
+router.get('/*' , (req, res, next)=>{
   let user = req.user;
   if (user == undefined || user.isAdmin != true)
   {
