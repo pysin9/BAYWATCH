@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
         let nowdate = new Date().getDate();
         let currday = users[0][0].signin;
         let dif = parseInt(nowdate) - parseInt(currday);
-        if (dif != 0) {
+        if (dif != 0 && users[0][0].isNotAdmin == true) {
           alertMessage(res, 'info', 'Welcome back! Check your profile for a login bonus!', 'fas fa-exclamation-circle', true);
         }
       })
