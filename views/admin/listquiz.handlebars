@@ -3,14 +3,17 @@
     body {
         background-image: url('/img/background3.jpg');
     }
-    h3{
-        color: white;
+
+    h3 {
+        color: black;
+        font-weight: bold;
     }
-    .alert.alert-success{
-        top:0 !important;
+
+    .alert.alert-success {
+        top: 0 !important;
     }
-    .main
-    {
+
+    .main {
         background-color: white;
     }
 </style>
@@ -44,5 +47,11 @@
 </div>
 {{/each}}
 {{else}}
-<h3>No Quiz Added</h3>
+<div class="main">
+    <div class="wrapper" id="pages">
+        <h3>No Quiz Added</h3>
+    </div>
+
+</div>
+
 {{/if}}

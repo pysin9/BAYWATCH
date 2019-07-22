@@ -32,7 +32,7 @@ router.get('/', function (req, res) {
     let id = req.user.id;
     sequelize.query("SELECT * FROM users where id= :ID", { replacements: { ID: id } }, raw = true)
       .then((users) => {
-        let nowdate = new Date().getDate;
+        let nowdate = new Date().getDate();
         let currday = users[0][0].signin;
         let dif = parseInt(nowdate) - parseInt(currday);
         if (dif != 0) {
@@ -166,10 +166,6 @@ router.get('/quiz', function (req, res) {
         allowQuiz = true;
       }
       if (allowQuiz == true) {
-        if (id == undefined || user == undefined) {
-          alertMessage(res, 'danger', 'Please log in to access daily quizzes!', 'fas fa-exclamation-circle', true);
-          res.redirect('/');
-        }
         sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
           let length = result[0].length;
           let getIndex = getRndInteger(0, length - 1);
@@ -223,13 +219,13 @@ router.get('/faq', (req, res) => {
   },
     raw = true
   ).then((qna) => {
-    res.render('faq/faq', {
+    res.render('faq/faq1', {
       title: title,
       qna: qna
     })
   })
     .catch(function (err) {
-      res.render('faq/faq',
+      res.render('faq/faq1',
         { title: title })
     })
 });
