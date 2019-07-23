@@ -1,0 +1,187 @@
+<head>
+    <style>
+        /***** RESETS *****/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /***** FONTS *****/
+
+        @font-face {
+            font-family: "Ionicons";
+            src: url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1");
+            src: url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.woff?v=2.0.1") format("woff"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #666;
+            font-size: 1em;
+            background-color: lightgrey;
+            line-height: 1.6em;
+            margin-top: 130px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #container {
+            width: 60%;
+            margin: 0 20%;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 1em 0;
+        }
+
+        i {
+            margin-right: 1em;
+        }
+
+        .faq li {
+            padding: 1.25em;
+        }
+
+        .faq li.q {
+            font-weight: bold;
+            font-size: 120%;
+            border-bottom: 1px #ccc solid;
+            cursor: pointer;
+        }
+
+        .faq li.q:nth-child(1),
+        .faq li.q:nth-child(5),
+        .faq li.q:nth-child(9) {
+            background: #eee;
+        }
+
+        .faq li.a {
+            font-weight: bold;
+            color: #316835;
+            background: #fff;
+            display: none;
+        }
+
+        img {
+            margin-right: .5em;
+        }
+
+        footer {
+            height: 6em;
+            padding: 2em;
+            margin-top: 2em;
+        }
+
+        footer h3,
+        h3 {
+            width: 50%;
+            margin: 0 25%;
+            color: black;
+        }
+
+        footer a {
+            color: #006600;
+            text-decoration: none;
+        }
+
+        .popover-header {
+            margin: 10px;
+            padding: 15px 5px 5px;
+        }
+        #delete{
+            background-color: white;
+            border-style: solid;
+        }
+        /********* MEDIA QUERIES ************/
+        @media (max-width: 800px) {
+            #container {
+                width: 90%;
+                margin: 0 5%;
+            }
+
+            .title {
+                width: 90%;
+                margin: 0 5%;
+                height: 3.5em;
+            }
+
+            .faq li {
+                text-align: center;
+            }
+
+            .faq li.a {
+                width: 85%;
+                margin-left: 5%;
+            }
+
+            footer h3 {
+                width: 90%;
+                margin: 0 5%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <h1 style='color: black;'>General FAQ</h1>
+        {{#if qna}}
+        {{#each qna}}
+        <ul class="faq">
+
+            <li class="q"><i class="ion-chevron-right"></i>Question: {{qns}}
+
+            </li>
+            <li class="a">Answer: {{ans}}</li>
+            {{#if user.isAdmin}}
+            <div id='delete'>
+                <center><a href="/admin/remove/{{id}}" class="card-link" data-toggle="confirmation"
+                        data-title="Confirm delete?">Delete</a>
+                </center>
+
+            </div>
+            {{/if}}
+
+
+        </ul>
+        {{/each}}
+    </div>
+    {{else}}
+    <h3>No FAQ has been added. Drop a question below!</h3>
+    {{/if}}
+    <footer>
+        <h3>Have a question? Ask us <a href="#">here</a>, and we will get back to you shortly.</h3>
+    </footer>
+</body>
+<script>
+    // Accordian
+    var action = "click";
+    var speed = "500";
+
+    $(document).ready(function () {
+        // Question handler
+        $('li.q').on(action, function () {
+            // Get next element
+            $(this).next()
+                .slideToggle(speed)
+                // Select all other answers
+                .siblings('li.a')
+                .slideUp();
+        });
+    });
+</script>
