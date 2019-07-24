@@ -8,6 +8,7 @@ const Shop = require('../models/Shop');
 const qna = require("../models/QnA")
 const Cart = require('../models/Cart');
 const moment = require('moment');
+const user = require('../models/User')
 
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -214,20 +215,24 @@ router.post('/submitedquiz', function (req, res) {
 
 router.get('/faq', (req, res) => {
   const title = 'FAQ';
-  qna.findAll({
-    attributes: ['qns', 'ans', 'id']
-  },
-    raw = true
-  ).then((qna) => {
-    res.render('faq/faq1', {
-      title: title,
-      qna: qna
+  let isadmin = req.user.isAdmin;
+  console.log(isadmin)
+    qna.findAll({
+      attributes: ['qns', 'ans', 'id']
+    },
+      raw = true
+    ).then((qna) => {
+      res.render('faq/faq1', {
+        title: title,
+        qna: qna,
+        isadmin :isadmin
+      })
     })
-  })
-    .catch(function (err) {
-      res.render('faq/faq1',
-        { title: title })
-    })
+      .catch(function (err) {
+        res.render('faq/faq1',
+          { title: title })
+      })  
+    
 });
 router.get('/about', (req, res) => {
   const title = "About"
