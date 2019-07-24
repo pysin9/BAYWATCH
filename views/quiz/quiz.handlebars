@@ -28,7 +28,12 @@
   <p id='displayanswer'>  </p>
 </div>
 {{else}}
+{{#if user.isNotAdmin}}
 <h3>Come back again for Quizzes!</h3><br><h3>Total Points: {{user.points}}</h3> 
+{{/if}}
+{{#if user.isAdmin}}
+<h3>No Quiz has been added. Add quiz to view the list</h3>
+{{/if}}
 {{/if}}
 <script>
   function checkcorrect(clickid) {

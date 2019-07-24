@@ -148,7 +148,7 @@
 
             </li>
             <li class="a">Answer: {{ans}}</li>
-            {{#if user.isAdmin}}
+            {{#if user}}
             <div id='delete'>
                 <center><a href="/admin/remove/{{id}}" class="card-link" data-toggle="confirmation"
                         data-title="Confirm delete?">Delete</a>
