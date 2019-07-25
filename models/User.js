@@ -27,12 +27,10 @@ const User = db.define('user', {
         defaultValue: 0
     },
     quizcompleted:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.STRING,
     },
     signin:{
-        type: Sequelize.INTEGER,
-        defaultValue : 0
+        type: Sequelize.STRING
     },
     isAdmin:{
         type: Sequelize.BOOLEAN,

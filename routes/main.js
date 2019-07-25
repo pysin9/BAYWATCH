@@ -26,6 +26,8 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 /* GET index */
 router.get('/', function (req, res) {
   const title = "NewOrganics";
+  let date = new Date();
+  let nowdate = date.toString().substring(4, 15);
   if (req.user == undefined) {
     console.log('it works!');
   }
@@ -33,10 +35,8 @@ router.get('/', function (req, res) {
     let id = req.user.id;
     sequelize.query("SELECT * FROM users where id= :ID", { replacements: { ID: id } }, raw = true)
       .then((users) => {
-        let nowdate = new Date().getDate();
         let currday = users[0][0].signin;
-        let dif = parseInt(nowdate) - parseInt(currday);
-        if (dif != 0 && users[0][0].isNotAdmin == true) {
+        if (currday!=nowdate && users[0][0].isNotAdmin == true) {
           alertMessage(res, 'info', 'Welcome back! Check your profile for a login bonus!', 'fas fa-exclamation-circle', true);
         }
       })
@@ -147,26 +147,13 @@ router.get('/quiz', function (req, res) {
   const title = "Quiz";
   let user = req.user;
   let id = req.user.id;
-  let nowdate = new Date();
-  let nowday = nowdate.getDate();
-  let allowQuiz = true;
+  let date = new Date();
+  let nowdate = date.toString().substring(4, 15);
   //test date retrieve
   sequelize.query('SELECT quizcompleted FROM users WHERE id= :ID', { replacements: { ID: id } }, raw = true)
     .then(function (compdate) {
       let currday = compdate[0][0].quizcompleted
-      let dif = parseInt(nowday) - parseInt(currday);
-      console.log(currday);
-      console.log(dif);
-      if (currday == 0) {
-        allowQuiz = true;
-      }
-      if (dif == 0) {
-        allowQuiz = false;
-      }
-      if (dif > 0) {
-        allowQuiz = true;
-      }
-      if (allowQuiz == true) {
+      if (nowdate != currday) {
         sequelize.query("SELECT * FROM quizzes", raw = true).then(result => {
           let length = result[0].length;
           let getIndex = getRndInteger(0, length - 1);
@@ -206,7 +193,7 @@ router.post('/submitedquiz', function (req, res) {
   let user = req.user;
   let points = parseInt(req.body.points);
   let date = new Date();
-  let dateday = date.getDate();
+  let dateday = date.toString().substring(4, 15);
   sequelize.query("UPDATE users SET points= :Points, quizcompleted= :Date WHERE id= :Id", { replacements: { Id: ID, Points: points, Date: dateday } })
     .then((users) => {
       res.redirect('/quiz');
@@ -253,14 +240,12 @@ router.get('/profile', function (req, res) {
   let user = req.user;
   let id = user.id;
   let date = new Date();
-  let nowdate = date.getDate();
+  let nowdate = date.toString().substring(4, 15);
 
   sequelize.query("SELECT * FROM users WHERE id = :ID", { replacements: { ID: id } }, raw = true)
     .then((user) => {
       let currday = user[0][0].signin
-      let dif = parseInt(nowdate) - parseInt(currday);
-      console.log(user[0])
-      if (dif == 0) {
+      if (nowdate == currday) {
         res.render('user/profile1', { title: title, user: user[0][0] });
       }
       else {
@@ -279,6 +264,12 @@ router.get('/password', function (req, res) {
   else {
     res.render('user/password1', { title: title });
   }
+});
+
+router.get('/listrating', function(req, res){
+    const title = "Ratings"
+    sequelize.query("SELECT * FROM shops WHERE id= :ID",{replacements:{ID: id}}).then((shop)=>{});
+    res.render('shop/listrating', {title:title});
 });
 
 router.get('/checkout1', function (req, res) {

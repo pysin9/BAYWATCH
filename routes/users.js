@@ -191,7 +191,7 @@ function sendEmail(userId, email, token) {
 
 }
 
-/* GET user profile */
+/* save user profile */
 
 router.put('/saveProfile/:id', function (req, res) {
     let id = req.params.id;
@@ -203,7 +203,7 @@ router.put('/saveProfile/:id', function (req, res) {
     let bankNo = req.body.bankNo;
     let points = req.body.points;
     let day = new Date();
-    let currday = day.getDate();
+    let currday = day.toString().substring(4, 15);
 
     if (phone.length != 8) {
         alertMessage(res, 'danger', 'Phone number should contain 8 numbers!', 'fas fa - sign -in -alt', true);
