@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
     sequelize.query("SELECT * FROM users where id= :ID", { replacements: { ID: id } }, raw = true)
       .then((users) => {
         let currday = users[0][0].signin;
-        if (currday!=nowdate && users[0][0].isNotAdmin == true) {
+        if (currday != nowdate && users[0][0].isNotAdmin == true) {
           alertMessage(res, 'info', 'Welcome back! Check your profile for a login bonus!', 'fas fa-exclamation-circle', true);
         }
       })
@@ -204,22 +204,22 @@ router.get('/faq', (req, res) => {
   const title = 'FAQ';
   let isadmin = req.user.isAdmin;
   console.log(isadmin)
-    qna.findAll({
-      attributes: ['qns', 'ans', 'id']
-    },
-      raw = true
-    ).then((qna) => {
-      res.render('faq/faq1', {
-        title: title,
-        qna: qna,
-        isadmin :isadmin
-      })
+  qna.findAll({
+    attributes: ['qns', 'ans', 'id']
+  },
+    raw = true
+  ).then((qna) => {
+    res.render('faq/faq1', {
+      title: title,
+      qna: qna,
+      isadmin: isadmin
     })
-      .catch(function (err) {
-        res.render('faq/faq1',
-          { title: title })
-      })  
-    
+  })
+    .catch(function (err) {
+      res.render('faq/faq1',
+        { title: title })
+    })
+
 });
 router.get('/about', (req, res) => {
   const title = "About"
@@ -266,20 +266,37 @@ router.get('/password', function (req, res) {
   }
 });
 // post rating
-router.get('/listrating/:id', function(req, res){
-    const title = "Ratings"
-    let id = req.params.id;
-    sequelize.query("SELECT * FROM shops WHERE id= :ID",{replacements:{ID: id}}, raw=true).then((shop)=>{
-      console.log(shop[0][0])
-      res.render('shop/listrating', {title:title, shop: shop[0][0]});
+router.get('/listrating/:id', function (req, res) {
+  const title = "Ratings"
+  let id = req.params.id;
+  sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
+    sequelize.query("SELECT * FROM ratings WHERE shopId= :ID",{replacements:{ID:id}}, raw = true).then((ratings) => {
+      res.render('shop/listrating', { 
+        title: title, 
+        shop: shop[0][0], 
+        ratings:ratings[0],
+        username:ratings[0][0].username,
+        date:ratings[0][0].date,
+        rating:ratings[0][0].rating,
+       });
+    }).catch(function(err){
+      res.render('shop/listrating',{title:title, shop:shop[0][0]}); 
     });
-    
+  });
+
 });
 
-router.post('/postrating', function(req, res){
-  const title = "Post Rating"
-  res.redirect('/listrating', {title:title});
-  
+router.post('/postrating/:id', function (req, res) {
+  let id = req.params.id;
+  let username = req.user.name;
+  let date = new Date();
+  let currdate = date.toString().substring(4, 15);
+  let rating = req.body.rating;
+  sequelize.query("INSERT INTO ratings(username, rating, date, shopId) VALUES(:Username, :Rating, :Date, :ID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID:id } })
+    .then(() => {
+      console.log('it works!')
+      res.redirect('/listrating/' + id);
+    });
 });
 //end rating
 

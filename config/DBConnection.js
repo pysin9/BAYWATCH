@@ -6,6 +6,7 @@ const Quiz = require('../models/Quiz');
 const Cart = require('../models/Cart');
 const checkout = require('../models/CheckOut');
 const qna = require('../models/QnA');
+const rating = require('../models/Rating');
 
 // If drop is true, all existing tables are dropped and recreated
 const setUpDB = (drop) => {
@@ -22,6 +23,7 @@ const setUpDB = (drop) => {
             Cart.hasMany(shop)
             user.hasMany(Cart)
             user.hasMany(shop)
+            shop.hasMany(rating)
             
             mySQLDB.sync({ // Creates table if none exists
                 force: drop
