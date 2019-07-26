@@ -5,11 +5,13 @@
         body {
             margin-top: 150px;
         }
-        label{
+
+        label {
             font-size: 25px;
             color: black;
         }
-        h3{
+
+        h3 {
             font-weight: bold;
             font-size: 30px
         }
@@ -18,66 +20,66 @@
 
 <div class="container">
     <div class="card card-body mx-auto">
-        <h3>Product Name</h3>
+        <h3>{{shop.name}}</h3>
         <div class="row mb-2">
             <div class="col-lg-9">
                 <div class="form-group">
-                    <label for="price">Price: ${{price}}</label>
+                    <label for="price">Price: ${{shop.price}}</label>
                 </div>
                 <div class="form-group">
                     <label for="story">Description:</label>
-                    <textarea class="form-control" id="desc" name="desc" rows="6" disabled>{{desc}}</textarea>
+                    <textarea class="form-control" id="desc" name="desc" rows="6"
+                        disabled>{{shop.description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="avg">Avg Ratings: {{ratings}}</label>
+                    <label for="avg">Avg Ratings: {{shop.ratings}} /5</label>
                 </div>
             </div>
             <div class="col-lg-3 mb-4">
-                <img id="img" src="{{image}}" alt="" class="border img-thumbnail img-fluid"
+                <img id="img" src="{{shop.images}}" alt="" class="border img-thumbnail img-fluid"
                     style="height:95%;width:100%">
             </div>
         </div>
         <hr>
         <form action="#" method="post">
-        <div class="form-group">
-            <div class="row mb-2 mt-4">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <label>Ratings</label>
+            <div class="form-group" style='border: 1px solid black;padding:25px;'>
+               <center> <label>Rate this item: </label></center>
+                <div class=" row col-12 form-horizontal">
+
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Ratings" id="1" value="1">
+                        <input type="radio" name="Ratings" id="1" value="1">
                         <label class="form-check-label" for="1">1</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Ratings" id="2" value="2">
+                        <input type="radio" name="Ratings" id="2" value="2">
                         <label class="form-check-label" for="2">2</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Ratings" id="3" value="3">
+                        <input type="radio" name="Ratings" id="3" value="3">
                         <label class="form-check-label" for="3">3</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Ratings" id="4" value="3">
+                        <input type="radio" name="Ratings" id="4" value="3">
                         <label class="form-check-label" for="4">4</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Ratings" id="5" value="5">
+                        <input type="radio" name="Ratings" id="5" value="5">
                         <label class="form-check-label" for="5">5</label>
+
                     </div>
                 </div>
+                <center><input class="btn btn-outline-primary" type="submit" value="Rate"></center>
             </div>
-            <div class="row mb-2 mt-4">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <label>Comment: </label>
-                    <br>
-                    <textarea id="comment" name="comment" rows='3'></textarea>
-                </div>
+            <br>
+            
+        </form>
+        <hr>
+        <h3>All ratings for this product: </h3>
+        <div style='border:1px solid black;padding: 10px;'>
+            <div class='row col-12'>
+                <label for='username'>username rated on date: insert ratings</label>
             </div>
         </div>
-
-        <br>
-        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
-        <input id="butAddVideo" class="btn btn-outline-primary" type="submit" value="Post">
-        </form>
     </div>
 </div>

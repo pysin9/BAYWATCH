@@ -265,12 +265,23 @@ router.get('/password', function (req, res) {
     res.render('user/password1', { title: title });
   }
 });
-
-router.get('/listrating', function(req, res){
+// post rating
+router.get('/listrating/:id', function(req, res){
     const title = "Ratings"
-    sequelize.query("SELECT * FROM shops WHERE id= :ID",{replacements:{ID: id}}).then((shop)=>{});
-    res.render('shop/listrating', {title:title});
+    let id = req.params.id;
+    sequelize.query("SELECT * FROM shops WHERE id= :ID",{replacements:{ID: id}}, raw=true).then((shop)=>{
+      console.log(shop[0][0])
+      res.render('shop/listrating', {title:title, shop: shop[0][0]});
+    });
+    
 });
+
+router.post('/postrating', function(req, res){
+  const title = "Post Rating"
+  res.redirect('/listrating', {title:title});
+  
+});
+//end rating
 
 router.get('/checkout1', function (req, res) {
   const title = "Checkout";

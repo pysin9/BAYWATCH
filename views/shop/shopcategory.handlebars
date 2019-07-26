@@ -155,6 +155,7 @@
     {{/each}}
     {{else}}
     {{#each shop}}
+    <a href='/listrating/{{id}}'>
     <div class="card" style="width: 20rem;">
         <img class="card-img-top" src="{{images}}" alt="Card image cap">
         <div class="card-body">
@@ -164,6 +165,7 @@
             <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
         </div>
     </div>
+    </a>
     {{/each}}
     {{/if}}
 </div>
