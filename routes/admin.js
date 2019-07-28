@@ -80,10 +80,14 @@ router.get('/addproducts', (req, res) => {
 });
 
 // Shows edit video page
-router.get('/editproducts', (req, res) => {
+router.get('/editproducts/:id', (req, res) => {
+  let id = req.params.id
+  let userId = req.user.id
+
   Shop.findOne({
     where: {
-      id: 1
+      id,
+      userId
     },
   }).then((shop) => {
     if (!shop) {
