@@ -1,4 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/css/editproduct.css">
+<style>
+    body {
+        background-color: grey;
+    }
+</style>
 
 <body class="login-page sidebar-collapse">
     <div class="page-header header-filter"
@@ -69,12 +74,12 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <input type="file" id="posterUpload" name="imageUpload"
+                                    <input type="file" id="posterUpload" name="posterUpload"
                                         accept="image/png,image/jpeg,image/jpg,image/gif">
-                                    <img id="picture" src="/img/no-image.jpg" alt=""
+                                    <img id="poster" src="/img/no-image.jpg" alt=""
                                         class="border img-thumbnail img-fluid" style="height:95%;width:100%">
                                     <input id="images" type="hidden" name="images">
-                                    <div class="font-weight-bold text-danger small" id="imageErr" style="display:none">
+                                    <div class="font-weight-bold text-danger small" id="posterErr" style="display:none">
                                     </div>
                                 </div>
                             </div>
@@ -89,10 +94,10 @@
     </div>
 </body>
 <script>
-    $('#imageUpload').on('change', function () {
-        let image = $("#imageUpload")[0].files[0];
+    $('#posterUpload').on('change', function () {
+        let image = $("#posterUpload")[0].files[0];
         let formdata = new FormData();
-        formdata.append('imageUpload', image);
+        formdata.append('posterUpload', image);
         $.ajax({
             url: '/admin/upload',
             type: 'POST',
@@ -100,13 +105,13 @@
             contentType: false,
             processData: false,
             'success': (data) => {
-                $('#picture').attr('src', data.file);
+                $('#poster').attr('src', data.file);
                 $('#images').attr('value', data.file);// sets posterURL hidden field
                 if (data.err) {
-                    $('#imageErr').show();
-                    $('#imageErr').text(data.err.message);
+                    $('#posterErr').show();
+                    $('#posterErr').text(data.err.message);
                 } else {
-                    $('#imageErr').hide();
+                    $('#posterErr').hide();
                 }
             }
         });

@@ -113,12 +113,14 @@ router.post('/saveEditedVideo/:id', (req, res) => {
   let name = req.body.name;
   let price = req.body.price;
   let description = req.body.description.slice(0, 1999);
+  let images = req.body.images;
   let userId = req.user.id;
   Shop.update({
     // Set variables here to save to the videos table
     name,
     price,
     description,
+    images,
     userId
   }, {
       where: {
