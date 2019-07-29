@@ -68,7 +68,8 @@
             background: #fff;
             display: none;
         }
-        .alert.alert-info{
+
+        .alert.alert-info {
             top: 0;
         }
 
@@ -145,9 +146,9 @@
 <body>
     <div id="container">
         <h1 style='color: black;'>General FAQ</h1>
-        {{#if user.isAdmin}}
-        {{#if qna}} 
-        
+        {{#if user.isNotAdmin}}
+        {{#if qna}}
+
         {{#each qna}}
         <ul class="faq">
 
@@ -158,18 +159,18 @@
 
         </ul>
         {{/each}}
-        {{/if}}
+        {{else}}
+        <h3>No FAQ has been added. Drop us a question below!</h3>
+
+        <footer>
+            <h3>Have a question? Ask us <a href="#">here</a>, and we will get back to you shortly.</h3>
+        </footer>
     </div>
-    {{else}}
-    <h3>No FAQ has been added. Drop us a question below!</h3>
-    
-    <footer>
-        <h3>Have a question? Ask us <a href="#">here</a>, and we will get back to you shortly.</h3>
-    </footer>
     {{/if}}
-<div id="container">
-        {{#if user.isNotAdmin}}
-        {{#if qna}} 
+    {{/if}}
+    <div id="container">
+        {{#if user.isAdmin}}
+        {{#if qna}}
 
         {{#each qna}}
         <ul class="faq">
@@ -178,24 +179,20 @@
 
             </li>
             <li class="a">Answer: {{ans}}</li>
-        
-            
+
+
             <div id='delete'>
                 <center><a href="/admin/remove/{{id}}" class="card-link" data-toggle="confirmation"
                         data-title="Confirm delete?">Delete</a>
                 </center>
-
             </div>
-            
-            
-
-
         </ul>
         {{/each}}
-        {{/if}}
+        
     </div>
     {{else}}
     <h3>No FAQ has been added</h3>
+    {{/if}}
     {{/if}}
 </body>
 <script>
