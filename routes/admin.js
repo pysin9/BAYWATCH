@@ -232,7 +232,7 @@ router.post('/addproducts', (req, res) => {
   let price = req.body.price;
   let description = req.body.description;
   let userId = req.user.id;
-  let category = req.body.catgeory
+  let category = req.body.category;
 
   if (!name) {
     errors.push({

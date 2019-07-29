@@ -1,5 +1,12 @@
-<link rel="stylesheet" type="text/css" href="/css/shopcategory.css">
-<link rel="stylesheet" type="text/css" href="/css/shop.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/shopcategory.css">
+    <link rel="stylesheet" type="text/css" href="/css/shop.css">
+    <style>
+        #list {
+            z-index=1000px;
+        }
+    </style>
+</head>
 {{>_shopnavbar}}
 <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container">
@@ -65,6 +72,7 @@
 <div class="items">
     {{#if user.isAdmin}}
     {{#each shop}}
+    <a id='list' href='/listrating/{{id}}'>
     <div class="card" style="width: 20rem;">
         <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap">
         <div class="card-body">
@@ -77,22 +85,21 @@
                 data-title="Confirm delete?">Delete</a>
         </div>
     </div>
+    </a>
     {{/each}}
     {{else}}
     {{#each shop}}
 
     <div class="card" style="width: 20rem;">
-        <a href='/listrating/{{id}}'>
-            <img class="card-img-top" src="{{images}}" alt="Card image cap">
-            <div class="card-body">
-                <h4 class="card-title">{{name}}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
-                <p class="card-text">{{description}}</p>
-                <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
-            </div>
-        </a>
+        <a id='list' href='/listrating/{{id}}'>Test</a>
+        <img class="card-img-top" src="{{images}}" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title">{{name}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
+            <p class="card-text">{{description}}</p>
+            <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
+        </div>
     </div>
-
     {{/each}}
     {{/if}}
 </div>
