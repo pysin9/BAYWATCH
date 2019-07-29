@@ -6,7 +6,8 @@
             margin-top: 150px;
         }
 
-        label {
+        label,
+        #desc {
             font-size: 25px;
             color: black;
         }
@@ -27,7 +28,7 @@
                     <label for="price">Price: ${{shop.price}}</label>
                 </div>
                 <div class="form-group">
-                    <label for="story">Description:</label>
+                    <label for="story">Description</label>
                     <textarea class="form-control" id="desc" name="desc" rows="6"
                         disabled>{{shop.description}}</textarea>
                 </div>
@@ -41,45 +42,84 @@
             </div>
         </div>
         <hr>
-        <form action="/postrating/{{shop.id}}" method="post">
-            <div class="form-group" style='border: 2px solid green;padding:25px;'>
-                <center> <label>Rate this item: </label></center>
-                <div class=" row col-12 form-horizontal">
+        {{#if user.hasrated}}
+        <div class='container'>
+            <form action="/epostrating/{{shop.id}}" method="post">
+                <div class="form-group" style='border: 2px solid green;padding:25px;'>
+                    <center> <label>Rate this item: </label></center>
+                    <div class=" row col-xs-12 form-horizontal">
 
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="rating" id="1" value="1">
-                        <label class="form-check-label" for="1">1</label>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="1" value="1" {{radioCheck rating '1'}}>
+                            <label class="form-check-label" for="1">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="2" value="2" {{radioCheck rating '2'}}>
+                            <label class="form-check-label" for="2">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="3" value="3" {{radioCheck rating '3'}}>
+                            <label class="form-check-label" for="3">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="4" value="4" {{radioCheck rating '4'}}>
+                            <label class="form-check-label" for="4">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="5" value="5" {{radioCheck rating '5'}}>
+                            <label class="form-check-label" for="5">5</label>
+                        </div>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="rating" id="2" value="2">
-                        <label class="form-check-label" for="2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="rating" id="3" value="3">
-                        <label class="form-check-label" for="3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="rating" id="4" value="3">
-                        <label class="form-check-label" for="4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="rating" id="5" value="5">
-                        <label class="form-check-label" for="5">5</label>
-
-                    </div>
+                    <center><input class="btn btn-outline-primary" type="submit" value="Rate"></center>
+                    <center><a href='#' class="btn btn-outline-primary">Delete</a></center>
                 </div>
-                <center><input class="btn btn-outline-primary" type="submit" value="Rate"></center>
-            </div>
-            <br>
-        </form>
+                <br>
+            </form>
+        </div>
+        {{else}}
+        <div class='container'>
+            <form action="/postrating/{{shop.id}}" method="post">
+                <div class="form-group" style='border: 2px solid green;padding:25px;'>
+                    <center> <label>Rate this item: </label></center>
+                    <div class=" row col-xs-12 form-horizontal">
+
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="1" value="1">
+                            <label class="form-check-label" for="1">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="2" value="2">
+                            <label class="form-check-label" for="2">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="3" value="3">
+                            <label class="form-check-label" for="3">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="4" value="4">
+                            <label class="form-check-label" for="4">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="rating" id="5" value="5">
+                            <label class="form-check-label" for="5">5</label>
+                        </div>
+
+                    </div>
+                    <center><input class="btn btn-outline-primary" type="submit" value="Rate"></center>
+                </div>
+                <br>
+            </form>
+        </div>
+        {{/if}}
         <hr>
         <h3>All ratings for this product: </h3>
         {{#if rating}}
         {{#each ratings}}
         <div style='border:1px solid green;padding: 10px;'>
             <div class='row col-12'>
-                <label for='username'>{{username}} rated on {{date}} : </label>
+                <label for='username'>{{username}} rated on {{date}} : &nbsp;</label>
                 <br>
                 <label>{{rating}}/5</label>
             </div>

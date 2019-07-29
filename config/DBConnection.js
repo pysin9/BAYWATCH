@@ -25,7 +25,7 @@ const setUpDB = (drop) => {
             user.hasMany(Cart)
             user.hasMany(shop)
             shop.hasMany(rating)
-            
+            user.hasOne(rating);
             mySQLDB.sync({ // Creates table if none exists
                 force: drop
             }).then(() => {

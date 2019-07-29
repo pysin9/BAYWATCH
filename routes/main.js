@@ -298,14 +298,29 @@ router.get('/listrating/:id', function (req, res) {
 
 router.post('/postrating/:id', function (req, res) {
   let id = req.params.id;
+  let Id = req.user.id;
   let username = req.user.name;
   let date = new Date();
   let currdate = date.toString().substring(4, 15);
   let rating = req.body.rating;
-  sequelize.query("INSERT INTO ratings(username, rating, date, shopId) VALUES(:Username, :Rating, :Date, :ID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID:id } })
+  sequelize.query("INSERT INTO ratings(username, rating, date, shopId, userId) VALUES(:Username, :Rating, :Date, :ID, :userID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID:id, userID: Id }})
     .then(() => {
-      console.log('it works!')
-      res.redirect('/listrating/' + id);
+      let rated = true;
+      sequelize.query("UPDATE users SET hasrated= :Rated WHERE id= :ID", {replacements:{Rated: rated, ID : Id}}).then(()=>{
+        res.redirect('/listrating/' + id);
+      });
+    });
+});
+
+router.post('/epostrating/:id', function (req, res) {
+  let id = req.params.id;
+  let ID = req.user.id;
+  let date = new Date();
+  let currdate = date.toString().substring(4, 15);
+  let rating = req.body.rating;
+  sequelize.query("UPDATE ratings SET rating= :Rating, date= :Date WHERE userId= :userID", {replacements:{Rating: rating, Date: currdate, userID: ID}})
+    .then(() => {
+        res.redirect('/listrating/' + id);
     });
 });
 //end rating

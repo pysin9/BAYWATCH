@@ -23,7 +23,7 @@ const mainRoute = require('./routes/main');
 const userRoute = require('./routes/users');
 const adminRoute = require('./routes/admin');
 const organicDB = require('./config/DBConnection')
-
+const { radioCheck } = require('./helpers/check');
 
 organicDB.setUpDB(false);
 const authenticate = require('./config/passport');
@@ -103,6 +103,14 @@ app.use(function (req, res, next) {
 	res.locals.user = req.user || null;
 	next();
 });
+
+app.engine('handlebars', exphbs({
+    helpers: {
+        radioCheck: radioCheck, 
+    },
+    defaultLayout: 'main' // Specify default template views/layout/main.handlebar
+}));
+
 // Place to define global variables - not used in practical 1
 app.use(function (req, res, next) {
 	next();
