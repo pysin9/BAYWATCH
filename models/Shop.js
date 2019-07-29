@@ -13,5 +13,8 @@ const Shop = db.define('shop', {
     description:{
         type: Sequelize.STRING
     },
+    category:{
+        type: Sequelize.STRING
+    }
 });
 module.exports = Shop;

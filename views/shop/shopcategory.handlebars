@@ -80,17 +80,19 @@
     {{/each}}
     {{else}}
     {{#each shop}}
-    <a href='/listrating/{{id}}'>
+
     <div class="card" style="width: 20rem;">
-        <img class="card-img-top" src="{{images}}" alt="Card image cap">
-        <div class="card-body">
-            <h4 class="card-title">{{name}}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
-            <p class="card-text">{{description}}</p>
-            <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
-        </div>
+        <a href='/listrating/{{id}}'>
+            <img class="card-img-top" src="{{images}}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{name}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
+                <p class="card-text">{{description}}</p>
+                <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
+            </div>
+        </a>
     </div>
-    </a>
+
     {{/each}}
     {{/if}}
 </div>
