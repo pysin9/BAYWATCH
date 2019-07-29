@@ -7,7 +7,8 @@ const Cart = require('../models/Cart');
 const checkout = require('../models/CheckOut');
 const qna = require('../models/QnA');
 const rating = require('../models/Rating');
-
+const category = require("../models/Category")
+const feedback = require("../models/Feedback")
 // If drop is true, all existing tables are dropped and recreated
 const setUpDB = (drop) => {
     mySQLDB.authenticate()

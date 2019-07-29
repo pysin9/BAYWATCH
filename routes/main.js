@@ -49,6 +49,16 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+router.get("/create", (req,res) =>{
+  const title = "Create Category";
+  res.render('admin/create', {title:title})
+});
+
+
+router.get('/forgot', (req, res) => {
+  const title = 'Reset Password';
+  res.render('user/forgot', { title: title })
+});
 
 router.get('/Login', (req, res) => {
   const title = 'Login';
@@ -75,7 +85,7 @@ router.get('/shop', function (req, res) {
 router.get('/category', function (req, res) {
   const title = "Category";
   Shop.findAll({
-    attributes: ['id', 'name', 'price', 'images', 'description', 'id']
+    attributes: ['id', 'name', 'price', 'images', 'description', 'id', 'category']
   },
     raw = true
   ).then((shop) => {

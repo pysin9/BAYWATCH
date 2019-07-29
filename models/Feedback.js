@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
-const Category = db.define('category', {
-    catName: {
+const Feedback = db.define('feedback', {
+    qns: {
         type: Sequelize.STRING
     },
-    catType: {
+    ans: {
         type: Sequelize.STRING
-    },
+    }
 });
-module.exports = Category;
+module.exports = QnA;

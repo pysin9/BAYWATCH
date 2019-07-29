@@ -232,6 +232,7 @@ router.post('/addproducts', (req, res) => {
   let price = req.body.price;
   let description = req.body.description;
   let userId = req.user.id;
+  let catName = req.body.catgeory
 
   if (!name) {
     errors.push({
@@ -265,8 +266,8 @@ router.post('/addproducts', (req, res) => {
       description
     })
   } else {
-    sequelize.query("INSERT INTO shops(images, name, price, description, userId) VALUES (:images,:name, :price, :description, :userId)"
-      , { replacements: { images: images, name: name, price: price, description: description, userId: userId } })
+    sequelize.query("INSERT INTO shops(images, name, price, description, userId, category) VALUES (:images,:name, :price, :description, :userId, :category)"
+      , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: catName } })
       .then((products) => {
         res.redirect('/category');
       })

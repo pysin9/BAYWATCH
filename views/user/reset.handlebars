@@ -1,0 +1,40 @@
+<body class="login-page sidebar-collapse">
+    <div class="page-header header-filter"
+        style="background-image: url('/img/login.jpeg'); background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-10 ml-auto mr-auto">
+                    <div class="card card-login">
+                        <form class="form" action="/user/reset/{{token}}" method="POST">
+                            <h2 class="card-title text-center">Forgot Password</h2>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons" style="font-size:24px">New Password</i>
+                                        </span>
+                                    </div>
+                                    <input type="password" id="password" name="Password" class="form-control"
+                                        placeholder="Password...">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                    </div>
+                                    <input type="password" id="cfmpassword" name="cfmpassword" class="form-control"
+                                        placeholder=" Confirm Password...">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-round">Reset Password</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

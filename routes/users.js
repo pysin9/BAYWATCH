@@ -22,24 +22,27 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 });
 
 router.post('/Login', (req, res, next) => {
-    sequelize.query('SELECT verified FROM users WHERE email = :Email', { replacements: { Email: req.body.email } }, raw = true
-    ).then(user => {
+    User.findOne({
+        where: { email: req.body.email }
+    }).then(user => {
         if (user) {
-            if (user == 0) {
-                alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', 'fas fa-exclamation-circle', true);
+            if (user.verified !== true) {
+                alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', true);
                 res.redirect('/');
             } else {
                 passport.authenticate('local', {
-                    successRedirect: '/', // Route to /video/listVideos URL
-                    failureRedirect: '/Login', // Route to /login URL
+                    successRedirect: '/',           // Route to /video/listVideos URL
+                    failureRedirect: '/Login',					// Route to /login URL
                     failureFlash: true
-                    /* Setting the failureFlash option to true instructs Passport to flash an error
-                    message using the message given by the strategy's verify callback, if any.
-                    When a failure occur passport passes the message object as error */
+					/*
+					 * Setting the failureFlash option to true instructs Passport to flash an  error message
+					 * using the message given by the strategy's verify callback, if any. When a failure occurs
+					 * passport passes the message object as error
+					 * */
                 })(req, res, next);
             }
         }
-    })
+    });
 
 
 });
