@@ -9,7 +9,8 @@ const qna = require("../models/QnA")
 const Cart = require('../models/Cart');
 const moment = require('moment');
 const user = require('../models/User')
-
+const Category = require("../models/Category")
+const ensureAuthenticated = require('../helpers/auth');
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
   dialect: 'mysql',
@@ -49,11 +50,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-router.get("/create", (req,res) =>{
-  const title = "Create Category";
-  res.render('admin/create', {title:title})
-});
-
 
 router.get('/forgot', (req, res) => {
   const title = 'Reset Password';
@@ -81,21 +77,89 @@ router.get('/shop', function (req, res) {
   res.render('shop/shop', { title: title });
 });
 
+router.get("/create", (req, res) => {
+  const title = "Create Category";
+  res.render('admin/create', { title: title })
+});
+
+router.get("/showAll", (req, res) => {
+  const title = "Create Category";
+  res.render('shop/shopcategory', { title: title })
+});
+
 /* Shop Categories */
 router.get('/category', function (req, res) {
   const title = "Category";
-  Shop.findAll({
-    attributes: ['id', 'name', 'price', 'images', 'description', 'id', 'category']
-  },
-    raw = true
-  ).then((shop) => {
-    res.render('shop/shopcategory', {
-      title: title,
-      shop: shop
+  Category.findAll({
+    attributes: ['id', 'catName'],
+    // sequelize.query("SELECT * from categories")
+  }).then((category) => {
+    Shop.findAll({
+      attributes: ['id', 'name', 'price', 'images', 'description', 'category'],
+      order: [
+        ['name', 'ASC']
+      ]
+    },
+      raw = true
+    ).then((shop) => {
+      // sequelize.query("SELECT * from categories")
+
+      res.render('shop/shopcategory', {
+        title: title,
+        shop: shop,
+        category: category,
+
+
+      })
+
     })
   })
     .catch(err => console.log(err));
 });
+
+router.get('/category2/:id', function (req, res) {
+  const title = "Shop"
+  let id  = req.params.id;
+  console.log(id)
+  Category.findAll({
+    attributes: [ 'id','catName'],
+    // sequelize.query("SELECT * from categories")
+  }).then((category) => {
+    console.log(category[0].id)
+    let id = category[0].id
+    Shop.findAll({
+      attributes: ['id', 'name', 'price', 'images', 'description', 'category'],
+      where: {
+        categoryId: id
+      },
+      order: [
+        ['name', 'ASC']
+      ]
+    },
+      raw = true
+    ).then((shop) => {
+      res.render('shop/shopcategory', {
+        title: title,
+        category: category,
+        shop: shop,
+
+      })
+    })
+  })
+});
+
+router.post("/category2/:ID", (req, res) => {
+  let categoryId = req.params.id
+
+  sequelize.query("SELECT * from shops WHERE categoryId = :categoryId", { replacements: { categoryId: categoryId } })
+    .then((shop) => {
+      console.log(p[0][0])
+      res.render(" shop/shopcategory", { shop: shop[0][0] })
+    })
+    .catch(err => console.log(err))
+})
+
+
 
 /* Add To Cart */
 router.get('/addToCart/:id', (req, res) => {

@@ -5,6 +5,13 @@
         #list {
             z-index=1000px;
         }
+           
+        .alert-info {
+            top: 0;
+            position: relative;
+            bottom: 56px;
+            text-align: center;
+        }
     </style>
 </head>
 {{>_shopnavbar}}
@@ -21,35 +28,18 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        ORGANIC FRESH PRODUCE
+                    <a class="nav-link" href="/showAll">
+                        Show All
                     </a>
                 </li>
+                {{#each category}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        Dairy
+                    <a class="nav-link" href="/category2/{{ID}}">
+                        {{catName}}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        BEVERAGES
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        FROZEN FOOD
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        HEALTH & BEAUTY
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        SNACKS
-                    </a>
-                </li>
+
+                {{/each}}
                 <li class="dropdown nav-item">
                     <a class="nav-link" href="/cart">
                         <i style="font-size:30px" class="fa">&#xf07a;</i>
@@ -73,18 +63,18 @@
     {{#if user.isAdmin}}
     {{#each shop}}
     <a id='list' href='/listrating/{{id}}'>
-    <div class="card" style="width: 20rem;">
-        <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap">
-        <div class="card-body">
-            <h4 class="card-title">{{name}}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
-            <p class="card-text">{{description}}</p>
-            <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
-            <a href="/admin/editproducts/{{id}}" class="card-link">Edit</a>
-            <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
-                data-title="Confirm delete?">Delete</a>
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{name}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
+                <p class="card-text">{{description}}</p>
+                <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
+                <a href="/admin/editproducts/{{id}}" class="card-link">Edit</a>
+                <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
+                    data-title="Confirm delete?">Delete</a>
+            </div>
         </div>
-    </div>
     </a>
     {{/each}}
     {{else}}

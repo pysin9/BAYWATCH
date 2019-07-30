@@ -7,7 +7,7 @@ const Shop = require('../models/Shop')
 const Sequelize = require('sequelize')
 const fs = require('fs');
 const upload = require('../helpers/imageUpload');
-
+const ensureAuthenticated = require('../helpers/auth');
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
   dialect: 'mysql',
@@ -38,6 +38,11 @@ router.get('/admin-quiz', (req, res) => {
   let title = 'Add Quiz'
     res.render('admin/admin-quiz1', { title: title });
   // }
+});
+
+router.get("/create", (req,res) =>{
+  const title = "Create Category";
+  res.render('admin/create', {title:title})
 });
 
 router.get('/faqform', (req, res) => {
@@ -266,14 +271,27 @@ router.post('/addproducts', (req, res) => {
       description
     })
   } else {
-    sequelize.query("INSERT INTO shops(images, name, price, description, userId, category) VALUES (:images,:name, :price, :description, :userId, :category)"
-      , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category} })
-      .then((products) => {
-        res.redirect('/category');
+    sequelize.query("SELECT * from categories WHERE catName = :catName", { replacements: { catName: category } })
+      .then((cat) => {
+        let categoryId = cat[0][0].id
+        sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
+          , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: categoryId } })
+          .then((products) => {
+            res.redirect('/category');
+          }).catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
   }
 })
+
+router.post("/create", (req,res) =>{
+  let catName = req.body.category
+  sequelize.query("INSERT INTO categories(catName) VALUES (:catName)"
+  , { replacements: { catName: catName } })
+  .then((category) => {
+    res.redirect("/category");
+  })
+})
+
 router.get('/delete/:id', (req, res) => {
   let id = req.params.id
   let userId = req.user.id
