@@ -273,12 +273,20 @@ router.post('/addproducts', (req, res) => {
   } else {
     sequelize.query("SELECT * from categories WHERE catName = :catName", { replacements: { catName: category } })
       .then((cat) => {
-        let categoryId = cat[0][0].id
+        if (!cat){
+          errors.push({
+            text: 'Please create a category first'
+          })
+          alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
+          res.redirect('/create');
+        }else{
+          let categoryId = cat[0][0].id
         sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
           , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: categoryId } })
           .then((products) => {
             res.redirect('/category');
           }).catch(err => console.log(err))
+        }
       })
   }
 })

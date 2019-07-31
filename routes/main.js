@@ -117,12 +117,10 @@ router.get('/category', function (req, res) {
     .catch(err => console.log(err));
 });
 
-router.get('/category2/:id', function (req, res) {
+router.get('/category23', function (req, res) {
   const title = "Shop"
-  let id  = req.params.id;
-  console.log(id)
   Category.findAll({
-    attributes: [ 'id','catName'],
+    attributes: ['id', 'catName'],
     // sequelize.query("SELECT * from categories")
   }).then((category) => {
     console.log(category[0].id)
@@ -138,25 +136,44 @@ router.get('/category2/:id', function (req, res) {
     },
       raw = true
     ).then((shop) => {
+      console.log(shop)
       res.render('shop/shopcategory', {
         title: title,
         category: category,
         shop: shop,
-
+        ID: category[0].id
       })
     })
   })
 });
 
-router.post("/category2/:ID", (req, res) => {
+router.get("/category23/:id", (req, res) => {
   let categoryId = req.params.id
+  console.log(categoryId)
+  Category.findAll({
+    attributes: ['id', 'catName'],
+    // sequelize.query("SELECT * from categories")
+  }).then((category) => {
+      Shop.findAll({
+        attributes: ['id', 'name', 'price', 'images', 'description', 'category'],
+        where: {
+          categoryId: categoryId
+        },
+        order: [
+          ['name', 'ASC']
+        ]
+      },
+        raw = true
+      ).then((shop) => {
+        console.log(shop)
+        res.render('shop/shopcategory', {
+        
+          category: category,
+          shop: shop,
 
-  sequelize.query("SELECT * from shops WHERE categoryId = :categoryId", { replacements: { categoryId: categoryId } })
-    .then((shop) => {
-      console.log(p[0][0])
-      res.render(" shop/shopcategory", { shop: shop[0][0] })
+        })
+      })
     })
-    .catch(err => console.log(err))
 })
 
 
@@ -344,17 +361,17 @@ router.get('/listrating/:id', function (req, res) {
   const title = "Ratings"
   let id = req.params.id;
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
-    sequelize.query("SELECT * FROM ratings WHERE shopId= :ID",{replacements:{ID:id}}, raw = true).then((ratings) => {
-      res.render('shop/listrating', { 
-        title: title, 
-        shop: shop[0][0], 
-        ratings:ratings[0],
-        username:ratings[0][0].username,
-        date:ratings[0][0].date,
-        rating:ratings[0][0].rating,
-       });
-    }).catch(function(err){
-      res.render('shop/listrating',{title:title, shop:shop[0][0]}); 
+    sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
+      res.render('shop/listrating', {
+        title: title,
+        shop: shop[0][0],
+        ratings: ratings[0],
+        username: ratings[0][0].username,
+        date: ratings[0][0].date,
+        rating: ratings[0][0].rating,
+      });
+    }).catch(function (err) {
+      res.render('shop/listrating', { title: title, shop: shop[0][0] });
     });
   });
 
@@ -367,10 +384,10 @@ router.post('/postrating/:id', function (req, res) {
   let date = new Date();
   let currdate = date.toString().substring(4, 15);
   let rating = req.body.rating;
-  sequelize.query("INSERT INTO ratings(username, rating, date, shopId, userId) VALUES(:Username, :Rating, :Date, :ID, :userID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID:id, userID: Id }})
+  sequelize.query("INSERT INTO ratings(username, rating, date, shopId, userId) VALUES(:Username, :Rating, :Date, :ID, :userID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID: id, userID: Id } })
     .then(() => {
       let rated = true;
-      sequelize.query("UPDATE users SET hasrated= :Rated WHERE id= :ID", {replacements:{Rated: rated, ID : Id}}).then(()=>{
+      sequelize.query("UPDATE users SET hasrated= :Rated WHERE id= :ID", { replacements: { Rated: rated, ID: Id } }).then(() => {
         res.redirect('/listrating/' + id);
       });
     });
@@ -382,9 +399,9 @@ router.post('/epostrating/:id', function (req, res) {
   let date = new Date();
   let currdate = date.toString().substring(4, 15);
   let rating = req.body.rating;
-  sequelize.query("UPDATE ratings SET rating= :Rating, date= :Date WHERE userId= :userID", {replacements:{Rating: rating, Date: currdate, userID: ID}})
+  sequelize.query("UPDATE ratings SET rating= :Rating, date= :Date WHERE userId= :userID", { replacements: { Rating: rating, Date: currdate, userID: ID } })
     .then(() => {
-        res.redirect('/listrating/' + id);
+      res.redirect('/listrating/' + id);
     });
 });
 //end rating
