@@ -33,7 +33,7 @@
                         disabled>{{shop.description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="avg">Avg Ratings: {{shop.ratings}} /5</label>
+                    <label for="avg">Avg Ratings: {{avgrating}} /5</label>
                 </div>
             </div>
             <div class="col-lg-3 mb-4">
@@ -114,7 +114,7 @@
         {{/if}}
         <hr>
         <h3>All ratings for this product: </h3>
-        {{#if rating}}
+        {{#if ratings}}
         {{#each ratings}}
         <div style='border:1px solid green;padding: 10px;'>
             <div class='row col-12'>

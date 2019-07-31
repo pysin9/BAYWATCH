@@ -79,7 +79,7 @@
     {{/each}}
     {{else}}
     {{#each shop}}
-
+<a id='list' href='/listrating/{{id}}'>
     <div class="card" style="width: 20rem;">
         <a id='list' href='/listrating/{{id}}'>Test</a>
         <img class="card-img-top" src="{{images}}" alt="Card image cap">
@@ -90,6 +90,7 @@
             <p><button><a href='addToCart/{{id}}'>Add to Cart</a></button></p>
         </div>
     </div>
+	</a>
     {{/each}}
     {{/if}}
 </div>

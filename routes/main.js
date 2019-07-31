@@ -3,7 +3,7 @@ const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz')
 const Sequelize = require('sequelize');
-const math = require("math");
+const Math = require("math");
 const Shop = require('../models/Shop');
 const qna = require("../models/QnA")
 const Cart = require('../models/Cart');
@@ -361,14 +361,18 @@ router.get('/listrating/:id', function (req, res) {
   const title = "Ratings"
   let id = req.params.id;
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
-    sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
-      res.render('shop/listrating', {
-        title: title,
-        shop: shop[0][0],
-        ratings: ratings[0],
-        username: ratings[0][0].username,
-        date: ratings[0][0].date,
-        rating: ratings[0][0].rating,
+    sequelize.query("SELECT username, date, rating FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
+      sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw=true).then((avgrat) => {
+        console.log(avgrat)
+        res.render('shop/listrating', {
+          title: title,
+          shop: shop[0][0],
+          ratings: ratings[0],
+          username: ratings[0][0].username,
+          date: ratings[0][0].date,
+          rating: ratings[0][0].rating,
+          avgrating: avgrat[0][0].avgrat,
+        });
       });
     }).catch(function (err) {
       res.render('shop/listrating', { title: title, shop: shop[0][0] });
