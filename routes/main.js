@@ -239,12 +239,15 @@ router.get('/cart', function (req, res) {
   let items = [];
 
   Cart.findAll({
-    attributes: ['id'],
     where: {
       userId: userId
     }
-  }).then(products => {
-    for (let i = 0; i < products.length; i++) {
+  }).then(product => {
+    res.render('shop/cart', {
+      product
+    });
+    console.log(product);
+    /*for (let i = 0; i < products.length; i++) {
       Shop.findOne({
         attributes: ['name', 'price'],
         where: {
@@ -252,13 +255,14 @@ router.get('/cart', function (req, res) {
         }
       }).then(item => {
         console.log(item);
-        items.push(item.dataValues);
+        items.push(item.dataValues);*/
       }).then(console.log(items));
-    }
+    })
+   
 
-  })
-  res.render('shop/cart', { title: title });
-});
+   
+
+
 
 /* GET quiz */
 router.get('/quiz', function (req, res) {
