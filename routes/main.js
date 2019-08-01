@@ -405,9 +405,10 @@ router.get('/listrating/:id', function (req, res) {
           avgrating: avgrat[0][0].avgrat,
         });
       });
+	  });
     }).catch(function (err) {
       res.render('shop/listrating', { title: title, shop: shop[0][0] });
-    });
+    
   });
 
 });
