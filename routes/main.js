@@ -154,37 +154,55 @@ router.get("/category23/:id", (req, res) => {
     attributes: ['id', 'catName'],
     // sequelize.query("SELECT * from categories")
   }).then((category) => {
-      Shop.findAll({
-        attributes: ['id', 'name', 'price', 'images', 'description', 'category'],
-        where: {
-          categoryId: categoryId
-        },
-        order: [
-          ['name', 'ASC']
-        ]
+    Shop.findAll({
+      attributes: ['id', 'name', 'price', 'images', 'description', 'category'],
+      where: {
+        categoryId: categoryId
       },
-        raw = true
-      ).then((shop) => {
-        console.log(shop)
-        res.render('shop/shopcategory', {
-        
-          category: category,
-          shop: shop,
+      order: [
+        ['name', 'ASC']
+      ]
+    },
+      raw = true
+    ).then((shop) => {
+      console.log(shop)
+      res.render('shop/shopcategory', {
 
-        })
+        category: category,
+        shop: shop,
+
       })
     })
+  })
 })
 
 
 
 /* Add To Cart */
-router.get('/addToCart/:id', (req, res) => {
-  let id = req.params.id;
+router.post('/addToCart/:id', (req, res) => {
+  let itemId = req.params.id;
   let userId = req.user.id;
-  console.log(userId)
+  let images = req.body.images;
+  let name = req.body.name;
+  let price = req.body.price;
+  let description = req.body.description;
 
-  Cart.findOne({ where: { id: id } })
+  console.log('dbjxv');
+  console.log(itemId);
+
+  // Cart.create({
+  //   itemId,
+  //   userId,
+  //   images,
+  //   name,
+  //   price,
+  //   description
+  // }).then((cart) => {
+  //   res.redirect('/category'); // redirect to call router.get(/listVideos...) to retrieve all updated
+  //   // videos
+  // }).catch(err => console.log(err))
+
+  Cart.findOne({ where: { itemId: itemId } })
     .then(product => {
       if (product) {
         let quantity = product.quantity + 1;
@@ -193,15 +211,24 @@ router.get('/addToCart/:id', (req, res) => {
           quantity
         }, {
             where: {
-              id: id
+              itemId: itemId
             }
           });
       } else {
-        let quantity = 1
-        Cart.create({ id, quantity, userId })
+        let quantity = 1;
+        Cart.create({
+          itemId,
+          userId,
+          images,
+          name,
+          price,
+          description,
+          quantity
+        });
       }
     });
   return res.redirect('/category');
+
 });
 
 /* Cart */
@@ -362,7 +389,7 @@ router.get('/listrating/:id', function (req, res) {
   let id = req.params.id;
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
     sequelize.query("SELECT username, date, rating FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
-      sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw=true).then((avgrat) => {
+      sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
         console.log(avgrat)
         res.render('shop/listrating', {
           title: title,

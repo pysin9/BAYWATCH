@@ -28,5 +28,8 @@ const Cart = db.define('cart', {
     grandTotal: {
         type: Sequelize.DECIMAL
     },
+    itemId: {
+        type: Sequelize.INTEGER
+    }
 });
 module.exports = Cart;
