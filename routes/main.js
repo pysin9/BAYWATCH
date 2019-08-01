@@ -392,7 +392,7 @@ router.get('/listrating/:id', function (req, res) {
   const title = "Ratings"
   let id = req.params.id;
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
-    sequelize.query("SELECT username, date, rating FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
+    sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
       sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
         console.log(avgrat)
         res.render('shop/listrating', {
