@@ -1,32 +1,32 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
 const Checkout = db.define('checkout', {
-    Firstname: {
+    Fname: {
         type: Sequelize.STRING
     },
-    LastName:{
+    Lname:{
         type: Sequelize.STRING
     },
-    Email: {
+    EmailAdd: {
         type: Sequelize.STRING
     },
-    Address:{
+    ADD:{
         type: Sequelize.STRING
     },
     PhoneNumber:{
         type: Sequelize.INTEGER(8)
     },
-    City:{
+    city:{
         type: Sequelize.STRING
     },
-    State: {
+    state: {
         type: Sequelize.INTEGER
     },
     zip:{
-        type: Sequelize.INTEGER(6),
+        type: Sequelize.INTEGER(6)
     },
     CardType: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
     CardNumber: {
         type: Sequelize.INTEGER
@@ -37,7 +37,7 @@ const Checkout = db.define('checkout', {
     EXPD: {
         type: Sequelize.INTEGER(2)
     },
-    ExpYear: {
+    EXPYear: {
         type: Sequelize.INTEGER(2)
     },
     SECNO: {
