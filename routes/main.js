@@ -256,11 +256,11 @@ router.get('/cart', function (req, res) {
       }).then(item => {
         console.log(item);
         items.push(item.dataValues);*/
-      }).then(console.log(items));
-    })
-   
+  }).then(console.log(items));
+})
 
-   
+
+
 
 
 
@@ -394,7 +394,7 @@ router.get('/listrating/:id', function (req, res) {
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
     sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
       sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
-        console.log(avgrat)
+        console.log(shop)
         res.render('shop/listrating', {
           title: title,
           shop: shop[0][0],
@@ -404,11 +404,13 @@ router.get('/listrating/:id', function (req, res) {
           rating: ratings[0][0].rating,
           avgrating: avgrat[0][0].avgrat,
         });
+      }).catch(function (err) {
+        res.render('shop/listrating', { title: title, shop: shop[0][0] });;
+    })
+      .catch(function (err) {
+        res.render('shop/listrating', { title: title, shop: shop[0][0] });
       });
-	  });
-    }).catch(function (err) {
-      res.render('shop/listrating', { title: title, shop: shop[0][0] });
-    
+    });
   });
 
 });
