@@ -7,9 +7,10 @@ const Math = require("math");
 const Shop = require('../models/Shop');
 const qna = require("../models/QnA")
 const Cart = require('../models/Cart');
+const feedback = require('../models/Feedback');
 const moment = require('moment');
-const user = require('../models/User')
-const Category = require("../models/Category")
+const user = require('../models/User');
+const Category = require("../models/Category");
 const ensureAuthenticated = require('../helpers/auth');
 const sequelize = new Sequelize('organic', 'organic', 'green', {
   host: 'localhost',
@@ -443,6 +444,30 @@ router.post('/epostrating/:id', function (req, res) {
     });
 });
 //end rating
+
+//feedback
+router.get('/feedback', function(req, res){
+    title = 'Feedback'
+    res.render('faq/feedback', {title:title})
+});
+
+router.post('/feedback', (req, res) => {
+  
+  let message = req.body.message;
+  let name = req.body.name;
+  let email = req.body.email;
+
+  feedback.create({
+    message,
+    name,
+    email,
+  }).then((cart) => {
+    alertMessage(res, 'success', 'Feedback sent!', 'fas fa-exclamation-circle', true);
+    res.redirect('/feedback'); // redirect to call router.get(/listVideos...) to retrieve all updated
+    // videos
+  }).catch(err => console.log(err))
+});
+//end feedback
 
 router.get('/checkout1', function (req, res) {
   const title = "Checkout";

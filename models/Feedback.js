@@ -1,11 +1,15 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
 const Feedback = db.define('feedback', {
-    qns: {
+    message: {
         type: Sequelize.STRING
     },
-    ans: {
+    name: {
+        type: Sequelize.STRING
+    },
+    email: {
         type: Sequelize.STRING
     }
 });
+
 module.exports = Feedback;

@@ -84,6 +84,7 @@
         <p>You will only be able to return the product if it was damaged during the process of the delivery.</p> --}}
     {{#if qna}}
     {{#if user.isAdmin}}
+
     {{#each qna}}
     </ul>
     <button class="accordion">{{qns}}</button>
@@ -93,39 +94,43 @@
             data-title="Confirm delete?">Delete</a>
     </div>
     {{/each}}
-    {{else}}
+    {{/if}}
     {{#if user.isNotAdmin}}
     {{#each}}
+
     </ul>
     <button class="accordion">{{qns}}</button>
     <div class="panel">
         <p>{{ans}}</p>
     </div>
     {{/each}}
+    {{/if}}
+    
     {{else}}
     <center>
         <h3>FAQ will be updated soon</h3>
+        <h2>Contact Us <a href="/feedback">here</a></h2>
     </center>
     {{/if}}
-    {{/if}}
-    {{/if}}
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-    </script>
-
+    {{!-- <h2>Contact Us <a href = "/feedback">here</a></h2> --}}
 </body>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+
+
 
 </html>

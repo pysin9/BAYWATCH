@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const Quiz = require('../models/Quiz');
-const FAQ = require('../models/QnA')
-const Shop = require('../models/Shop')
-const Sequelize = require('sequelize')
+const FAQ = require('../models/QnA');
+const Shop = require('../models/Shop');
+const feedback = require('../models/Feedback');
+const Sequelize = require('sequelize');
 const fs = require('fs');
 const upload = require('../helpers/imageUpload');
 const ensureAuthenticated = require('../helpers/auth');
@@ -21,28 +22,26 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
   operatorsAliases: false
 });
 
-router.get('/*' , (req, res, next)=>{
+router.get('/*', (req, res, next) => {
   let user = req.user;
-  if (user == undefined || user.isAdmin != true)
-  {
+  if (user == undefined || user.isAdmin != true) {
     alertMessage(res, 'danger', 'Access Denied! You are not an admin!', 'fas fa-exclamation-circle', true);
     res.redirect('/');
   }
-  else
-  {
+  else {
     next();
   }
 });
 
 router.get('/admin-quiz', (req, res) => {
   let title = 'Add Quiz'
-    res.render('admin/admin-quiz1', { title: title });
+  res.render('admin/admin-quiz1', { title: title });
   // }
 });
 
-router.get("/create", (req,res) =>{
+router.get("/create", (req, res) => {
   const title = "Create Category";
-  res.render('admin/create', {title:title})
+  res.render('admin/create', { title: title })
 });
 
 router.get('/faqform', (req, res) => {
@@ -180,10 +179,9 @@ router.get('/quizedit/:id', (req, res) => {
   let title = 'Edit Quiz'
   let id = req.params.id;
   sequelize.query('SELECT * FROM quizzes WHERE id= :ID ', { replacements: { ID: id } }, raw = true)
-    .then( function(quiz){
+    .then(function (quiz) {
       console.log(quiz[0][0])
-      if (quiz[0][0] == undefined) 
-      {
+      if (quiz[0][0] == undefined) {
         alertMessage(res, 'danger', 'Quiz not found!', 'fas fa-exclamation-circle', true);
         res.redirect('/admin/listquiz');
       }
@@ -205,9 +203,9 @@ router.post('/saveEditedQuiz/:id', (req, res) => {
     { replacements: { Question: question, Option1: option1, Option2: option2, Option3: option3, Option4: option4, Correct: correct, ID: id } })
     .then((quiz) => {
       res.redirect('/admin/listquiz')
-    }).catch(function(err){
+    }).catch(function (err) {
       alertMessage(res, 'danger', 'No such quiz to edit!', 'fas fa-check', true);
-      res.redirect('/admin/listQuiz'); 
+      res.redirect('/admin/listQuiz');
     });
 });
 
@@ -273,31 +271,31 @@ router.post('/addproducts', (req, res) => {
   } else {
     sequelize.query("SELECT * from categories WHERE catName = :catName", { replacements: { catName: category } })
       .then((cat) => {
-        if (!cat){
+        if (!cat) {
           errors.push({
             text: 'Please create a category first'
           })
           alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
           res.redirect('/create');
-        }else{
+        } else {
           let categoryId = cat[0][0].id
-        sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
-          , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: categoryId } })
-          .then((products) => {
-            res.redirect('/category');
-          }).catch(err => console.log(err))
+          sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
+            , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: categoryId } })
+            .then((products) => {
+              res.redirect('/category');
+            }).catch(err => console.log(err))
         }
       })
   }
 })
 
-router.post("/create", (req,res) =>{
+router.post("/create", (req, res) => {
   let catName = req.body.category
   sequelize.query("INSERT INTO categories(catName) VALUES (:catName)"
-  , { replacements: { catName: catName } })
-  .then((category) => {
-    res.redirect("/category");
-  })
+    , { replacements: { catName: catName } })
+    .then((category) => {
+      res.redirect("/category");
+    })
 })
 
 router.get('/delete/:id', (req, res) => {
@@ -352,4 +350,50 @@ router.post('/upload', (req, res) => {
     }
   });
 })
+//view feedback
+router.get('/feedback', function (req, res) {
+  const title = 'View Feedback';
+  feedback.findAll({
+    attributes: ['message', 'name', 'email', 'id']
+  },
+    raw = true
+  ).then((feedback) => {
+    res.render('admin/viewfeedback', {
+      title: title,
+      feedback: feedback,
+    })
+  })
+    .catch(function (err) {
+      res.render('admin/viewfeedback',
+        { title: title })
+    })
+
+});
+//delete feedback
+router.get('/removefeed/:id', (req, res) => {
+  feedbackId = req.params.id
+  feedback.findOne({
+    where: {
+      id: feedbackId,
+    }
+  }).then((viewfeedback) => {
+    console.log(viewfeedback)
+
+    if (viewfeedback) {
+
+      feedback.destroy({
+        where: {
+          id: feedbackId
+        }
+      }).then(() => {
+        alertMessage(res, 'success', 'Deleted successfully!', 'fas fa-exclamation-circle', true);
+        res.redirect('/admin/feedback')
+      })
+    }
+    else {
+      alertMessage(res, 'danger', 'Failed', 'fas fa-exclamation-circle', true);
+      res.redirect('/admin/feedback');
+    }
+  })
+});
 module.exports = router;

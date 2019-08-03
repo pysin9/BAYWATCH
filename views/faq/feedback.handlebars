@@ -32,12 +32,12 @@
             <div class="row2">
                 <div class="col-lg-10 col-md-6 ml-auto mr-auto">
                     <div class="card card-login">
-                        <form class="form" method="post" action="/user/register">
+                        <form class="form" method="post" action="/feedback">
                             <h2 class="card-title text-center">Contact Us</h2>
                         
                             <div class="form-group">
                                 <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-                                <textarea type="email" class="form-control b" rows="4" id="exampleMessage"></textarea>
+                                <textarea type="email" class="form-control b" rows="4" id="exampleMessage" name='message'></textarea>
                             </div>
                             <div class="form-check form-check-radio form-check-inline">
                                 <label class="form-check-label">
@@ -53,13 +53,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Name</label>
-                                        <input type="email" class="form-control">
+                                        <input type="text" class="form-control" name='name'>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Email</label>
-                                        <input type="email" class="form-control">
+                                        <input type="email" class="form-control" name='email'>
                                     </div>
                                 </div>
                             </div>
