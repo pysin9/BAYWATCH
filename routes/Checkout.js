@@ -21,7 +21,7 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 });
 
 
-router.post('/checkout1', (req, res) => {
+router.post('/checkout4', (req, res) => {
 
     let Fname = req.body.Fname.slice(0, 50);
     let Lname = req.body.Lname.slice(0, 50);
@@ -38,30 +38,100 @@ router.post('/checkout1', (req, res) => {
     let NameOnC = req.body.NameOnC;
     let SECNO = req.body.SECNO;
 
-    Checkout.create({
-        Fname,
-        Lname,
-        EXPD,
-        EXPYear,
-        EmailAdd,
-        ADD,
-        PhoneNumber,
-        city,
-        state,
-        zip,
+    checkout.create({
+        //Fname,
+      //  Lname,
+       // EXPD,
+      //  EXPYear,
+       // EmailAdd,
+       // ADD,
+       // PhoneNumber,
+       // city,
+       // state,
+       // zip,
         CardType,
         CardNumber,
         NameOnC,
         SECNO
-    }).then(chkout => {
-        res.redirect('/Checkout/Reciept');
+    }).then(Checkout => {
+        res.redirect('/Reciept');
     })
     .catch(err => console.log(err))
  
 });
 
+// List videos belonging to current logged in user
+router.get('/Reciept', (req, res) => {
+    Checkout.findAll({
+    where: {
+    NameOnC = req.body.NameOnC // how to req user id
+    },
+    order: [
+    ['NameonC', 'ASC']
+    ],
+    raw: true
+    })
+    .then((Checkout) => {
+    // pass object
+    res.render('Checkout/Reciept', {
+   
+    });
+    })
+    .catch(err => console.log(err));
+    });
 
-router.post('/checkout2', (req, res) => { });
+
+router.post('/checkout1', (req, res) => {
+    let errors = [];
+  
+    let {Fname, Lname, EmailAdd, ADD, PhoneNumber, city, state, zip} = req.body;
+    
+    if(Fname < 0) {
+     errors.push({text: 'please fill up'});
+    }
+    if(Lname < 0) {
+        errors.push({text: 'please fill up'});
+       }
+    if(EmailAdd <0) {
+        errors.push({text: 'please fill up'});
+       }
+    if(ADD < 0) {
+        errors.push({text: 'please fill up'});
+       }
+    // Checks that password length is more than 4
+    if(PhoneNumber< 8) {
+     errors.push({text: 'Please enter correct phone number'});
+    }
+    if(zip < 0) {
+        errors.push({text: 'please fill in'});
+       }
+    if(city < 0) {
+        errors.push({text: 'please fill in'});
+       }
+    if(state < 0) {
+        errors.push({text: 'please fill in'});
+       }
+    if (errors.length > 0) {
+     res.render('Checkout/checkout1', {
+     errors,
+     Fname,
+     Lname,
+     PhoneNumber,
+     zip,
+     city,
+     state
+     });
+    }
+    else {
+        checkout.create({ Fname, Lname, PhoneNumber })
+ .then(checkout => {
+ alertMessage(res, 'success',  true);
+ res.redirect('/showcheckout2');
+    })
+    .catch(err => console.log(err));
+          
+ }});
 
 router.post('/checkout3', (req, res) => { });
 
+router.post('/Reciept', (req, res) => { });

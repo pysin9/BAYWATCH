@@ -4,33 +4,33 @@
 <head>
     <meta charset="utf-8" />
     <title>Store ChKOut</title>
-
+    
     <link rel="stylesheet" type="text/css" href="/css/Checkout4.css" />
 </head>
 
 <body>
     <p id="Step4"> Step 4: Shipping Address </p>
     <hr id="hr">
-    <form action="FormProcessor.html" method="post">
+    <form class="form" method="post" action="/Checkout/checkout4">
         <fieldset id="particular">
             <legend>Checkout</legend>
 
             <p id="Cardtext"> Card type: </p><br>
-            <input type="text" id="Card" name="Cardtype" placeholder="Card type" required />
+            <input type="text" id="Card" name="Cardtype" placeholder="Card type" required value="{{CardType}}"/>
 
             <p id="CardNo"> Card Number: </p><br>
-            <input type="text" id="cardnumber" name="cardno" placeholder="Enter card number" required />
+            <input type="text" id="cardnumber" name="cardno" placeholder="Enter card number" required value="{{CardNumber}}"/>
 
             <p id="Expiry"> Expiry date: </p><br>
-            <input type="number" id="EXPD" name="expiry" placeholder="MM" required />
+            <input type="number" id="EXPD" name="expiry" placeholder="MM" required value="{{EXPD}}"/>
 
-            <input type="number" id="ExpYear" name="ExpYear" placeholder="YYYY" required />
+            <input type="number" id="ExpYear" name="ExpYear" placeholder="YYYY" required value="{{EXPYear}}" />
             <br>
             <p id="NameOC"> Name On Card: </p><br>
-            <input type="text" id="NameOnCRD" name="nameoncard" placeholder="Enter Name on card" required />
+            <input type="text" id="NameOnCRD" name="nameoncard" placeholder="Enter Name on card" required value="{{NameOnC}}" />
 
             <p id="Security"> security number: </p><br>
-            <input type="number" id="SECNO" name="securitynumber" placeholder="Enter security number" required />
+            <input type="number" id="SECNO" name="securitynumber" placeholder="Enter security number" required value="{{SECNO}}" />
 
 
             <br>
@@ -38,8 +38,9 @@
 
 
         </fieldset>
-
-        <input type="submit" value="Continue"></input>
+        
+        
+        <button type="submit" class="btn btn-success btn-round">Continue</button>
     </form>
 </body>
 

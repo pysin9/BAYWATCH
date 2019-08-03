@@ -550,4 +550,8 @@ router.get('/checkout4', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout4', { title: title });
 });
+router.get('/Reciept', function (req, res){
+  const title = "reciept";
+  res.render('Checkout/Reciept', {title: title});
+});
 module.exports = router;

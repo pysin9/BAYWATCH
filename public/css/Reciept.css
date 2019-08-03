@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    position: relative;
+    top: 97px;
+  }
+  
+ 
+  .reciept-details {
+    float: left;
+    width: 37%;
+  }
+  
+  .reciept-price {
+    margin-left: -25px;
+    margin-top: 37px;
+    position: absolute;
+  }
+  
+  .reciept-quantity {
+    float: left;
+    width: 10%;
+  }
+  
+ 
+  
+  
+  
+  h2 {
+    font-weight: 100;
+  }
+  
+  label {
+    color: #aaa;
+  }
+
+  
+  /* Column headers */
+  
+  .column-labels label {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
+    text-indent: -9999px;
+  }
+  
+  /* Product entries */
+  
+  .reciept {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+ 
+ 
+  
+  .reciept .reciept-details .reciept-title {
+    margin-right: 20px;
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  }
+  
+  .reciept .reciept-details .reciept-description {
+    margin: 5px 20px 5px 0;
+    line-height: 1.4em;
+  }
+  
+  .reciept .reciept-quantity input {
+    width: 40px;
+  }
+
+  
+  
+  /* Totals section */
+
+ 
+  
+  .totals .totals-item .totals-value {
+    float: right;
+    width: 21%;
+    text-align: right;
+  }
+  
+
+  
+  .checkout {
+    float: right;
+    border: 0;
+    margin-top: 20px;
+    padding: 6px 25px;
+    background-color: #6b6;
+    color: #fff;
+    font-size: 25px;
+    border-radius: 3px;
+  }
+  
+  .checkout:hover {
+    background-color: #494;
+  }
+  
+ 
