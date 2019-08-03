@@ -99,7 +99,28 @@ router.get("/create", (req, res) => {
   res.render('admin/create', { title: title })
 });
 
- 
+router.post('/addTotal', function (req, res) {
+  console.log('IT WORKS----------------------------------------------')
+  let subTotal = req.body.subTotal;
+  let id = 1;
+  sequelize.query("UPDATE carts SET subtotal= :subTOTAL WHERE id= :id", { replacements: { subTOTAL: subTotal, id: id } })
+    .then((result) => {
+      console.log('it works')
+      res.redirect('/cart');
+    });
+
+  // Cart.findAll({
+  //   where: {
+  //     id:id
+  //   }
+  // }).then((c)=>{
+
+  //   Cart.create({
+  //     subTotal
+  //   });
+  // })
+
+})
 
 /* Shop Categories */
 router.get('/category', function (req, res) {
@@ -190,6 +211,34 @@ router.get("/category2/:id", (req, res) => {
   })
 })
 
+router.get('/removeAdd/:id', (req, res) => {
+  let Id = req.params.id
+  Cart.findOne({
+    where: {
+      id: Id
+    }
+  }).then((cart) => {
+    console.log(qna)
+    if (cart != null) {
+
+      Cart.destroy({
+        where: {
+          id: Id
+        }
+      }).then(() => {
+        let success_msg = cart.name + " removed successfully";
+        alertMessage(res, 'success_msg', success_msg, true);
+        res.redirect('/cart')
+      })
+    }
+    else {
+      alertMessage(res, 'danger', 'Access Denied', 'fas fa-exclamation-circle', true);
+      res.redirect('/logout');
+
+
+    }
+  })
+});
 
 
 /* Add To Cart */
