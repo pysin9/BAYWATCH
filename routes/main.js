@@ -43,6 +43,22 @@ router.get('/', function (req, res) {
         }
       })
   }
+  sequelize.query("SELECT * from ratings")
+  .then((rate)=>{
+    let shopId = rate[0][0].shopId
+    if (shopId == undefined){
+      console.log('There is no rating')
+    }
+    else{
+      Shop.findAll({
+        where:{
+          id: shopId
+        }
+      }).then((shop) =>{
+        console.log(shop)
+      })
+    }
+  })
   res.render('index', { title: title });
 });
 
@@ -83,10 +99,7 @@ router.get("/create", (req, res) => {
   res.render('admin/create', { title: title })
 });
 
-router.get("/showAll", (req, res) => {
-  const title = "Create Category";
-  res.render('shop/shopcategory', { title: title })
-});
+ 
 
 /* Shop Categories */
 router.get('/category', function (req, res) {
@@ -118,7 +131,7 @@ router.get('/category', function (req, res) {
     .catch(err => console.log(err));
 });
 
-router.get('/category23', function (req, res) {
+router.get('/category2', function (req, res) {
   const title = "Shop"
   Category.findAll({
     attributes: ['id', 'catName'],
@@ -148,7 +161,7 @@ router.get('/category23', function (req, res) {
   })
 });
 
-router.get("/category23/:id", (req, res) => {
+router.get("/category2/:id", (req, res) => {
   let categoryId = req.params.id
   console.log(categoryId)
   Category.findAll({

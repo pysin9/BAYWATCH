@@ -1,166 +1,322 @@
+<style>
+  .col-center {
+    margin: 0 auto;
+    float: none !important;
+  }
+
+  .carousel {
+    margin: 30px auto 60px;
+    padding: 0 48px;
+  }
+
+  .carousel .item {
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .carousel .item h4 {
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  .carousel .item img {
+    max-width: 100%;
+    display: inline-block;
+  }
+
+  .carousel .item .btn {
+    border-radius: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    background: #a177ff;
+    padding: 6px 15px;
+    margin-top: 5px;
+  }
+
+  .carousel .item .btn:hover {
+    background: #8c5bff;
+  }
+
+  .carousel .item .btn i {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  .carousel .thumb-wrapper {
+    margin: 5px;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .carousel .thumb-content {
+    padding: 15px;
+    font-size: 13px;
+  }
+
+  .carousel .carousel-control {
+    height: 44px;
+    width: 44px;
+    background: none;
+    margin: auto 0;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.8);
+  }
+
+  .carousel .carousel-control i {
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    margin: -19px 0 0 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: rgba(0, 0, 0, 0.8);
+    text-shadow: none;
+    font-weight: bold;
+  }
+
+  .carousel .carousel-control.left i {
+    margin-left: -3px;
+  }
+
+  .carousel .carousel-control.right i {
+    margin-right: -3px;
+  }
+
+  .carousel .carousel-indicators {
+    bottom: -50px;
+  }
+
+  .carousel-indicators li,
+  .carousel-indicators li.active {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 4px;
+    border-color: transparent;
+  }
+
+  .carousel-indicators li {
+    background: #ababab;
+  }
+
+  .carousel-indicators li.active {
+    background: #555;
+  }
+</style>
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('/img/home1.jpg')">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="title">Welcome to New Organics</h1>
+        <h4>We believe that good health should be affordable and accessible to all. At NewOrganics, we strive to provide
+          the best quality products to our customers. Click below to see our lastest products! </h4>
+        <br>
+        <a href="/category" class="btn btn-danger btn-raised btn-lg">
+          <i class="fa fa-shopping-cart"></i> Shop Now
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main main-raised">
+  <div class="container">
+    <div class="section text-center">
       <div class="row">
-        <div class="col-md-6">
-          <h1 class="title">Welcome to New Organics</h1>
-          <h4>We believe that good health should be affordable and accessible to all. At NewOrganics, we strive to provide the best quality products to our customers. Click below to see our lastest products! </h4>
-          <br>
-          <a href="/category" class="btn btn-danger btn-raised btn-lg">
-            <i class="fa fa-shopping-cart"></i> Shop Now
-          </a>
+        <div class="col-md-8 ml-auto mr-auto">
+          <h2 class="title">Welcome to New Organics</h2>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="main main-raised">
-    <div class="container">
-      <div class="section text-center">
+      <div class="features">
         <div class="row">
-          <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="title">Welcome to New Organics</h2>
-          </div>
-        </div>
-        <div class="features">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-info">
-                  <i class="material-icons">&#128336;</i>
-                </div>
-                <h4 class="info-title">Quick & Easy Returns</h4>
-                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+          <div class="col-md-4">
+            <div class="info">
+              <div class="icon icon-info">
+                <i class="material-icons">&#128336;</i>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-success">
-                  <i class="material-icons">&#127793;</i>
-                </div>
-                <h4 class="info-title">Pesticide Free.</h4>
-                <p>We deliver organic produce that is pesticide-free and sustainably-grown, ensuring that we maintain healthy communities.</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-danger">
-                  <i class="material-icons">&#127903;</i>
-                </div>
-                <h4 class="info-title">Organic points</h4>
-                <p>Collect points to get free shipping!</p>
-              </div>
+              <h4 class="info-title">Quick & Easy Returns</h4>
+              <p>Divide details about your product or agency work into parts. Write a few lines about each one. A
+                paragraph describing a feature will be enough.</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="section text-center">
-        <h2 class="title">Popular Products</h2>
-        <div class="team">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="team-player">
-                <div class="card card-plain">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <img src="../assets/img/faces/avatar.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
-                  </div>
-                  <h4 class="card-title">Gigi Hadid
-                    <br>
-                    <small class="card-description text-muted">Model</small>
-                  </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
-                  <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
-                  </div>
-                </div>
+          <div class="col-md-4">
+            <div class="info">
+              <div class="icon icon-success">
+                <i class="material-icons">&#127793;</i>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="team-player">
-                <div class="card card-plain">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <img src="../assets/img/faces/christian.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
-                  </div>
-                  <h4 class="card-title">Christian Louboutin
-                    <br>
-                    <small class="card-description text-muted">Designer</small>
-                  </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
-                  <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="team-player">
-                <div class="card card-plain">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <img src="../assets/img/faces/kendall.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
-                  </div>
-                  <h4 class="card-title">Kendall Jenner
-                    <br>
-                    <small class="card-description text-muted">Model</small>
-                  </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
-                  <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
-                  </div>
-                </div>
-              </div>
+              <h4 class="info-title">Pesticide Free.</h4>
+              <p>We deliver organic produce that is pesticide-free and sustainably-grown, ensuring that we maintain
+                healthy communities.</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="section section-contacts">
-        <div class="row">
-          <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="text-center title">Work with us</h2>
-            <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-            <form class="contact-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">Your Name</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">Your Email</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
+          <div class="col-md-4">
+            <div class="info">
+              <div class="icon icon-danger">
+                <i class="material-icons">&#127903;</i>
               </div>
-              <div class="form-group">
-                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-                <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
-              </div>
-              <div class="row">
-                <div class="col-md-4 ml-auto mr-auto text-center">
-                  <button class="btn btn-primary btn-raised">
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </form>
+              <h4 class="info-title">Organic points</h4>
+              <p>Collect points to get free shipping!</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="section text-center">
+      <h2 class="title">Popular Products</h2>
+      <div class="team">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="team-player">
+              <div class="card card-plain">
+                <div class="col-md-6 ml-auto mr-auto">
+                  <img src="../assets/img/faces/avatar.jpg" alt="Thumbnail Image"
+                    class="img-raised rounded-circle img-fluid">
+                </div>
+                <h4 class="card-title">Gigi Hadid
+                  <br>
+                  <small class="card-description text-muted">Model</small>
+                </h4>
+                <div class="card-body">
+                  <p class="card-description">You can write here details about one of your team members. You can give
+                    more details about what they do. Feel free to add some
+                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="team-player">
+              <div class="card card-plain">
+                <div class="col-md-6 ml-auto mr-auto">
+                  <img src="../assets/img/faces/christian.jpg" alt="Thumbnail Image"
+                    class="img-raised rounded-circle img-fluid">
+                </div>
+                <h4 class="card-title">Christian Louboutin
+                  <br>
+                  <small class="card-description text-muted">Designer</small>
+                </h4>
+                <div class="card-body">
+                  <p class="card-description">You can write here details about one of your team members. You can give
+                    more details about what they do. Feel free to add some
+                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="team-player">
+              <div class="card card-plain">
+                <div class="col-md-6 ml-auto mr-auto">
+                  <img src="../assets/img/faces/kendall.jpg" alt="Thumbnail Image"
+                    class="img-raised rounded-circle img-fluid">
+                </div>
+                <h4 class="card-title">Kendall Jenner
+                  <br>
+                  <small class="card-description text-muted">Model</small>
+                </h4>
+                <div class="card-body">
+                  <p class="card-description">You can write here details about one of your team members. You can give
+                    more details about what they do. Feel free to add some
+                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
+                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-contacts">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-center title">Popular Products</h2>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card" style="width: 13rem;">
+                      <img class="card-img-top"  width="250" height="250" src="img/soymilk.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h4 class="card-title">Soy Milk</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">$10</h6>
+                        <p class="card-text">milkk</p>
+                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card" style="width: 13rem;">
+                      <img class="card-img-top"  width="250" height="250" src="img/apple.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h4 class="card-title">Apple</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">$5</h6>
+                        <p class="card-text">3 apples</p>
+                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card" style="width: 13rem;">
+                      <img class="card-img-top"  width="250" height="250" src="img/banana.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h4 class="card-title">Banana</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">$4</h6>
+                        <p class="card-text">Banana</p>
+                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item carousel-item">
+                <div class="row">
+                  <div class="col-sm-4">
+                     <div class="card" style="width: 13rem;">
+                      <img class="card-img-top"  width="250" height="250" src="{{images}}" alt="Card image cap">
+                      <div class="card-body">
+                        <h4 class="card-title">{{name}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{price}}</h6>
+                        <p class="card-text">{{description}}</p>
+                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control left carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control right carousel-control-next" href="#carouselExampleIndicators" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
-
-
+</div>

@@ -28,13 +28,13 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/showAll">
+                    <a class="nav-link" href="/category">
                         Show All
                     </a>
                 </li>
                 {{#each category}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/category23/{{id}}">
+                    <a class="nav-link" href="/category2/{{id}}">
                         {{catName}}
                     </a>
                 </li>
@@ -62,32 +62,37 @@
 <div class="items">
     {{#if user.isAdmin}}
     {{#each shop}}
-    <form action="addToCart/{{id}}" method="post">
-        <a id='list' href='/listrating/{{id}}'>
-            <div class="card" style="width: 20rem;">
-                <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap" id="images">
-                <input id="images" type="hidden" name="images" value="{{images}}">
-                <div class="card-body">
-                    <h4 class="card-title" id="name">{{name}}</h4>
-                    <input id="name" type="hidden" name="name" value="{{name}}">
-                    <h6 class="card-subtitle mb-2 text-muted" id="price">${{price}}</h6>
-                    <input id="price" type="hidden" name="price" value="{{price}}">
-                    <p class="card-text" id="description">{{description}}</p>
-                    <input id="description" type="hidden" name="description" value="{{description}}">
-                    <p><button type="submit">Add to Cart</button></p>
-                    <a href="/admin/editproducts/{{id}}" class="card-link">Edit</a>
-                    <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
-                        data-title="Confirm delete?">Delete</a>
-                </div>
-            </div>
-        </a>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="addToCart/{{id}}" method="post">
+                <a id='list' href='/listrating/{{id}}'>
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap"
+                            id="images">
+                        <input id="images" type="hidden" name="images" value="{{images}}">
+                        <div class="card-body">
+                            <h4 class="card-title" id="name">{{name}}</h4>
+                            <input id="name" type="hidden" name="name" value="{{name}}">
+                            <h6 class="card-subtitle mb-2 text-muted" id="price">${{price}}</h6>
+                            <input id="price" type="hidden" name="price" value="{{price}}">
+                            <p class="card-text" id="description">{{description}}</p>
+                            <input id="description" type="hidden" name="description" value="{{description}}">
+                            <p><button type="submit">Add to Cart</button></p>
+                            <a href="/admin/editproducts/{{id}}" class="card-link">Edit</a>
+                            <a href="/admin/delete/{{id}}" class="card-link" data-toggle="confirmation"
+                                data-title="Confirm delete?">Delete</a>
+                        </div>
+                    </div>
+                </a>
+            </form>
+        </div>
+    </div>
     {{/each}}
     {{else}}
     {{#each shop}}
     <a id='list' href='/listrating/{{id}}'>
         <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src="{{images}}" alt="Card image cap">
+            <img class="card-img-top" width="250" height="250" src="{{images}}" alt="Card image cap">
             <div class="card-body">
                 <h4 class="card-title">{{name}}</h4>
                 <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>

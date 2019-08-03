@@ -7,6 +7,7 @@ const Shop = require('../models/Shop');
 const feedback = require('../models/Feedback');
 const Sequelize = require('sequelize');
 const fs = require('fs');
+const Category = require("../models/Category")
 const upload = require('../helpers/imageUpload');
 const ensureAuthenticated = require('../helpers/auth');
 const sequelize = new Sequelize('organic', 'organic', 'green', {
@@ -270,32 +271,112 @@ router.post('/addproducts', (req, res) => {
     })
   } else {
     sequelize.query("SELECT * from categories WHERE catName = :catName", { replacements: { catName: category } })
-      .then((cat) => {
-        if (!cat) {
-          errors.push({
-            text: 'Please create a category first'
-          })
-          alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
-          res.redirect('/create');
-        } else {
-          let categoryId = cat[0][0].id
-          sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
-            , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: categoryId } })
-            .then((products) => {
-              res.redirect('/category');
-            }).catch(err => console.log(err))
-        }
-      })
-  }
+    .then((cat) => {
+      if (cat == undefined) {
+        alertMessage(res, 'danger', 'You need to create a category', true);
+        res.redirect('/create')
+      }
+      if(cat){
+
+        sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
+          , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: cat[0][0].id } })
+          .then((products) => {
+            res.redirect('/category');
+          }).catch(err => console.log(err))
+
+      }
+    }).catch(err => console.log(err))
+}
 })
+
 
 router.post("/create", (req, res) => {
   let catName = req.body.category
-  sequelize.query("INSERT INTO categories(catName) VALUES (:catName)"
-    , { replacements: { catName: catName } })
+  let userId = req.user.id
+  sequelize.query("INSERT INTO categories(catName, userId) VALUES (:catName, :userId)"
+    , { replacements: { catName: catName, userId: userId } })
     .then((category) => {
-      res.redirect("/category");
+      res.redirect("/create");
     })
+})
+
+router.get('/editCategory/:id', (req, res) => {
+  let id = req.params.id
+  let userId = req.user.id
+
+  Category.findOne({
+    where: {
+      id,
+      userId
+    },
+  }).then((c) => {
+    if (!c) {
+      alertMessage(res, 'info', 'No such category', 'fas fa-exclamation-circle', true);
+      res.redirect('/');
+    }
+    res.render('admin/editcategory', { c: c })
+  }).catch(err => console.log(err)); // To catch no video ID
+});
+
+router.post('/saveEditedCategory/:id', (req, res) => {
+  let id = req.params.id;
+  let category = req.body.category;
+  sequelize.query('UPDATE categories SET catName= :category WHERE id= :ID',
+    { replacements: { category: category, ID: id } })
+    .then((category) => {
+      res.redirect('/listcategory')
+    }).catch(function (err) {
+      alertMessage(res, 'danger', 'No such quiz to edit!', 'fas fa-check', true);
+      res.redirect('/listcategory');
+    });
+});
+
+router.get('/Catdelete/:id', (req, res) => {
+  let id = req.params.id
+  let userId = req.user.id
+
+  Category.findOne({
+    where: {
+      id,
+      userId
+    }
+  }).then((cat) => {
+    if (!cat) {
+      let error_msg = 'Product not found';
+      alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
+      res.redirect('/');
+      return;
+    }
+    if (cat.userId != userId) {
+      let error_msg = "Access denied";
+      alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
+      res.redirect('/');
+      return;
+    }b 
+    cat.destroy({
+      where: {
+        id
+      }
+    }).then(() => {
+      let success_msg = cat.name + " deleted successfully";
+      alertMessage(res, 'success_msg', success_msg, true);
+      res.redirect('/category');
+    })
+  }).catch(err => console.log(err)); // To catch no video ID
+});
+
+router.get('/listcategory', (req, res) => {
+  const title = "List Category"
+  Category.findAll({
+    attributes: ['id', 'catName']
+  }).then((category) => {
+
+    res.render('admin/listCategory',
+      {
+        title: title,
+        category: category
+      });
+  })
 })
 
 router.get('/delete/:id', (req, res) => {

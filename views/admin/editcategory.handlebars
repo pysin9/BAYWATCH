@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="/css/editproduct.css">
+<style>
+    body {
+        background-color: grey;
+    }
+</style>
+
+<body class="login-page sidebar-collapse">
+    <div class="page-header header-filter"
+        style="background-image: url('/img/background4.jpg'); background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="card card-login">
+                    <form action="/admin/saveEditedCategory/{{id}}" method="post">
+                        <input type="hidden" name="_method" value="PUT">
+                        <h2 class="card-title text-center">Edit Category</h2>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                  
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">thumb_up_alt</i>
+                                            </span>
+                                        </div>
+                                        <div class="try-select" style="width:300px;">
+                                            <select name="category" class="form-control">
+                                                <option id='organic' value="Fresh">Fresh</option>
+                                                <option id='option 2' value="Dairy">Dairy</option>
+                                                <option id='option 3' value="Beverages">Beverages</option>
+                                                <option id='option 4' value="Frozen">Frozen</option>
+                                                <option id='option 4' value="Health">Health</option>
+                                                <option id='option 4' value="Snacks">Snacks</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="text-center">
+                                <button id="butAddVideo" type="submit" class="btn btn-primary">Save
+                                </button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    
+</script>
