@@ -43,23 +43,18 @@ router.get('/', function (req, res) {
         }
       })
   }
-  sequelize.query("SELECT * from ratings")
-    .then((rate) => {
-      let shopId = rate[0][0].shopId
-      if (shopId == undefined) {
-        console.log('There is no rating')
-      }
-      else {
-        Shop.findAll({
-          where: {
-            id: shopId
-          }
-        }).then((shop) => {
-          console.log(shop)
-        })
-      }
-    })
-  res.render('index', { title: title });
+  sequelize.query("SELECT * FROM shops WHERE avgrating > '3' ")
+    .then((shop) => {
+      res.render('index', {
+        title: title,
+        shop: shop[0],
+      });
+
+
+    }).catch(function (err) {
+      res.render('index',
+        { title: title })
+    });
 });
 
 router.get('/logout', (req, res) => {
@@ -94,12 +89,9 @@ router.get('/shop', function (req, res) {
   res.render('shop/shop', { title: title });
 });
 
-router.get("/create", (req, res) => {
-  const title = "Create Category";
-  res.render('admin/create', { title: title })
-});
 
-router.post('/addTotal', function (req, res) {
+
+router.post('/addTotal',ensureAuthenticated, function (req, res) {
   console.log('IT WORKS----------------------------------------------')
   let subTotal = req.body.subTotal;
   let id = 1;
@@ -211,7 +203,7 @@ router.get("/category2/:id", (req, res) => {
   })
 })
 
-router.get('/removeAdd/:id', (req, res) => {
+router.get('/removeAdd/:id',ensureAuthenticated, (req, res) => {
   let Id = req.params.id
   Cart.findOne({
     where: {
@@ -295,7 +287,7 @@ router.post('/addToCart/:id', (req, res) => {
 });
 
 /* Cart */
-router.get('/cart', function (req, res) {
+router.get('/cart',ensureAuthenticated, function (req, res) {
   const title = "Cart";
   let userId = req.user.id;
 
@@ -328,7 +320,7 @@ router.get('/cart', function (req, res) {
 
 
 /* GET quiz */
-router.get('/quiz', function (req, res) {
+router.get('/quiz',ensureAuthenticated, function (req, res) {
   const title = "Quiz";
   let user = req.user;
   let id = req.user.id;
@@ -406,10 +398,7 @@ router.get('/faq', (req, res) => {
     })
 
 });
-router.get('/about', (req, res) => {
-  const title = "About"
-  res.render('about', { title: title });
-});
+
 
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -420,7 +409,7 @@ router.get('/admin', (req, res) => {
   res.render('admin', { title: title })
 })
 
-router.get('/profile', function (req, res) {
+router.get('/profile',ensureAuthenticated, function (req, res) {
   const title = "Profile";
   let user = req.user;
   let id = user.id;
@@ -439,7 +428,7 @@ router.get('/profile', function (req, res) {
       }
     })
 });
-router.get('/password', function (req, res) {
+router.get('/password',ensureAuthenticated, function (req, res) {
   const title = "Password";
   let user = req.user;
   if (user == undefined) {
@@ -457,7 +446,8 @@ router.get('/listrating/:id', function (req, res) {
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
     sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
       sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
-        console.log(shop)
+        let avgrating = avgrat[0][0].avgrat
+        sequelize.query("UPDATE shops SET avgrating= :avgrating WHERE id= :ID", { replacements: { avgrating: avgrating, ID: id } }, raw = true)
         res.render('shop/listrating', {
           title: title,
           shop: shop[0][0],
@@ -538,26 +528,26 @@ router.post('/feedback', (req, res) => {
 });
 //end feedback
 
-router.get('/checkout1', function (req, res) {
+router.get('/checkout1',ensureAuthenticated, function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout1', { title: title });
 });
 
-router.get('/checkout2', function (req, res) {
+router.get('/checkout2',ensureAuthenticated, function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout2', { title: title });
 });
 
-router.get('/checkout3', function (req, res) {
+router.get('/checkout3',ensureAuthenticated, function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout3', { title: title });
 });
 
-router.get('/checkout4', function (req, res) {
+router.get('/checkout4',ensureAuthenticated, function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout4', { title: title });
 });
-router.get('/Reciept', function (req, res) {
+router.get('/Reciept',ensureAuthenticated, function (req, res) {
   const title = "reciept";
   res.render('Checkout/Reciept', { title: title });
 });

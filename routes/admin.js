@@ -291,6 +291,10 @@ router.post('/addproducts', (req, res) => {
   }
 })
 
+router.get("/create", (req, res) => {
+  const title = "Create Category";
+  res.render('admin/create', { title: title })
+});
 
 router.post("/create", (req, res) => {
   let catName = req.body.category
@@ -302,36 +306,36 @@ router.post("/create", (req, res) => {
     })
 })
 
-router.get('/editCategory/:id', (req, res) => {
-  let id = req.params.id
-  let userId = req.user.id
+// router.get('/editCategory/:id', (req, res) => {
+//   let id = req.params.id
+//   let userId = req.user.id
 
-  Category.findOne({
-    where: {
-      id,
-      userId
-    },
-  }).then((c) => {
-    if (!c) {
-      alertMessage(res, 'info', 'No such category', 'fas fa-exclamation-circle', true);
-      res.redirect('/');
-    }
-    res.render('admin/editcategory', { c: c })
-  }).catch(err => console.log(err)); // To catch no video ID
-});
+//   Category.findOne({
+//     where: {
+//       id,
+//       userId
+//     },
+//   }).then((c) => {
+//     if (!c) {
+//       alertMessage(res, 'info', 'No such category', 'fas fa-exclamation-circle', true);
+//       res.redirect('/');
+//     }
+//     res.render('admin/editcategory', { c: c })
+//   }).catch(err => console.log(err)); // To catch no video ID
+// });
 
-router.post('/saveEditedCategory/:id', (req, res) => {
-  let id = req.params.id;
-  let category = req.body.category;
-  sequelize.query('UPDATE categories SET catName= :category WHERE id= :ID',
-    { replacements: { category: category, ID: id } })
-    .then((category) => {
-      res.redirect('/listcategory')
-    }).catch(function (err) {
-      alertMessage(res, 'danger', 'No such quiz to edit!', 'fas fa-check', true);
-      res.redirect('/listcategory');
-    });
-});
+// router.post('/saveEditedCategory/:id', (req, res) => {
+//   let id = req.params.id;
+//   let category = req.body.category;
+//   sequelize.query('UPDATE categories SET catName= :category WHERE id= :ID',
+//     { replacements: { category: category, ID: id } })
+//     .then((category) => {
+//       res.redirect('/listcategory')
+//     }).catch(function (err) {
+//       alertMessage(res, 'danger', 'No such quiz to edit!', 'fas fa-check', true);
+//       res.redirect('/listcategory');
+//     });
+// });
 
 router.get('/Catdelete/:id', (req, res) => {
   let id = req.params.id

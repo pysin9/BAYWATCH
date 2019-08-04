@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize')
 const sgMail = require('@sendgrid/mail');
 const jwt = require('jsonwebtoken');
-
+const ensureAuthenticated = require('../helpers/auth');
 const sequelize = new Sequelize('organic', 'organic', 'green', {
     host: 'localhost',
     dialect: 'mysql',

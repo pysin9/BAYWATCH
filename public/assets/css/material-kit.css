@@ -15,7 +15,7 @@
 
  */
 
-.card {
+ .card {
   font-size: .875rem;
 }
 
@@ -14223,7 +14223,7 @@ textarea {
   background-color: #55b559;
   color: #ffffff;
   z-index: 5;
-  padding: 11px;
+  text-align: center;
 }
 
 .alert.alert-success a,
@@ -14235,7 +14235,7 @@ textarea {
   background-color: #00cae3;
   color: #ffffff;
   z-index: 5;
-  padding: 11px;
+  text-align: center;
 }
 
 .alert.alert-info a,
@@ -14260,7 +14260,7 @@ textarea {
   z-index: 5;
   position: relative;
   top: 114px;
-  padding: 11px;
+  text-align: center;
 }
 
 .alert.alert-danger a,

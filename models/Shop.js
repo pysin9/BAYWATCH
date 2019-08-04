@@ -15,6 +15,11 @@ const Shop = db.define('shop', {
     },
     category:{
         type: Sequelize.STRING
+    },
+    avgrating: {
+        type: Sequelize.DECIMAL(10,2),
+        allowNull: false,
+        defaultValue: '0.00'
     }
 });
 module.exports = Shop;
