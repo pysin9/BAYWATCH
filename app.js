@@ -23,6 +23,7 @@ const passport = require('passport');
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/users');
 const adminRoute = require('./routes/admin');
+const CheckoutRoute = require('./routes/Checkout');
 const organicDB = require('./config/DBConnection')
 const { radioCheck } = require('./helpers/check');
 
@@ -122,7 +123,9 @@ app.use(function (req, res, next) {
 * Defines that any root URL with '/' that Node JS receives request from, for eg. http://localhost:5000/, will be handled by
 * mainRoute which was defined earlier to point to routes/main.js
 * */
+
 app.use('/', mainRoute);
+app.use('/Checkout', CheckoutRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/admin*', adminRoute);
