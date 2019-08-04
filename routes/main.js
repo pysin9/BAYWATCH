@@ -465,6 +465,7 @@ router.get('/listrating/:id', function (req, res) {
           username: ratings[0][0].username,
           date: ratings[0][0].date,
           rating: ratings[0][0].rating,
+		  id: ratings[0][0].id,
           avgrating: avgrat[0][0].avgrat,
         });
       }).catch(function (err) {
@@ -487,24 +488,29 @@ router.post('/postrating/:id', function (req, res) {
   let rating = req.body.rating;
   sequelize.query("INSERT INTO ratings(username, rating, date, shopId, userId) VALUES(:Username, :Rating, :Date, :ID, :userID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID: id, userID: Id } })
     .then(() => {
-      let rated = true;
-      sequelize.query("UPDATE users SET hasrated= :Rated WHERE id= :ID", { replacements: { Rated: rated, ID: Id } }).then(() => {
-        res.redirect('/listrating/' + id);
-      });
-    });
+      res.redirect('/listrating/' + id);
 });
 
-router.post('/epostrating/:id', function (req, res) {
+router.post('/deleterating/:id', function (req, res) {
   let id = req.params.id;
-  let ID = req.user.id;
-  let date = new Date();
-  let currdate = date.toString().substring(4, 15);
-  let rating = req.body.rating;
-  sequelize.query("UPDATE ratings SET rating= :Rating, date= :Date WHERE userId= :userID", { replacements: { Rating: rating, Date: currdate, userID: ID } })
-    .then(() => {
-      res.redirect('/listrating/' + id);
-    });
+  let shopid = req.body.shopid;
+  console.log(shopid)
+  sequelize.query("DELETE FROM ratings WHERE id= :ID", { replacements: { ID: id } }).then(() => {
+    res.redirect('/listrating/' + shopid);
+  });
 });
+
+// router.post('/epostrating/:id', function (req, res) {
+//   let id = req.params.id;
+//   let ID = req.user.id;
+//   let date = new Date();
+//   let currdate = date.toString().substring(4, 15);
+//   let rating = req.body.rating;
+//   sequelize.query("UPDATE ratings SET rating= :Rating, date= :Date WHERE userId= :userID", { replacements: { Rating: rating, Date: currdate, userID: ID } })
+//     .then(() => {
+//       res.redirect('/listrating/' + id);
+//     });
+// });
 //end rating
 
 //feedback

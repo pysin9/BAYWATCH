@@ -32,10 +32,6 @@ const User = db.define('user', {
     signin:{
         type: Sequelize.STRING
     },
-	hasrated:{
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-    },
     isAdmin:{
         type: Sequelize.BOOLEAN,
         allowNull: false,
