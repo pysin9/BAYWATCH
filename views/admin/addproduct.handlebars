@@ -49,16 +49,17 @@
                                                 <i class="material-icons">thumb_up_alt</i>
                                             </span>
                                         </div>
+                                        {{#if cat}}
+                                       
                                         <div class="try-select" style="width:300px;">
                                             <select name="category" class="form-control" id="exampleFormControlSelect1">
-                                                <option id='organic' value="Fresh">Fresh</option>
-                                                <option id='option 2' value="Dairy">Dairy</option>
-                                                <option id='option 3' value="Beverages">Beverages</option>
-                                                <option id='option 4' value="Frozen">Frozen</option>
-                                                <option id='option 4' value="Health">Health</option>
-                                                <option id='option 4' value="Snacks">Snacks</option>
+                                                {{#each cat}}
+                                                <option id='organic' value="{{catName}}">{{catName}}</option>
+                                                {{/each}}
                                             </select>
                                         </div>
+                                        
+                                        {{/if}}
                                     </div>
                                 </div>
                                 <div class="col-lg-3">

@@ -81,7 +81,17 @@ router.get('/remove/:id', (req, res) => {
 
 router.get('/addproducts', (req, res) => {
   let title = 'Add Products'
-  res.render('admin/addproduct', { title: title });
+  sequelize.query('SELECT * FROM categories', raw = true).then((cat) => {
+    console.log(cat[0][0])
+    if (cat[0][0] == undefined) {
+      alertMessage(res, 'danger', 'You need to create a category', true);
+      res.redirect('/create')
+    }
+    else {
+      res.render('admin/addproduct', { title: title, cat: cat[0], catName: cat[0][0].catName });
+    }
+  });
+
 });
 
 // Shows edit video page
@@ -271,22 +281,14 @@ router.post('/addproducts', (req, res) => {
     })
   } else {
     sequelize.query("SELECT * from categories WHERE catName = :catName", { replacements: { catName: category } })
-    .then((cat) => {
-      if (cat == undefined) {
-        alertMessage(res, 'danger', 'You need to create a category', true);
-        res.redirect('/create')
-      }
-      if(cat){
-
+      .then((cat) => {
         sequelize.query("INSERT INTO shops(images, name, price, description, userId, category, categoryId) VALUES (:images,:name, :price, :description, :userId, :category, :categoryId)"
           , { replacements: { images: images, name: name, price: price, description: description, userId: userId, category: category, categoryId: cat[0][0].id } })
           .then((products) => {
             res.redirect('/category');
           }).catch(err => console.log(err))
-
-      }
-    }).catch(err => console.log(err))
-}
+      }).catch(err => console.log(err))
+  }
 })
 
 
@@ -352,7 +354,7 @@ router.get('/Catdelete/:id', (req, res) => {
       alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
       res.redirect('/');
       return;
-    }b 
+    } b
     cat.destroy({
       where: {
         id
