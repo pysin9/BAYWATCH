@@ -44,41 +44,13 @@
                                         <input type="description" id="description" name="description"
                                             class="form-control" value="{{shop.description}}">
                                     </div>
-                                    <div class="input-group">
-                                        <div class="try-select" style="width:200px;">
-                                            <select>
-                                                <option value="0">Select category:</option>
-                                                <option value="1">Fruits</option>
-                                                <option value="2">Herbs</option>
-                                                <option value="3">Vegetables</option>
-                                                <option value="4">Milk</option>
-                                                <option value="5">Yogurt</option>
-                                                <option value="6">Butter</option>
-                                                <option value="7">Cheese</option>
-                                                <option value="8">Juice</option>
-                                                <option value="9">Soy</option>
-                                                <option value="10">Tea</option>
-                                                <option value="11">Chicken</option>
-                                                <option value="12">Pork</option>
-                                                <option value="13">Beef</option>
-                                                <option value="14">Fish</option>
-                                                <option value="15">Personal</option>
-                                                <option value="16">Healing</option>
-                                                <option value="17">Supplements</option>
-                                                <option value="18">Crackers</option>
-                                                <option value="19">Nuts</option>
-                                                <option value="20">Candy</option>
-                                                <option value="21">Energy Bar</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <input type="file" id="posterUpload" name="posterUpload"
                                         accept="image/png,image/jpeg,image/jpg,image/gif">
-                                    <img id="poster" src="/img/no-image.jpg" alt=""
-                                        class="border img-thumbnail img-fluid" style="height:95%;width:100%">
-                                    <input id="images" type="hidden" name="images">
+                                    <img id="poster" src="{{shop.images}}" alt="" class="border img-thumbnail img-fluid"
+                                        style="height:95%;width:100%">
+                                    <input id="images" type="hidden" name="images" value="{{shop.images}}">
                                     <div class="font-weight-bold text-danger small" id="posterErr" style="display:none">
                                     </div>
                                 </div>

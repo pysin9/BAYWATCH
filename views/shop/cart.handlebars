@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/cart.css">
-{{>_shopnavbar}}
+
+<p></p>
 
 <div class="shopping-cart">
 
@@ -61,8 +62,8 @@
 
 <script>
     /* Set rates + misc */
-    var taxRate = 0.05;
-    var shippingRate = 10.00;
+    {{!-- var taxRate = 0.05; --}}
+    var shippingRate = 5.00;
     var fadeTime = 300;
 
 
@@ -86,14 +87,14 @@
         });
 
         /* Calculate totals */
-        var tax = subtotal * taxRate;
+        {{!-- var tax = subtotal * taxRate; --}}
         var shipping = (subtotal > 0 ? shippingRate : 0);
-        var total = subtotal + tax + shipping;
+        var total = subtotal + shipping;
 
         /* Update totals display */
         $('.totals-value').fadeOut(fadeTime, function () {
             $('#cart-subtotal').html(subtotal.toFixed(2));
-            $('#cart-tax').html(tax.toFixed(2));
+            {{!-- $('#cart-tax').html(tax.toFixed(2)); --}}
             $('#cart-shipping').html(shipping.toFixed(2));
             $('#cart-total').html(total.toFixed(2));
             if (total == 0) {

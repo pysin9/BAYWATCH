@@ -89,7 +89,15 @@ router.get('/shop', function (req, res) {
   res.render('shop/shop', { title: title });
 });
 
+router.get('/game', function (req, res) {
+  const title = "Game"
+  res.render('game/game', { title: title });
+});
 
+router.get("/create", (req, res) => {
+  const title = "Create Category";
+  res.render('admin/create', { title: title })
+});
 
 router.post('/addTotal',ensureAuthenticated, function (req, res) {
   console.log('IT WORKS----------------------------------------------')

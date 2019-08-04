@@ -16,18 +16,6 @@ const Cart = db.define('cart', {
     quantity: {
         type: Sequelize.INTEGER
     },
-    total: {
-        type: Sequelize.DECIMAL
-    },
-    subtotal: {
-        type: Sequelize.DECIMAL
-    },
-    shipping: {
-        type: Sequelize.DECIMAL
-    },
-    grandTotal: {
-        type: Sequelize.DECIMAL
-    },
     itemId: {
         type: Sequelize.INTEGER
     }
