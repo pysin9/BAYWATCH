@@ -249,4 +249,10 @@ width: 17%;
     position: sticky;
 }
  
- 
+.btn.btn-outline-primary {
+    color: black;
+    background-color: transparent;
+    border-color: black;
+    margin-left: 293px;
+    margin-top: 159px;
+}

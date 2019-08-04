@@ -25,94 +25,126 @@ router.post('/checkout4', (req, res) => {
 
     //let Fname = req.body.Fname
     //let Lname = req.body.Lname
-   // let EXPD = moment(req.body.EXPD, 'MM');
-   // let EXPYear = moment(req.body.EXPYear, 'YYYY');
-   // let EmailAdd = req.body.EmailAdd;
-   // let ADD = req.body.ADD;
-   // let PhoneNumber = req.body.PhoneNumber;
-   // let city = req.body.city;
-   // let state = req.body.state;
-   // let zip = req.body.zip;
+     let EXPD = moment(req.body.EXPD, 'MM');
+     let EXPYear = moment(req.body.EXPYear, 'YYYY');
+    // let EmailAdd = req.body.EmailAdd;
+    // let ADD = req.body.ADD;
+    // let PhoneNumber = req.body.PhoneNumber;
+    // let city = req.body.city;
+    // let state = req.body.state;
+    // let zip = req.body.zip;
     let CardType = req.body.CardType;
     let CardNumber = req.body.CardNumber;
     let NameOnC = req.body.NameOnC;
     let SECNO = req.body.SECNO;
 
     checkout.create({
-      
+
         CardType,
         CardNumber,
         NameOnC,
-        SECNO
-    }).then(checkout => {
+        SECNO,
+        EXPD,
+        EXPYear
+    }).then(checkouts => {
         res.redirect('/Reciept');
     })
-    .catch(err => console.log(err))
- 
+        .catch(err => console.log(err))
+
 });
 
 // List videos belonging to current logged in user
-router.get('/Reciept', function(req, res){
+router.get('/Reciept', function (req, res) {
     title = 'Reciept'
-    res.render('Checkout/Reciept', {title:title})
+    res.render('Checkout/Reciept', { title: title })
 });
 
 router.post('/checkout1', (req, res) => {
     let errors = [];
-  
-    let {Fname, Lname, EmailAdd, ADD, PhoneNumber, city, state, zip} = req.body;
-    
-    if(Fname < 0) {
-     errors.push({text: 'please fill up'});
+
+    let { Fname, Lname, EmailAdd, ADD, PhoneNumber, city, state, zip } = req.body;
+
+    if (Fname < 0) {
+        errors.push({ text: 'please fill up' });
     }
-    if(Lname < 0) {
-        errors.push({text: 'please fill up'});
-       }
-    if(EmailAdd <0) {
-        errors.push({text: 'please fill up'});
-       }
-    if(ADD < 0) {
-        errors.push({text: 'please fill up'});
-       }
+    if (Lname < 0) {
+        errors.push({ text: 'please fill up' });
+    }
+    if (EmailAdd < 0) {
+        errors.push({ text: 'please fill up' });
+    }
+    if (ADD < 0) {
+        errors.push({ text: 'please fill up' });
+    }
     // Checks that password length is more than 4
-    if(PhoneNumber< 8) {
-     errors.push({text: 'Please enter correct phone number'});
+    if (PhoneNumber < 8) {
+        errors.push({ text: 'Please enter correct phone number' });
     }
-    if(zip < 0) {
-        errors.push({text: 'please fill in'});
-       }
-    if(city < 0) {
-        errors.push({text: 'please fill in'});
-       }
-    if(state < 0) {
-        errors.push({text: 'please fill in'});
-       }
+    if (zip < 0) {
+        errors.push({ text: 'please fill in' });
+    }
+    if (city < 0) {
+        errors.push({ text: 'please fill in' });
+    }
+    if (state < 0) {
+        errors.push({ text: 'please fill in' });
+    }
     if (errors.length > 0) {
-     res.render('Checkout/checkout1', {
-     errors,
-     Fname,
-     Lname,
-     PhoneNumber,
-     zip,
-     city,
-     state
-     });
+        res.render('/Checkout/checkout1', {
+            errors,
+            Fname,
+            Lname,
+            PhoneNumber,
+            zip,
+            city,
+            state
+        });
     }
     else {
-        checkout.create({ Fname, Lname, PhoneNumber })
- .then(checkout => {
- alertMessage(res, 'success',  true);
- res.redirect('/showcheckout2');
+        res.redirect('/checkout2')
+    }
+
+
+
+});
+
+router.post('/checkout1', (req, res) => {
+
+    let Fname = req.body.Fname
+    let Lname = req.body.Lname
+   // let EXPD = moment(req.body.EXPD, 'MM');
+    //let EXPYear = moment(req.body.EXPYear, 'YYYY');
+    let EmailAdd = req.body.EmailAdd;
+    let ADD = req.body.ADD;
+    let PhoneNumber = req.body.PhoneNumber;
+    let city = req.body.city;
+    let state = req.body.state;
+    let zip = req.body.zip;
+    //let CardType = req.body.CardType;
+    // let CardNumber = req.body.CardNumber;
+    /// let NameOnC = req.body.NameOnC;
+    // let SECNO = req.body.SECNO;
+
+    checkout.create({
+       Fname,
+       Lname,
+       EmailAdd,
+       ADD,
+       PhoneNumber,
+       city,
+       state,
+       zip
+    }).then(checkouts => {
+        res.redirect('/Reciept');
     })
-    .catch(err => console.log(err));
-          
- }});
+        .catch(err => console.log(err))
 
+});
 
-router.post('/checkout1', (req, res) => {});
-  
+router.post('/checkout1', (req, res) => { });
+
 
 router.post('/checkout3', (req, res) => { });
 
-router.post('/Reciept', (req, res) => { });
+router.get('/Reciept', (req, res) => { });
 module.exports = router;

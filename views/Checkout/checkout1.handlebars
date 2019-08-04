@@ -11,40 +11,42 @@
 <body>
     <p id="Step1"> Step 1: Shipping Address </p>
     <hr id="hr">
-    <form action="Checkout2.html" method="post">
+    <form action="/Checkout/checkout1" method="post">
         <fieldset id="particular">
             <legend>Checkout</legend>
 
             <p id="Ftext"> First name: </p><br>
-            <input type="text" id="Fstname" name="Fname" placeholder="Your First Name"  value="{{Fname}}" />
+            <input type="text" id="Fstname" name="Fname" placeholder="Your First Name"  value="{{Fname}}" required />
 
             <p id="Ltext"> Last name: </p><br>
-            <input type="text" id="Lstname" name="Lname" placeholder="Your Last Name"  value="{{Lname}}" />
+            <input type="text" id="Lstname" name="Lname" placeholder="Your Last Name"  value="{{Lname}}" required />
 
             <p id="Etext"> Email: </p><br>
-            <input type="email" id="email" name="EmailAdd" placeholder="Email Address"  value="{{EmailAdd}}" />
+            <input type="email" id="email" name="EmailAdd" placeholder="Email Address"  value="{{EmailAdd}}" required />
 
             <p id="Atext"> Address: </p><br>
-            <input type="text" id="address" name="ADD" placeholder="Address"  value="{{ADD}}" />
+            <input type="text" id="address" name="ADD" placeholder="Address"  value="{{ADD}}" required />
 
             <p id="PNum"> Phone number: </p><br>
             <input type="number" id="phonenumber" name="phoneNumber" placeholder="Phone Number" 
-                value="{{PhoneNumber}}" />
+                value="{{PhoneNumber}}" required />
 
             <p id="Ctext"> City: </p><br>
-            <input type="text" id="city" name="city" placeholder="City"  value="{{city}}" />
+            <input type="text" id="city" name="city" placeholder="City"  value="{{city}}" required />
 
             <p id="Stext"> State: </p><br>
-            <input type="text" id="state" name="state" placeholder="State"  value="{{state}}" />
+            <input type="text" id="state" name="state" placeholder="State"  value="{{state}}"  required />
 
             <p id="Ztext"> Zip: </p><br>
-            <input type="number" id="zip" name="zip" placeholder="ZIP"  value="{{zip}}" />
+            <input type="number" id="zip" name="zip" placeholder="ZIP"  value="{{zip}}" required/>
 
             <br>
 
 
 
         </fieldset>
+        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+			<input id="butAddVideo" class="btn btn-outline-primary" type="submit" value="Save">
         <a href="/checkout2">
             <input type="button" value="continue"> </input>
     </form>

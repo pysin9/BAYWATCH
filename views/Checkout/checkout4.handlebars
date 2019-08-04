@@ -11,7 +11,7 @@
 <body>
     <p id="Step4"> Step 4: Shipping Address </p>
     <hr id="hr">
-    <form class="form" method="post" action="/Checkout/checkout4">
+    <form action="/Checkout/checkout4" method='POST' >
         <fieldset id="particular">
             <legend>Checkout</legend>
 
@@ -19,18 +19,18 @@
             <input type="text" id="Card" name="Cardtype" placeholder="Card type" required value="{{CardType}}"/>
 
             <p id="CardNo"> Card Number: </p><br>
-            <input type="text" id="cardnumber" name="cardno" placeholder="Enter card number" required value="{{CardNumber}}"/>
+            <input type="text" id="cardnumber" name="CardNumber" placeholder="Enter card number" required value="{{CardNumber}}"/>
 
             <p id="Expiry"> Expiry date: </p><br>
-            <input type="number" id="EXPD" name="expiry" placeholder="MM" required value="{{EXPD}}"/>
+            <input type="number" id="EXPD" name="EXPD" placeholder="MM" required value="{{EXPD}}"/>
 
-            <input type="number" id="ExpYear" name="ExpYear" placeholder="YYYY" required value="{{EXPYear}}" />
+            <input type="number" id="ExpYear" name="EXPYear" placeholder="YYYY" required value="{{EXPYear}}" />
             <br>
             <p id="NameOC"> Name On Card: </p><br>
-            <input type="text" id="NameOnCRD" name="nameoncard" placeholder="Enter Name on card" required value="{{NameOnC}}" />
+            <input type="text" id="NameOnCRD" name="NameOnC" placeholder="Enter Name on card" required value="{{NameOnC}}" />
 
             <p id="Security"> security number: </p><br>
-            <input type="number" id="SECNO" name="securitynumber" placeholder="Enter security number" required value="{{SECNO}}" />
+            <input type="number" id="SECNO" name="SECNO" placeholder="Enter security number" required value="{{SECNO}}" />
 
 
             <br>
