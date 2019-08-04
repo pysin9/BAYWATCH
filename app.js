@@ -19,7 +19,7 @@ const passport = require('passport');
 * Loads routes file main.js in routes directory. The main.js determines which function
 * will be called based on the HTTP request and URL.
 */
-const CheckoutRoute = require('./routes/Checkout')
+//const CheckoutRoute = require('./routes/Checkout')
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/users');
 const adminRoute = require('./routes/admin');
@@ -126,7 +126,7 @@ app.use('/', mainRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/admin*', adminRoute);
-app.use('/Checkout', CheckoutRoute);
+//app.use('/Checkout', CheckoutRoute);
 
 app.use(methodOverride('_method')); // mainRoute is declared to point to routes/main.js
 // This route maps the root URL to any path defined in main.js
