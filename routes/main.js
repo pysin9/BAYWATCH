@@ -44,21 +44,21 @@ router.get('/', function (req, res) {
       })
   }
   sequelize.query("SELECT * from ratings")
-  .then((rate)=>{
-    let shopId = rate[0][0].shopId
-    if (shopId == undefined){
-      console.log('There is no rating')
-    }
-    else{
-      Shop.findAll({
-        where:{
-          id: shopId
-        }
-      }).then((shop) =>{
-        console.log(shop)
-      })
-    }
-  })
+    .then((rate) => {
+      let shopId = rate[0][0].shopId
+      if (shopId == undefined) {
+        console.log('There is no rating')
+      }
+      else {
+        Shop.findAll({
+          where: {
+            id: shopId
+          }
+        }).then((shop) => {
+          console.log(shop)
+        })
+      }
+    })
   res.render('index', { title: title });
 });
 
@@ -465,15 +465,15 @@ router.get('/listrating/:id', function (req, res) {
           username: ratings[0][0].username,
           date: ratings[0][0].date,
           rating: ratings[0][0].rating,
-		  id: ratings[0][0].id,
+          id: ratings[0][0].id,
           avgrating: avgrat[0][0].avgrat,
         });
       }).catch(function (err) {
         res.render('shop/listrating', { title: title, shop: shop[0][0] });;
-    })
-      .catch(function (err) {
-        res.render('shop/listrating', { title: title, shop: shop[0][0] });
-      });
+      })
+        .catch(function (err) {
+          res.render('shop/listrating', { title: title, shop: shop[0][0] });
+        });
     });
   });
 
@@ -489,6 +489,7 @@ router.post('/postrating/:id', function (req, res) {
   sequelize.query("INSERT INTO ratings(username, rating, date, shopId, userId) VALUES(:Username, :Rating, :Date, :ID, :userID)", { replacements: { Username: username, Rating: rating, Date: currdate, ID: id, userID: Id } })
     .then(() => {
       res.redirect('/listrating/' + id);
+    });
 });
 
 router.post('/deleterating/:id', function (req, res) {
@@ -514,13 +515,13 @@ router.post('/deleterating/:id', function (req, res) {
 //end rating
 
 //feedback
-router.get('/feedback', function(req, res){
-    title = 'Feedback'
-    res.render('faq/feedback', {title:title})
+router.get('/feedback', function (req, res) {
+  title = 'Feedback'
+  res.render('faq/feedback', { title: title })
 });
 
 router.post('/feedback', (req, res) => {
-  
+
   let message = req.body.message;
   let name = req.body.name;
   let email = req.body.email;
@@ -556,8 +557,8 @@ router.get('/checkout4', function (req, res) {
   const title = "Checkout";
   res.render('Checkout/checkout4', { title: title });
 });
-router.get('/Reciept', function (req, res){
+router.get('/Reciept', function (req, res) {
   const title = "reciept";
-  res.render('Checkout/Reciept', {title: title});
+  res.render('Checkout/Reciept', { title: title });
 });
 module.exports = router;
