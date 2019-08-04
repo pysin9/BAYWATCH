@@ -24,7 +24,7 @@ const sequelize = new Sequelize('organic', 'organic', 'green', {
 router.post('/Login', (req, res, next) => {
     User.findOne({
         where: { email: req.body.email }
-    }).then(user => {
+    }).then((user) => {
         if (user) {
             if (user.verified !== true) {
                 alertMessage(res, 'danger', 'Email ' + user.email + ' has not been verified.', true);
@@ -42,7 +42,16 @@ router.post('/Login', (req, res, next) => {
                 })(req, res, next);
             }
         }
+        else {
+            alertMessage(res, 'danger', 'This email does not exist. Please create an account', true);
+            res.redirect('/Register');
+        }
+    }).catch(function (data) {
+        console.log('Testing')
+        alertMessage(res, 'danger', 'This email does not exist. Please create an account', true);
+        res.redirect('/Register');
     });
+
 
 
 });
@@ -144,12 +153,13 @@ router.get('/verify/:userId/:token', (req, res, next) => {
                         res.redirect('/');
                     } else {
                         sequelize.query("UPDATE users SET verified= 1 WHERE id= :ID",
-                        { replacements: { ID: req.params.userId } 
-                        }).then(user => {
-                            console.log(user)
-                            alertMessage(res, 'success', userEmail + ' verified.Please login', 'fas fa - sign -in -alt', true);
-                            res.redirect('/Login');
-                        });
+                            {
+                                replacements: { ID: req.params.userId }
+                            }).then(user => {
+                                console.log(user)
+                                alertMessage(res, 'success', userEmail + ' verified.Please login', 'fas fa - sign -in -alt', true);
+                                res.redirect('/Login');
+                            });
                     }
                 });
             }
@@ -222,7 +232,7 @@ router.put('/saveProfile/:id', function (req, res) {
     }
     else {
         sequelize.query("UPDATE users SET name= :Name, email= :Email, address= :Address, phone= :Phone, bankName= :BankName, points = :Points, signin = :Day WHERE id= :ID",
-            { replacements: { Name: name, Email: email, Address: address, Phone: phone, BankName: bankName, Points:points, Day:currday, ID: id } })
+            { replacements: { Name: name, Email: email, Address: address, Phone: phone, BankName: bankName, Points: points, Day: currday, ID: id } })
             .then(() => {
                 alertMessage(res, 'success', 'Profile Updated!', 'fas fa - sign -in -alt', true);
                 res.redirect('/profile');
