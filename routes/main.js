@@ -445,7 +445,7 @@ router.get('/listrating/:id', function (req, res) {
   let id = req.params.id;
   sequelize.query("SELECT * FROM shops WHERE id= :ID", { replacements: { ID: id } }, raw = true).then((shop) => {
     sequelize.query("SELECT * FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((ratings) => {
-      sequelize.query("SELECT avg(rating) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
+      sequelize.query("SELECT round(avg(rating),2) avgrat FROM ratings WHERE shopId= :ID", { replacements: { ID: id } }, raw = true).then((avgrat) => {
         let avgrating = avgrat[0][0].avgrat
         sequelize.query("UPDATE shops SET avgrating= :avgrating WHERE id= :ID", { replacements: { avgrating: avgrating, ID: id } }, raw = true)
         res.render('shop/listrating', {

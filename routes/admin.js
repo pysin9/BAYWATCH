@@ -85,7 +85,7 @@ router.get('/addproducts', (req, res) => {
     console.log(cat[0][0])
     if (cat[0][0] == undefined) {
       alertMessage(res, 'danger', 'You need to create a category', true);
-      res.redirect('/create')
+      res.redirect('/admin/create')
     }
     else {
       res.render('admin/addproduct', { title: title, cat: cat[0], catName: cat[0][0].catName });
@@ -302,7 +302,7 @@ router.post("/create", (req, res) => {
   sequelize.query("INSERT INTO categories(catName, userId) VALUES (:catName, :userId)"
     , { replacements: { catName: catName, userId: userId } })
     .then((category) => {
-      res.redirect("/create");
+      res.redirect("/admin/create");
     })
 })
 
@@ -358,13 +358,13 @@ router.get('/Catdelete/:id', (req, res) => {
       alertMessage(res, 'danger', error_msg, 'fas fa-timers', false);
       res.redirect('/');
       return;
-    } b
+    }
     cat.destroy({
       where: {
         id
       }
     }).then(() => {
-      let success_msg = cat.name + " deleted successfully";
+      let success_msg = cat.catName + " deleted successfully";
       alertMessage(res, 'success_msg', success_msg, true);
       res.redirect('/category');
     })
